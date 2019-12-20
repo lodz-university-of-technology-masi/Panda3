@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withAuthenticator} from "aws-amplify-react";
 import {Auth} from 'aws-amplify';
 import UserMainView from "./pages/candidate/UserMainView";
+import RecruiterMainView from "./pages/recruiter/RecruiterMainView";
 
 class HomeController extends Component {
     constructor(props) {
@@ -22,8 +23,8 @@ class HomeController extends Component {
     render() {
         const {isAdmin} = this.state;
         const {username} = this.state;
-        if (isAdmin) {
-            return;
+        if (isAdmin) { //zmienic na true by testowac widok admina
+            return <RecruiterMainView username={username}/>;
         }
         return <UserMainView username={username}/>;
     }

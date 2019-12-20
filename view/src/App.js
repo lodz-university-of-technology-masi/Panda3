@@ -1,5 +1,6 @@
 import React from 'react';
 import Amplify from 'aws-amplify';
+import Helmet from "react-helmet";
 import HomeController from "./components/HomeController";
 
 Amplify.configure({
@@ -26,6 +27,10 @@ Amplify.configure({
 function App() {
   return (
         <div style={{width: '100%'}}>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Panda3</title>
+            </Helmet>
             <HomeController/>
         </div>
   );

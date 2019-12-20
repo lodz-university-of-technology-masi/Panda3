@@ -1,16 +1,11 @@
 import React, {Component} from 'react'
 import Button from 'react-bootstrap/Button';
 import BasicTable from "./BasicTable";
+import {Link} from "react-router-dom";
 
 class ActiveTests extends Component {
     constructor(props) {
         super(props);
-        this.handleButtonClick = this.handleButtonClick.bind(this);
-    }
-
-    handleButtonClick(event) {
-        alert("test");
-        event.preventDefault();
     }
 
     render() {
@@ -31,7 +26,8 @@ class ActiveTests extends Component {
             Header: 'View Test',
             Cell: row => {
                 return (
-                    <Button variant="primary" onClick={this.handleButtonClick}>View</Button>
+                    //TODO: zparametryzomany link do testu
+                    <Link to="/results"><Button variant="primary">View</Button></Link>
                 )
             }
         }];

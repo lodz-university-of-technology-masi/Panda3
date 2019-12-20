@@ -3,8 +3,6 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import ActiveTests from "../../ActiveTests"
-import TestResults from "../../TestResults"
 import {
     BrowserRouter as Router,
     Switch,
@@ -12,23 +10,20 @@ import {
     Link
 } from "react-router-dom";
 
-class UserMainView extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+class RecruiterMainView extends Component {
     render() {
         return (
             <Router>
                 <Container fluid={true}>
                     <Row style={{background: "LightBlue", padding: "0.5rem"}}>
                         <Col md="auto">Welcome, {this.props.username}</Col>
-                        <Col md="auto"><Link to="/tests"><Button variant="primary">Active tests</Button></Link></Col>
-                        <Col md="auto"><Link to="/results"><Button variant="primary">Test results</Button></Link></Col>
+                        <Col md="auto"><Link to="/users"><Button variant="primary">Users</Button></Link></Col>
+                        <Col md="auto"><Link to="/test-groups"><Button variant="primary">Test Groups</Button></Link></Col>
+                        <Col md="auto"><Link to="/test-menu"><Button variant="primary">Tests</Button></Link></Col>
+                        <Col md="auto"><Link to="/check-tests"><Button variant="primary">Check Tests</Button></Link></Col>
                     </Row>
+                    //TODO: dodac routy
                     <Switch>
-                        <Route path="/tests" component={ActiveTests}/>
-                        <Route path="/results" component={TestResults} />
                     </Switch>
                 </Container>
             </Router>
@@ -36,4 +31,4 @@ class UserMainView extends Component {
     }
 }
 
-export default UserMainView;
+export default RecruiterMainView;
