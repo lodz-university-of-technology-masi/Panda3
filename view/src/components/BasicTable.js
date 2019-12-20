@@ -1,18 +1,17 @@
-import React, {Component} from 'react'
-import Button from 'react-bootstrap/Button';
+import React from 'react'
 import Table from 'react-bootstrap/Table';
 
 import {
     useTable,
-/*  moze sie przyda potem
-    useGroupBy,
-    useFilters,
-    useSortBy,
-    useExpanded,
-    usePagination,*/
+    /*  moze sie przyda potem
+        useGroupBy,
+        useFilters,
+        useSortBy,
+        useExpanded,
+        usePagination,*/
 } from 'react-table';
 
-function GetTable({ columns, data }) {
+function BasicTable({ columns, data }) {
     const {
         getTableProps,
         getTableBodyProps,
@@ -52,46 +51,4 @@ function GetTable({ columns, data }) {
     )
 }
 
-
-class TestTable extends Component {
-    constructor(props) {
-        super(props);
-        this.handleButtonClick = this.handleButtonClick.bind(this);
-    }
-
-    handleButtonClick(event) {
-        alert("test");
-        event.preventDefault();
-    }
-
-    render() {
-        const data = [{
-            title: 'Przykladowy Test',
-            maxScore: 50
-        }];
-
-        const columns = [{
-            Header: 'Title',
-            accessor: 'title'
-        }, {
-            id: 'score',
-            Header: 'MaxScore',
-            accessor: d => d.maxScore
-        },{
-            id: 'action',
-            Header: 'View Test',
-            Cell: row => {
-                return (
-                    <Button variant="primary" onClick={this.handleButtonClick}>View</Button>
-                )
-            }
-        }];
-
-        return <GetTable
-            data={data}
-            columns={columns}
-        />
-    }
-}
-
-export default TestTable;
+export default BasicTable;

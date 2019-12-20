@@ -1,5 +1,15 @@
 import React, {Component} from 'react';
-import TestTable from "../../TestTable";
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import ActiveTests from "../../ActiveTests";
+import TestResults from "../../TestResults";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 class UserMainView extends Component {
     constructor(props) {
@@ -8,13 +18,19 @@ class UserMainView extends Component {
 
     render() {
         return (
-           <div>
-               <h2>Hello, {this.props.username}</h2>
-               <div>
-                   <span>Your tests: </span>
-                   <TestTable/>
-               </div>
-           </div>
+            <Router>
+                    <Container>
+                        <Row>
+                            <Col>Welcome, {this.props.username}</Col>
+                            <Col><Link to="/tests">Active tests</Link></Col>
+                            <Col><Link to="/results">Test results</Link></Col>
+                        </Row>
+                            <Switch>
+                                <Route path="/tests" component={ActiveTests}/>
+                                <Route path="/results" component={TestResults} />
+                            </Switch>
+                    </Container>
+            </Router>
         );
     }
 }
