@@ -1,7 +1,8 @@
-import React from 'react';
-import Amplify from 'aws-amplify';
-import Helmet from "react-helmet";
-import HomeController from "./components/HomeController";
+import React from 'react'
+import Amplify from 'aws-amplify'
+import Helmet from "react-helmet"
+import HomeController from "./components/HomeController"
+import Container from "react-bootstrap/Container"
 
 Amplify.configure({
     Auth: {
@@ -26,13 +27,13 @@ Amplify.configure({
 
 function App() {
   return (
-        <div style={{width: '100%'}}>
+        <Container fluid={true}>
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Panda3</title>
             </Helmet>
             <HomeController/>
-        </div>
+        </Container>
   );
 }
 
