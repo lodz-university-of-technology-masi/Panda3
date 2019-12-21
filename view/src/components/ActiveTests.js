@@ -32,6 +32,42 @@ class ActiveTests extends Component {
         const data = [{
             title: 'Przykladowy Test',
             maxScore: 50
+        },{
+                title: 'Przykladowy Test',
+                maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
+        },{
+            title: 'Przykladowy Test',
+            maxScore: 50
         }];
         this.setState({tests: data})
     }
