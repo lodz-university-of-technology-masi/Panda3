@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import PropTypes, {arrayOf} from 'prop-types';
+import PropTypes from 'prop-types';
 
 class ClosedQuestion extends React.Component {
     constructor(props) {
@@ -12,6 +12,9 @@ class ClosedQuestion extends React.Component {
             answers: this.props.defaultAnswer
         };
         this.handleChange = this.handleChange.bind(this);
+        if(this.state.answers.length > this.props.options.length) {
+            this.state.answers.length = this.props.options.length
+        }
     }
 
     handleChange(event, index) {
@@ -51,8 +54,8 @@ ClosedQuestion.propTypes = {
 
 ClosedQuestion.defaultProps = {
     options:[],
-    defaultAnswer: [false, false, false, false],
-    title:''
+    title:'',
+    defaultAnswer:Array(15).fill(false)
 };
 
 export default ClosedQuestion;

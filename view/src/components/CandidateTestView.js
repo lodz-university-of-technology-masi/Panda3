@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button";
 import QuestionController from "./questions/QuestionController";
 import update from 'immutability-helper';
@@ -23,13 +22,13 @@ class CandidateTestView extends Component{
     IncrementCounter = () => {
         this.setState((prevState) => ({
             counter: prevState.counter + 1
-        }), () => console.log(this.state.answers));
+        })/*, () => console.log(this.state.answers)*/);
     };
 
     DecrementCounter = () => {
         this.setState((prevState) => ({
             counter: prevState.counter - 1
-        }), () => console.log(this.state.answers));
+        })/*, () => console.log(this.state.answers)*/);
     };
 
     fetchTestData = () => {
@@ -72,27 +71,37 @@ class CandidateTestView extends Component{
        this.fetchTestData();
     }
 
+
     render() {
         if(this.state.loading){
             return null;
         }
         let question = this.state.testData.questions[this.state.counter];
-        console.log(this.state.answers);
         return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
-        <Row>
-            <Col>
-                Title: {this.state.testData.title}
-            </Col>
-            <Col>
+        <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
+            <span className="d-flex">
+                {this.state.testData.title}
+            </span>
+            <span className="d-flex">
                 Question {this.state.counter + 1} / {this.state.testData.questions.length}
-            </Col>
+            </span>
         </Row>
         <QuestionController param={question} onAnswer={this.onAnswer.bind(this)} defaultVal={this.state.answers[this.state.counter]}/>
+           <Row className="justify-content-end align-content-end" style={{margin:"1rem"}}>
+               {
+
+                   this.state.counter + 1  === this.state.testData.questions.length
+                       ? this.state.answers.length < this.state.testData.questions.length
+                            ? <p>You need to answer all the questions</p>
+                            : <p>End the test</p>
+                       : null
+               }
+           </Row>
         <Row className="justify-content-between" style={{margin:"1rem"}}>
             <Button onClick={this.DecrementCounter} disabled={this.state.counter === 0}>Previous</Button>
             {
                 this.state.counter === this.state.testData.questions.length - 1
-                    ? <Link to="/tests"><Button onClick={this.SubmitTest} variant="success" disabled={this.state.answers.length < this.state.testData.questions.length}>Submit</Button></Link>
+                    ?<Link to="/tests"><Button onClick={this.SubmitTest} variant="success" disabled={this.state.answers.length < this.state.testData.questions.length}>Submit</Button></Link>
                     :<Button onClick={this.IncrementCounter}>Next</Button>
             }
         </Row>

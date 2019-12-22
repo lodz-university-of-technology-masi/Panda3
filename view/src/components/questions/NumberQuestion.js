@@ -20,10 +20,6 @@ class NumberQuestion extends React.Component {
         );
     }
 
-    componentWillUnmount() {
-        this.props.onAnswer(this.state.answer);
-    }
-
     render() {
         return (
             <Container>
