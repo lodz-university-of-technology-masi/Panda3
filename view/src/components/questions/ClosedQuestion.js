@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import PropTypes from 'prop-types';
+import PropTypes, {arrayOf} from 'prop-types';
 
 class ClosedQuestion extends React.Component {
     constructor(props) {
@@ -9,19 +9,27 @@ class ClosedQuestion extends React.Component {
         this.state = {
             options: this.props.options,
             title: this.props.title,
-            answer: this.props.defaultAnswer
+            answers: this.props.defaultAnswer
         };
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({answer: event.target.value});
+    handleChange(event, index) {
+        // eslint-disable-next-line react/no-direct-mutation-state
+        this.state.answers[index] = event.target.checked;
+        this.forceUpdate();
+        this.props.onAnswer(this.state.answers);
     }
 
     render() {
-        let options = this.state.options.map((option)=> {
+        let options = this.state.options.map((option, index)=> {
             return <Row key={option} className="d-flex align-content-center justify-content-start">
-                <input style={{width:"2rem", marginRight:"0.8rem"}} className="form-control" type="checkbox"/>
+                <input
+                    checked={this.state.answers[index]}
+                    onChange={(e) => this.handleChange(e, index)}
+                    style={{width:"2rem", marginRight:"0.8rem"}}
+                    className="form-control"
+                    type="checkbox"/>
                 <span  className="text-center" style={{width:"auto"}}>{option}</span>
             </Row>
         });
@@ -43,7 +51,7 @@ ClosedQuestion.propTypes = {
 
 ClosedQuestion.defaultProps = {
     options:[],
-    defaultAnswer: [],
+    defaultAnswer: [false, false, false, false],
     title:''
 };
 

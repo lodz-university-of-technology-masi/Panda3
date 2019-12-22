@@ -12,21 +12,12 @@ class OpenQuestion extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        this.setState({answer: event.target.value});
-
-
-    }
-    componentWillUnmount() {
-        this.props.onAnswer(this.state.answer);
-    }
-
-    handleSubmit(event) {
-        alert(this.state.answer);
-        event.preventDefault();
+        this.setState({answer: event.target.value},
+            () => {this.props.onAnswer(this.state.answer)}
+        );
     }
 
     render() {

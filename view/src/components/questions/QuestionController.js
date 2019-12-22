@@ -40,7 +40,10 @@ class QuestionController extends Component {
 }
 
 QuestionController.propTypes = {
-    defaultVal: PropTypes.string,
+    defaultVal: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.bool)
+    ]),
     title: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.string),
     onAnswer: PropTypes.func

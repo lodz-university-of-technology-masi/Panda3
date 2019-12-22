@@ -15,7 +15,9 @@ class NumberQuestion extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({answer: event.target.value});
+        this.setState({answer: event.target.value},
+            () => {this.props.onAnswer(this.state.answer)}
+        );
     }
 
     componentWillUnmount() {
@@ -28,7 +30,9 @@ class NumberQuestion extends React.Component {
                 <Row>{this.state.title}</Row>
                 <input type="number" className="form-control"
                           value={this.state.answer}
-                          onChange={this.handleChange}/>
+                          onChange={this.handleChange}
+                       placeholder="Enter a number"
+                />
             </Container>
         );
     }

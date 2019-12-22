@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button";
 import QuestionController from "./questions/QuestionController";
 import update from 'immutability-helper';
+import {Link} from "react-router-dom";
 
 class CandidateTestView extends Component{
     constructor(props) {
@@ -22,13 +23,13 @@ class CandidateTestView extends Component{
     IncrementCounter = () => {
         this.setState((prevState) => ({
             counter: prevState.counter + 1
-        }));
+        }), () => console.log(this.state.answers));
     };
 
     DecrementCounter = () => {
         this.setState((prevState) => ({
             counter: prevState.counter - 1
-        }));
+        }), () => console.log(this.state.answers));
     };
 
     fetchTestData = () => {
@@ -58,11 +59,12 @@ class CandidateTestView extends Component{
 
     SubmitTest = () => {
         //Todo:call to api
+        alert(this.state.answers)
     };
 
     onAnswer(value){
         this.setState((prevState) => ({
-            answers: update(prevState.answers,{[prevState.counter - 1]:{$set:value}})
+            answers: update(prevState.answers,{[prevState.counter]:{$set:value}})
         }));
     }
 
@@ -76,7 +78,7 @@ class CandidateTestView extends Component{
         }
         let question = this.state.testData.questions[this.state.counter];
         console.log(this.state.answers);
-        return <Container style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray"}}>
+        return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
         <Row>
             <Col>
                 Title: {this.state.testData.title}
@@ -90,7 +92,7 @@ class CandidateTestView extends Component{
             <Button onClick={this.DecrementCounter} disabled={this.state.counter === 0}>Previous</Button>
             {
                 this.state.counter === this.state.testData.questions.length - 1
-                ? <Button onClick={this.SubmitTest} variant="success">Submit</Button>
+                    ? <Link to="/tests"><Button onClick={this.SubmitTest} variant="success" disabled={this.state.answers.length < this.state.testData.questions.length}>Submit</Button></Link>
                     :<Button onClick={this.IncrementCounter}>Next</Button>
             }
         </Row>
