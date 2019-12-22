@@ -9,19 +9,21 @@ class ActiveTests extends Component {
         this.state ={
             tests: [],
             columns: [{
+                Header: 'Id',
+                accessor: 'testId'
+            },{
                 Header: 'Title',
                 accessor: 'title'
             }, {
-                id: 'score',
-                Header: 'MaxScore',
-                accessor: d => d.maxScore
+                Header: 'Language',
+                accessor: 'language'
             },{
                 id: 'action',
                 Header: 'View Test',
-                Cell: row => {
+                Cell: table => {
+                    let path = '/test/' + table.row.original.testId;
                     return (
-                        //TODO: zparametryzomany link do testu
-                        <Link to={'/test'}><Button variant="primary">View</Button></Link>
+                        <Link to={path}><Button variant="primary">View</Button></Link>
                     )
                 }
             }]
@@ -30,57 +32,13 @@ class ActiveTests extends Component {
 
     componentDidMount() {
         const data = [{
-            testId:1,
-            title: 'Przykladowy Test',
-            maxScore: 50
+            testId:'1',
+            title: 'Sample test',
+            language: 'EN'
         },{
-                testId:2,
+                testId:'2',
                 title: 'Przykladowy Test',
-                maxScore: 50
-        },{
-            testId:3,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:4,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:5,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:6,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:7,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:8,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:9,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:10,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:11,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:12,
-            title: 'Przykladowy Test',
-            maxScore: 50
-        },{
-            testId:13,
-            title: 'Przykladowy Test',
-            maxScore: 50
+                language: 'PL'
         }];
         this.setState({tests: data})
     }

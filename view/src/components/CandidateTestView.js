@@ -16,7 +16,7 @@ class CandidateTestView extends Component{
                 questions: []
             },
             answers:[]
-        }
+        };
     }
 
     IncrementCounter = () => {
@@ -69,6 +69,7 @@ class CandidateTestView extends Component{
 
     componentDidMount() {
        this.fetchTestData();
+        console.log(this.props.match.params.id);
     }
 
 

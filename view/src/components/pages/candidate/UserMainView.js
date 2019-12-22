@@ -28,9 +28,9 @@ class UserMainView extends Component {
                         <Col md="auto"><Link to="/results"><Button variant="primary">Test results</Button></Link></Col>
                     </Row>
                     <Switch>
-                        <Route path="/tests" component={ActiveTests}/>
-                        <Route path="/results" component={TestResults} />
-                        <Route path="/test" component={CandidateTestView}/>
+                        <Route path="/tests"><ActiveTests/></Route>
+                        <Route path="/results"><TestResults/></Route>
+                        <Route path="/test/:id" component={(props) => <CandidateTestView {...props}/> }/>
                     </Switch>
                 </Container>
             </Router>
