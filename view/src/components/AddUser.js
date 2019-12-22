@@ -7,20 +7,63 @@ import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
 
 class AddUser extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+                firstName:'',
+                lastName:'',
+                dateOfBirth:'',
+                email:''
+        };
+        this.handleFirstName.bind(this);
+        this.handleLastName.bind(this);
+        this.handleMail.bind(this);
+        this.handleDoB.bind(this);
+        this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event){
+        let user = {
+            firstName:this.state.firstName,
+            lastName:this.state.lastName,
+            dateOfBirth:this.state.dateOfBirth,
+            email:this.state.email
+        };
+        console.log(user);
+        //Todo: add user api call
+        event.preventDefault();
+    };
+
+   handleFirstName(event) {
+        this.setState({firstName:event.target.value})
+    };
+
+    handleLastName(event) {
+        this.setState({lastName:event.target.value})
+    };
+
+    handleMail(event){
+        this.setState({email:event.target.value})
+    };
+
+    handleDoB(event){
+        this.setState({dateOfBirth:event.target.value})
+    };
+
 render() {
     return <Container className="justify-items-center" style={{width:"auto"}}>
-        <Form className="justify-items-center">
+        <Form className="justify-items-center" onSubmit={(e) => this.handleSubmit(e)}>
             <Row>
                 <Col md="auto">
                     <Form.Group>
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter name" />
+                        <Form.Control onChange={(e) => this.handleFirstName(e)} type="text" placeholder="Enter name" required={true}/>
                     </Form.Group>
                 </Col>
                 <Col md="auto">
                     <Form.Group>
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter last name" />
+                        <Form.Control onChange={(e) => this.handleLastName(e)} type="text" placeholder="Enter last name" required={true} />
                     </Form.Group>
                 </Col>
             </Row>
@@ -28,7 +71,7 @@ render() {
                 <Col md="auto">
                     <Form.Group>
                         <Form.Label>Date of birth</Form.Label>
-                        <Form.Control type="date" placeholder="Enter date of birth" />
+                        <Form.Control onChange={(e) => this.handleDoB(e)} type="date" placeholder="Enter date of birth"  required={true}/>
                     </Form.Group>
                 </Col>
             </Row>
@@ -36,7 +79,7 @@ render() {
                 <Col md="auto">
                 <Form.Group>
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter e-mail" />
+                    <Form.Control onChange={(e) => this.handleMail(e)} type="email" placeholder="Enter e-mail"  required={true}/>
                 </Form.Group>
                 </Col>
             </Row>
