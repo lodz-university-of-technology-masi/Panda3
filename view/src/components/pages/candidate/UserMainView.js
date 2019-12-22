@@ -11,6 +11,7 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import CandidateTestView from "../../CandidateTestView";
 
 class UserMainView extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ class UserMainView extends Component {
                     <Switch>
                         <Route path="/tests" component={ActiveTests}/>
                         <Route path="/results" component={TestResults} />
+                        <Route path="/test" component={CandidateTestView}/>
                     </Switch>
                 </Container>
             </Router>

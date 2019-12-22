@@ -21,7 +21,7 @@ class ActiveTests extends Component {
                 Cell: row => {
                     return (
                         //TODO: zparametryzomany link do testu
-                        <Link to="/results"><Button variant="primary">View</Button></Link>
+                        <Link to={'/test'}><Button variant="primary">View</Button></Link>
                     )
                 }
             }]
@@ -30,42 +30,55 @@ class ActiveTests extends Component {
 
     componentDidMount() {
         const data = [{
+            testId:1,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+                testId:2,
                 title: 'Przykladowy Test',
                 maxScore: 50
         },{
+            testId:3,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:4,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:5,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:6,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:7,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:8,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:9,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:10,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:11,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:12,
             title: 'Przykladowy Test',
             maxScore: 50
         },{
+            testId:13,
             title: 'Przykladowy Test',
             maxScore: 50
         }];
