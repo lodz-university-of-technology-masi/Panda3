@@ -13,6 +13,7 @@ import UserManagement from "../../UserManagement";
 import AddUser from "../../AddUser"
 import SplitButton from "react-bootstrap/SplitButton";
 import DropdownItem from "react-bootstrap/DropdownItem";
+import TestMenu from "./TestMenu";
 
 
 //TODO: dodac routy
@@ -37,6 +38,7 @@ class RecruiterMainView extends Component {
                     <Switch>
                         <Route path="/users" component={UserManagement}/>
                         <Route path="/add-user" component={AddUser}/>
+                        <Route path="/test-menu"><TestMenu props={this.props}/></Route>
                     </Switch>
                 </Container>
             </Router>
