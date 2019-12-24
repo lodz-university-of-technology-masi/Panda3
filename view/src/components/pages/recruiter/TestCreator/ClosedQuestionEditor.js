@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Row from "react-bootstrap/Row";
+import PropTypes from "prop-types";
 
 const MAX_QUESTIONS =  15;
 
@@ -16,14 +17,14 @@ class ClosedQuestionEditor extends Component {
         let val = event.target.value;
         if(val > MAX_QUESTIONS) val = MAX_QUESTIONS;
         if(val < 1) val = 1;
-        this.setState({n: val})
+        this.setState({n: val});
+        this.props.onChangeOfNumberOfClosedAnswers(val);
     };
 
     getBody() {
         let inputs = [];
         for (let i = 1; i <= this.state.n; i++){
             inputs.push(
-
                 <Row key={i} className="d-flex mb-2 align-content-center justify-content-start">
                     <input
                         checked={false}
@@ -31,11 +32,18 @@ class ClosedQuestionEditor extends Component {
                         style={{width:"2rem", marginRight:"0.8rem"}}
                         className="form-control"
                         type="checkbox"/>
-                    <input className="form-control" type="text" placeholder={"Answer " + i} style={{width:"95%"}}/>
+                    <input
+                        index={i}
+                        className="form-control"
+                        type="text"
+                        value={this.props.answers[i]}
+                        onChange={((event) => this.props.onChange(event))}
+                        placeholder={"Answer " + i}
+                        style={{width:"95%"}}
+                    />
                 </Row>
             );
         }
-        console.log(inputs);
         return inputs;
     };
 
@@ -60,5 +68,14 @@ class ClosedQuestionEditor extends Component {
         );
     }
 }
+
+ClosedQuestionEditor.propTypes = {
+    answers: PropTypes.array,
+    onChange: PropTypes.func
+};
+
+ClosedQuestionEditor.defaultProps = {
+    answers: []
+};
 
 export default ClosedQuestionEditor;

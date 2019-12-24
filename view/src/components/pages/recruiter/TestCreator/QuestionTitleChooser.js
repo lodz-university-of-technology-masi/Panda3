@@ -7,7 +7,9 @@ class QuestionTitleChooser extends Component {
             <Form.Control
                 type="text"
                 className="d-flex"
+                value={this.props.value}
                 placeholder={"Question"}
+                onChange={this.props.onChange}
                 />
         </div>
     }

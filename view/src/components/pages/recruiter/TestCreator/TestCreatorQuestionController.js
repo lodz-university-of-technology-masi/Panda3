@@ -8,12 +8,11 @@ import ClosedQuestionEditor from "./ClosedQuestionEditor";
 class TestCreatorQuestionController extends Component {
 
     render() {
-        let answer = this.props.defaultVal;
         switch (this.props.type) {
             case "O":
                 return <OpenQuestionEditor/>;
             case "W":
-                return <ClosedQuestionEditor/>;
+                return <ClosedQuestionEditor answers={this.props.answers} onChange={this.props.onChange} onChangeOfNumberOfClosedAnswers={this.props.onChangeOfNumberOfClosedAnswers}/>;
             case "L":
                 return <NumberQuestionEditor/>;
             default:
@@ -23,16 +22,12 @@ class TestCreatorQuestionController extends Component {
 }
 
 TestCreatorQuestionController.propTypes = {
-    defaultVal: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.arrayOf(PropTypes.bool)
-    ]),
-    title: PropTypes.string,
-    options: PropTypes.arrayOf(PropTypes.string),
-    onAnswer: PropTypes.func
+    answers: PropTypes.array,
+    onChange: PropTypes.func,
+    onChangeOfNumberOfClosedAnswers: PropTypes.func
 };
 
 TestCreatorQuestionController.defaultProps = {
-    title:''
+    answers: []
 };
 export default TestCreatorQuestionController;
