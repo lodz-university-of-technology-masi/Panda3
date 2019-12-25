@@ -28,6 +28,6 @@ TestCreatorQuestionController.propTypes = {
 };
 
 TestCreatorQuestionController.defaultProps = {
-    answers: []
+    answers: Array(4).fill(null)
 };
 export default TestCreatorQuestionController;

@@ -8,6 +8,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import TestCreatorQuestionController from "./TestCreatorQuestionController";
 import QuestionTitleChooser from "./QuestionTitleChooser";
 import ValidateTest from "./TestValidator";
+import {removeByKey} from "../../../utils/utils";
+import Alert from "react-bootstrap/Alert";
 
 class TestCreator extends Component{
     constructor(props) {
@@ -15,8 +17,7 @@ class TestCreator extends Component{
         this.state = {
             counter:0,
             loading:true,
-            selectedType:'O',
-            currentQuestion:'',
+            canSubmit:null,
             test: {
                 title:'',
                 language:'',
@@ -28,14 +29,17 @@ class TestCreator extends Component{
                 ]
             }
         };
-        console.log("State: " + this.state);
     }
 
-    //TODO: delete answers when type changes
-
     setTestType = (type) => {
+        let t = type;
+        if((!('answers' in this.state.test.questions[this.state.counter])) && this.state.test.questions[this.state.counter].type !== 'W'){
+            this.setState((prevState) => ({
+                test:update(prevState.test,{questions:{[prevState.counter]:{answers:{$set:Array(4).fill('')}}}})
+            }));
+        }
         this.setState((prevState) => ({
-            test:update(prevState.test,{questions:{[prevState.counter]:{type: {$set:type}}}})
+            test:update(prevState.test,{questions:{[prevState.counter]:{type: {$set:t}}}})
         }));
     };
 
@@ -56,8 +60,24 @@ class TestCreator extends Component{
     };
 
     SubmitTest = () => {
-        //Todo:call to api
-        alert(ValidateTest(this.state.test));
+        let test = this.state.test;
+        for(let i=0; i< test.questions.length;i++){
+            if(test.questions[i].type !== 'W' &&'answers' in test.questions[i]){
+                test.questions[i] = removeByKey(test.questions[i], 'answers')
+            }
+        }
+        if(ValidateTest(test)){
+            this.setState({
+                canSubmit:true
+            });
+            let json = JSON.stringify(test);
+            console.log(json);
+        } else{
+            this.setState({
+                canSubmit:false
+            })
+        }
+        console.log(this.state);
     };
 
     componentDidMount() {
@@ -105,7 +125,6 @@ class TestCreator extends Component{
     setClosedAnswers = (event) => {
         let val = event.target.value;
         let i = event.target.attributes['index'].value - 1;
-        console.log(i);
         if(this.state.test.questions[this.state.counter].answers === undefined){
             this.setState(prevState => ({
                 test:update(prevState.test,{questions:{[prevState.counter]:{answers: {$set:[]}}}})
@@ -113,15 +132,20 @@ class TestCreator extends Component{
         this.setState((prevState) => ({
             test:update(prevState.test,{questions:{[prevState.counter]:{answers:{[i]: {$set:val}}}}})
         }));
-       console.log(this.state.test);
+
     };
 
     setClosedAnswersLength = (numberOfAnswers) => {
         let val = numberOfAnswers;
-        if(this.state.test.questions[this.state.counter].answers > val){
+        if(this.state.test.questions[this.state.counter].answers.length > val){
             let difference = this.state.test.questions[this.state.counter].answers.length - val;
             this.setState((prevState) => ({
                 test:update(prevState.test,{questions:{[prevState.counter]:{answers:{$splice:[[val,difference]]}}}})
+            }));
+        } else if(this.state.test.questions[this.state.counter].answers.length < val){
+            let difference = val - this.state.test.questions[this.state.counter].answers.length;
+            this.setState((prevState) => ({
+                test:update(prevState.test,{questions:{[prevState.counter]:{answers:{$push:Array(difference).fill('')}}}})
             }));
         }
     };
@@ -178,7 +202,7 @@ class TestCreator extends Component{
             </div>
             <TestCreatorQuestionController
                 type={this.state.test.questions[this.state.counter].type}
-                answers={this.state.test.questions[this.state.counter]}
+                answers={this.state.test.questions[this.state.counter].answers}
                 onChange={this.setClosedAnswers}
                 onChangeOfNumberOfClosedAnswers={this.setClosedAnswersLength}
             />
@@ -192,6 +216,13 @@ class TestCreator extends Component{
             </Row>
             <Row className="justify-content-end" style={{margin:"1rem"}}>
                 <Button variant="success" size="lg" onClick={this.SubmitTest}>Submit Test</Button>
+            </Row>
+            <Row className="justify-content-end" style={{margin:"1rem"}}>
+                {
+                    !this.state.canSubmit && this.state.canSubmit != null
+                    ? <Alert variant="danger">Test contains empty data</Alert>
+                        :null
+                }
             </Row>
         </Container>
     }

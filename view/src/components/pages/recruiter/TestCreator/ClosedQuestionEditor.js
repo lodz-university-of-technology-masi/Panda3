@@ -36,7 +36,7 @@ class ClosedQuestionEditor extends Component {
                         index={i}
                         className="form-control"
                         type="text"
-                        value={this.props.answers[i]}
+                        value={this.props.answers[i-1]}
                         onChange={((event) => this.props.onChange(event))}
                         placeholder={"Answer " + i}
                         style={{width:"95%"}}
@@ -75,7 +75,7 @@ ClosedQuestionEditor.propTypes = {
 };
 
 ClosedQuestionEditor.defaultProps = {
-    answers: []
+    answers: Array(4).fill(null)
 };
 
 export default ClosedQuestionEditor;
