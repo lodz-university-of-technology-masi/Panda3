@@ -16,9 +16,8 @@ import SplitButton from "react-bootstrap/SplitButton";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import RecruiterTests from "./RecruiterTests";
 import TestCreator from "./TestCreator/TestCreator";
+import Translator from "./Translator";
 
-
-//TODO: dodac routy
 class RecruiterMainView extends Component {
     constructor(props) {
         super(props);
@@ -50,6 +49,7 @@ class RecruiterMainView extends Component {
                         <Route path="/view-tests"><RecruiterTests/></Route>
                         <Route path="/test-creator" component={TestCreator}/>
                         <Route path="/modify-test/:id">{withRouter(TestCreator)}</Route>
+                        <Route path="/translate/:id">{withRouter(Translator)}</Route>
                     </Switch>
                 </Container>
             </Router>

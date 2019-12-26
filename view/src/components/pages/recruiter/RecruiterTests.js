@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import Button from 'react-bootstrap/Button';
 import BasicTable from "../../BasicTable";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col"
+import Col from "react-bootstrap/Col";
 import {Link} from "react-router-dom";
-import {getLanguages} from "../../utils/Yandex";
+
 
 class RecruiterTests extends Component {
     constructor(props) {
@@ -26,12 +26,13 @@ class RecruiterTests extends Component {
                 Cell: table => {
                     let path = '/test/' + table.row.original.testId;
                     let modifyPath = '/modify-test/' + table.row.original.testId;
+                    let translatePath = '/translate/' + table.row.original.testId;
                     return (
                         <Row className="justify-content-center" stylw={{width:"auto"}}>
                             <Col md={"auto"}><Link to={path}><Button variant="info">Manage Access</Button></Link></Col>
                             <Col md={"auto"}><Link to={path}><Button variant="info">View Submissions</Button></Link></Col>
                             <Col md={"auto"}><Link to={modifyPath}><Button variant="warning">Modify</Button></Link></Col>
-                            <Col md={"auto"}><Link to={path}><Button variant="info">Translate</Button></Link></Col>
+                            <Col md={"auto"}><Link to={translatePath}><Button variant="info">Translate</Button></Link></Col>
                             <Col md={"auto"}><Button data-id={table.row.original.testId} variant="danger" onClick={this.deleteTest}>Delete</Button></Col>
                         </Row>
                     )
@@ -44,7 +45,6 @@ class RecruiterTests extends Component {
         let idToDel = event.target.attributes['data-id'].value
         event.preventDefault();
         alert("id to del:" + idToDel);
-        getLanguages();
     };
 
     componentDidMount() {
