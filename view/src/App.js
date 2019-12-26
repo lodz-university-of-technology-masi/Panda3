@@ -26,12 +26,14 @@ Amplify.configure({
 
 function App() {
   return (
-        <div style={{width:"100%", margin:"0auto"}}>
+        <div style={{width:"100%", height:"100%", margin:"0auto"}}>
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Panda3</title>
             </Helmet>
             <HomeController/>
+            <div className="container">
+            </div>
         </div>
   );
 }

@@ -68,8 +68,8 @@ class CandidateTestView extends Component{
     }
 
     componentDidMount() {
-       this.fetchTestData();
         console.log(this.props.match.params.id);
+       this.fetchTestData();
     }
 
 

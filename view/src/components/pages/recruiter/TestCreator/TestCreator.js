@@ -31,6 +31,21 @@ class TestCreator extends Component{
         };
     }
 
+    componentDidMount() {
+        if(this.props.match.params.id === undefined){
+            this.setState({loading:false})
+        } else{
+            this.fetchTestData(this.props.match.params.id);
+        }
+    }
+
+    fetchTestData = (id) => {
+        console.log(id);
+        let response = JSON.parse("{\"title\":\"Test\",\"language\":\"EN\",\"questions\":[{\"question\":\"ABF\",\"type\":\"O\"},{\"question\":\"fhfgh\",\"type\":\"W\",\"answers\":[\"addfgs\",\"dfhdh\",\"esgrd\",\"fhg\"]},{\"question\":\"fjfgjfhjh\",\"type\":\"L\"}]}");
+        this.setState({test: response});
+        this.setState({loading:false});
+    };
+
     setTestType = (type) => {
         let t = type;
         if((!('answers' in this.state.test.questions[this.state.counter])) && this.state.test.questions[this.state.counter].type !== 'W'){
@@ -55,10 +70,6 @@ class TestCreator extends Component{
         }));
     };
 
-    fetchTestData = () => {
-        this.setState({loading:false})
-    };
-
     SubmitTest = () => {
         let test = this.state.test;
         for(let i=0; i< test.questions.length;i++){
@@ -79,10 +90,6 @@ class TestCreator extends Component{
         }
         console.log(this.state);
     };
-
-    componentDidMount() {
-        this.fetchTestData();
-    }
 
     handleTestTitle = (event) => {
         let val = event.target.value;

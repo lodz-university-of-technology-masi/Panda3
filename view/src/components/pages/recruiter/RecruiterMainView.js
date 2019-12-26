@@ -8,22 +8,28 @@ import {
     Switch,
     Route,
     Link,
+    withRouter
 } from "react-router-dom";
 import UserManagement from "../../UserManagement";
 import AddUser from "../../AddUser"
 import SplitButton from "react-bootstrap/SplitButton";
 import DropdownItem from "react-bootstrap/DropdownItem";
-import TestMenu from "./TestMenu";
+import RecruiterTests from "./RecruiterTests";
+import TestCreator from "./TestCreator/TestCreator";
 
 
 //TODO: dodac routy
 class RecruiterMainView extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     render() {
+        console.log(this.props.match);
         return (
             <Router>
                 <Container fluid={true}>
-                    <Row style={{background: "LightBlue", padding: "0.5rem"}}>
+                    <Row style={{background: "LightBlue", padding: "0.5rem" }}>
                         <Col md="auto">Welcome, {this.props.username}</Col>
                         <Col md="auto">
                             <Link to="/users">
@@ -31,14 +37,19 @@ class RecruiterMainView extends Component {
                                 <DropdownItem as="button"><Link to="/add-user">Add User</Link></DropdownItem>
                             </SplitButton></Link>
                         </Col>
-                        <Col md="auto"><Link to="/test-groups"><Button variant="primary">Test Groups</Button></Link></Col>
-                        <Col md="auto"><Link to="/test-menu"><Button variant="primary">Tests</Button></Link></Col>
-                        <Col md="auto"><Link to="/check-tests"><Button variant="primary">Check Tests</Button></Link></Col>
+                        <Col md="auto">
+                            <Link to="/view-tests"><Button>View Tests</Button></Link>
+                        </Col>
+                        <Col md="auto">
+                            <Link to="/test-creator"><Button>Test Creator</Button></Link>
+                        </Col>
                     </Row>
                     <Switch>
                         <Route path="/users" component={UserManagement}/>
                         <Route path="/add-user" component={AddUser}/>
-                        <Route path="/test-menu"><TestMenu props={this.props}/></Route>
+                        <Route path="/view-tests"><RecruiterTests/></Route>
+                        <Route path="/test-creator" component={TestCreator}/>
+                        <Route path="/modify-test/:id">{withRouter(TestCreator)}</Route>
                     </Switch>
                 </Container>
             </Router>

@@ -9,14 +9,17 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    withRouter,
 } from "react-router-dom";
 import CandidateTestView from "../../CandidateTestView";
 
 class UserMainView extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props)
     }
+
 
     render() {
         return (
@@ -30,7 +33,7 @@ class UserMainView extends Component {
                     <Switch>
                         <Route path="/tests"><ActiveTests/></Route>
                         <Route path="/results"><TestResults/></Route>
-                        <Route path="/test/:id" component={(props) => <CandidateTestView {...props}/> }/>
+                        <Route path="/test/:id">{withRouter(CandidateTestView)}</Route>
                     </Switch>
                 </Container>
             </Router>
