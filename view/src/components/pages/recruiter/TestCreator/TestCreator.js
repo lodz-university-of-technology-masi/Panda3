@@ -10,17 +10,24 @@ import QuestionTitleChooser from "./QuestionTitleChooser";
 import ValidateTest from "./TestValidator";
 import {removeByKey} from "../../../utils/utils";
 import Alert from "react-bootstrap/Alert";
+import {getLanguages} from "../../../utils/Yandex";
+import VirtualizedSelect from 'react-virtualized-select';
+import 'react-select/dist/react-select.css'
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
 
 class TestCreator extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            error:null,
             counter:0,
             loading:true,
+            languages:[],
             canSubmit:null,
             test: {
                 title:'',
-                language:'',
+                language:{label:'', value:''},
                 questions: [
                     {
                         question:'',
@@ -31,13 +38,27 @@ class TestCreator extends Component{
         };
     }
 
-    componentDidMount() {
-        if(this.props.match.params.id === undefined){
-            this.setState({loading:false})
-        } else{
+    componentDidMount = async () => {
+        if(this.props.match.params.id !== undefined){
             this.fetchTestData(this.props.match.params.id);
         }
-    }
+        const languages = await getLanguages();
+        try{
+            console.log(languages);
+            const options = Object.keys(languages).map((key) => ({label:languages[key], value:key}));
+            console.log(options);
+            this.setState({
+                languages: options,
+                loading: false
+            });
+        } catch (e) {
+            this.setState({
+                error:true,
+                loading: false
+            })
+        }
+
+    };
 
     fetchTestData = (id) => {
         console.log(id);
@@ -98,8 +119,8 @@ class TestCreator extends Component{
         }))
     };
 
-    handleTestLanguage = (event) => {
-        let val = event.target.value;
+    handleTestLanguage = (selectValue) => {
+        let val = selectValue;
         this.setState((prevState) => ({
             test:update(prevState.test,{language: {$set:val}})
         }))
@@ -161,6 +182,10 @@ class TestCreator extends Component{
         if(this.state.loading){
             return null;
         }
+        else if(this.state.loading){
+            return <Alert variant="danger">Fetch error</Alert>;
+        }
+
         return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
             <div>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
@@ -176,14 +201,13 @@ class TestCreator extends Component{
                     />
             </div>
                 <div className="d-flex"  style={{width:"auto", flexDirection:"column"}}>
-                    <label className="text-center">Enter Language:</label>
-                    <Form.Control
-                        type="text"
-                        className="d-flex"
-                        onChange={(event => this.handleTestLanguage(event))}
-                        placeholder={"Language"}
+                    <label className="text-center">Choose Language:</label>
+                    <VirtualizedSelect
+                        options={this.state.languages}
+                        onChange={(selectValue) => this.handleTestLanguage(selectValue)}
                         value={this.state.test.language}
-                        style={{width:"auto"}}/>
+                        style={{minWidth:"12rem"}}
+                    />
                 </div>
                 <div className="d-flex"  style={{width:"auto", flexDirection:"column"}} >
                     <label className="text-center">Select question type:</label>
