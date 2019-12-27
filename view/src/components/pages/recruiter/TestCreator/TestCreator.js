@@ -10,11 +10,12 @@ import QuestionTitleChooser from "./QuestionTitleChooser";
 import ValidateTest from "./TestValidator";
 import {removeByKey} from "../../../utils/utils";
 import Alert from "react-bootstrap/Alert";
-import {getLanguages} from "../../../utils/Yandex";
+import {getLanguages, translateTest} from "../../../utils/Yandex";
 import VirtualizedSelect from 'react-virtualized-select';
 import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
+import TranslationSpinner from "../../../TranslationSpinner";
 
 class TestCreator extends Component{
     constructor(props) {
@@ -22,12 +23,13 @@ class TestCreator extends Component{
         this.state = {
             error:null,
             counter:0,
+            translating:false,
             loading:true,
             languages:[],
             canSubmit:null,
             test: {
                 title:'',
-                language:{label:'', value:''},
+                language:{label:'English', value:'en'},
                 questions: [
                     {
                         question:'',
@@ -44,9 +46,7 @@ class TestCreator extends Component{
         }
         const languages = await getLanguages();
         try{
-            console.log(languages);
             const options = Object.keys(languages).map((key) => ({label:languages[key], value:key}));
-            console.log(options);
             this.setState({
                 languages: options,
                 loading: false
@@ -116,14 +116,22 @@ class TestCreator extends Component{
         let val = event.target.value;
         this.setState((prevState) => ({
             test:update(prevState.test,{title: {$set:val}})
-        }))
+        }));
     };
 
     handleTestLanguage = (selectValue) => {
-        let val = selectValue;
-        this.setState((prevState) => ({
-            test:update(prevState.test,{language: {$set:val}})
-        }))
+            this.setState({translating:true});
+            let val = selectValue;
+            translateTest(this.state.test, val).then((translatedTest) =>
+                this.setState({test: translatedTest,
+                    translating:false})
+            ).catch((error) => {
+                console.log(error);
+                this.setState((prevState) => ({
+                    test:update(prevState.test,{language: {$set:val}}),
+                    translating:false
+                }))
+            });
     };
 
     handleQuestionTitle = (event) =>{
@@ -181,8 +189,10 @@ class TestCreator extends Component{
     render() {
         if(this.state.loading){
             return null;
+        } else if(this.state.translating){
+            return TranslationSpinner();
         }
-        else if(this.state.loading){
+        else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
         }
 

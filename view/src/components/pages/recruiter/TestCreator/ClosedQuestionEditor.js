@@ -8,10 +8,9 @@ class ClosedQuestionEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            n: 4
+            n: this.props.answers.length
         }
     }
-
 
     setNumOfAnswers = (event) => {
         let val = event.target.value;
