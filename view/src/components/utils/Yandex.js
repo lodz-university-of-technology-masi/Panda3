@@ -32,11 +32,10 @@ export async function translateTest(test, language) {
         if(q.question !== '') {
            q.question = await translateText(q.question, lang);
         }
-        if('answers' in q) {
+        if('answers' in q && q.type === 'W') {
             let i=0;
             for (let answer of q.answers) {
                 if (answer !== '') {
-                    //TODO:parallel await for answers
                     q.answers[i] = await translateText(answer, lang);
                 }
                 i++;

@@ -28,6 +28,7 @@ class ClosedQuestion extends React.Component {
         let options = this.state.options.map((option, index)=> {
             return <Row key={option} className="d-flex align-content-center justify-content-start">
                 <input
+                    disabled={this.props.readOnly}
                     checked={this.state.answers[index]}
                     onChange={(e) => this.handleChange(e, index)}
                     style={{width:"2rem", marginRight:"0.8rem"}}
@@ -49,13 +50,15 @@ ClosedQuestion.propTypes = {
     defaultAnswer: PropTypes.arrayOf(PropTypes.bool),
     title: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.string),
-    onAnswer: PropTypes.func
+    onAnswer: PropTypes.func,
+    readOnly:PropTypes.bool
 };
 
 ClosedQuestion.defaultProps = {
     options:[],
     title:'',
-    defaultAnswer:Array(15).fill(false)
+    defaultAnswer:Array(15).fill(false),
+    readOnly:false
 };
 
 export default ClosedQuestion;

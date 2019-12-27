@@ -26,6 +26,7 @@ class OpenQuestion extends React.Component {
                 <Row>{this.state.title}</Row>
                     <textarea className="form-control-lg form-control"
                               value={this.state.answer}
+                              readOnly={this.props.readOnly}
                               onChange={this.handleChange}/>
             </Container>
         );
@@ -35,11 +36,13 @@ class OpenQuestion extends React.Component {
 OpenQuestion.propTypes = {
     defaultAnswer: PropTypes.string,
     title: PropTypes.string,
-    onAnswer: PropTypes.func
+    onAnswer: PropTypes.func,
+    readOnly:PropTypes.bool
 };
 
 OpenQuestion.defaultProps = {
     defaultAnswer: '',
-    title:''
+    title:'',
+    readOnly:false
 };
 export default OpenQuestion;
