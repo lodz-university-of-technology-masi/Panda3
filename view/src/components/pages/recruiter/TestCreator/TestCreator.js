@@ -16,6 +16,7 @@ import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 import TranslationSpinner from "../../../TranslationSpinner";
+import LoadingSpinner from "../../../LoadingSpinner";
 
 class TestCreator extends Component{
     constructor(props) {
@@ -49,22 +50,19 @@ class TestCreator extends Component{
             const options = Object.keys(languages).map((key) => ({label:languages[key], value:key}));
             this.setState({
                 languages: options,
-                loading: false
             });
         } catch (e) {
             this.setState({
                 error:true,
-                loading: false
             })
         }
-
+        this.setState({loading:false});
     };
 
     fetchTestData = (id) => {
         console.log(id);
         let response = JSON.parse("{\"title\":\"Test\",\"language\":\"EN\",\"questions\":[{\"question\":\"ABF\",\"type\":\"O\"},{\"question\":\"fhfgh\",\"type\":\"W\",\"answers\":[\"addfgs\",\"dfhdh\",\"esgrd\",\"fhg\"]},{\"question\":\"fjfgjfhjh\",\"type\":\"L\"}]}");
         this.setState({test: response});
-        this.setState({loading:false});
     };
 
     setTestType = (type) => {
@@ -196,7 +194,7 @@ class TestCreator extends Component{
 
     render() {
         if(this.state.loading){
-            return null;
+            return LoadingSpinner();
         } else if(this.state.translating){
             return TranslationSpinner();
         }
