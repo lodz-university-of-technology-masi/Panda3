@@ -19,6 +19,7 @@ import TestCreator from "./TestCreator/TestCreator";
 import Translator from "./Translator";
 
 class RecruiterMainView extends Component {
+    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
     }

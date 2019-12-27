@@ -120,18 +120,26 @@ class TestCreator extends Component{
     };
 
     handleTestLanguage = (selectValue) => {
-            this.setState({translating:true});
+        if(selectValue != null) {
+            this.setState({translating: true});
             let val = selectValue;
             translateTest(this.state.test, val).then((translatedTest) =>
-                this.setState({test: translatedTest,
-                    translating:false})
+                this.setState({
+                    test: translatedTest,
+                    translating: false
+                })
             ).catch((error) => {
                 console.log(error);
                 this.setState((prevState) => ({
-                    test:update(prevState.test,{language: {$set:val}}),
-                    translating:false
+                    test: update(prevState.test, {language: {$set: val}}),
+                    translating: false
                 }))
             });
+        } else {
+            this.setState((prevState) => ({
+                test: update(prevState.test, {language: {$set: null}}),
+            }))
+        }
     };
 
     handleQuestionTitle = (event) =>{
