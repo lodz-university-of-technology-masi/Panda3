@@ -58,7 +58,8 @@ class CandidateTestView extends Component{
 
     SubmitTest = () => {
         //Todo:call to api
-        alert(this.state.answers)
+        let json = JSON.stringify(this.state.answers);
+        console.log(json);
     };
 
     onAnswer(value){

@@ -5,11 +5,6 @@ import ClosedQuestion from "./ClosedQuestion";
 import PropTypes from "prop-types";
 
 class QuestionController extends Component {
-    /*get answer (){
-        return (
-            this.props
-        )
-    }*/
 
     render() {
         let answer = this.props.defaultVal;
@@ -19,6 +14,7 @@ class QuestionController extends Component {
                     title={this.props.param.question}
                     onAnswer={this.props.onAnswer}
                     defaultAnswer={answer}
+                    readOnly={this.props.readOnly}
                 />;
             case "W":
                 return <ClosedQuestion
@@ -26,12 +22,14 @@ class QuestionController extends Component {
                     options={this.props.param.options}
                     onAnswer={this.props.onAnswer}
                     defaultAnswer={answer}
+                    readOnly={this.props.readOnly}
                 />;
             case "L":
             return <NumberQuestion
                 title={this.props.param.question}
                 onAnswer={this.props.onAnswer}
                 defaultAnswer={answer}
+                readOnly={this.props.readOnly}
             />;
             default:
                 return <span>Question Type Error</span>;
@@ -46,10 +44,12 @@ QuestionController.propTypes = {
     ]),
     title: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.string),
-    onAnswer: PropTypes.func
+    onAnswer: PropTypes.func,
+    readOnly:PropTypes.bool
 };
 
 QuestionController.defaultProps = {
-    title:''
+    title:'',
+    readOnly:false
 };
 export default QuestionController;

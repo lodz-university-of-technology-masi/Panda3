@@ -25,6 +25,7 @@ class NumberQuestion extends React.Component {
             <Container>
                 <Row>{this.state.title}</Row>
                 <input type="number" className="form-control"
+                       readOnly={this.props.readOnly}
                           value={this.state.answer}
                           onChange={this.handleChange}
                        placeholder="Enter a number"
@@ -37,12 +38,14 @@ class NumberQuestion extends React.Component {
 NumberQuestion.propTypes = {
     defaultAnswer: PropTypes.string,
     title: PropTypes.string,
-    onAnswer: PropTypes.func
+    onAnswer: PropTypes.func,
+    readOnly:PropTypes.bool
 };
 
 NumberQuestion.defaultProps = {
     defaultAnswer: '',
-    title:''
+    title:'',
+    readOnly:false
 };
 
 export default NumberQuestion;

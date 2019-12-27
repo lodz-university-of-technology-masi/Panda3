@@ -17,6 +17,8 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 import RecruiterTests from "./RecruiterTests";
 import TestCreator from "./TestCreator/TestCreator";
 import Translator from "./Translator";
+import PendingSubmissions from "./SubmissionManager/PendingSubmissions";
+import TestChecker from "./SubmissionManager/TestChecker";
 
 class RecruiterMainView extends Component {
     // eslint-disable-next-line no-useless-constructor
@@ -29,7 +31,7 @@ class RecruiterMainView extends Component {
         return (
             <Router>
                 <Container fluid={true}>
-                    <Row style={{background: "LightBlue", padding: "0.5rem" }}>
+                    <Row style={{background: "LightBlue", padding: "0.5rem"}}>
                         <Col md="auto">Welcome, {this.props.username}</Col>
                         <Col md="auto">
                             <Link to="/users">
@@ -51,6 +53,8 @@ class RecruiterMainView extends Component {
                         <Route path="/test-creator" component={TestCreator}/>
                         <Route path="/modify-test/:id">{withRouter(TestCreator)}</Route>
                         <Route path="/translate/:id">{withRouter(Translator)}</Route>
+                        <Route path="/submissions/:id">{withRouter(PendingSubmissions)}</Route>
+                        <Route path="/check-test/:id">{withRouter(TestChecker)}</Route>
                     </Switch>
                 </Container>
             </Router>
