@@ -50,13 +50,14 @@ class TestCreator extends Component{
             const options = Object.keys(languages).map((key) => ({label:languages[key], value:key}));
             this.setState({
                 languages: options,
-            });
+                loading:false,
+        });
         } catch (e) {
             this.setState({
                 error:true,
+                loading:false,
             })
         }
-        this.setState({loading:false});
     };
 
     fetchTestData = (id) => {
@@ -107,7 +108,6 @@ class TestCreator extends Component{
                 canSubmit:false
             })
         }
-        console.log(this.state);
     };
 
     handleTestTitle = (event) => {
@@ -149,8 +149,11 @@ class TestCreator extends Component{
 
     deleteQuestion = () => {
         this.setState((prevState) => ({
-            test:update(prevState.test,{questions:{$splice:[[this.state.counter, 1]]}})
-        }), () => this.DecrementCounter);
+            test:update(prevState.test,{questions:{$splice:[[prevState.counter, 1]]}})
+        }));
+        if(this.state.counter > 0){
+            this.DecrementCounter();
+        }
     };
 
     setQuestions = () => {
@@ -201,7 +204,8 @@ class TestCreator extends Component{
         else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
         }
-
+        console.log(this.state.counter);
+        console.log(this.state.test.questions);
         return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
             <div>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
