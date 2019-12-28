@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
+import {ApiHelper} from "./utils/API";
 
 class AddUser extends Component {
     constructor(props) {
@@ -23,14 +24,17 @@ class AddUser extends Component {
     }
 
     handleSubmit(event){
-        let user = {
+        /*let user = {
             firstName:this.state.firstName,
             lastName:this.state.lastName,
             dateOfBirth:this.state.dateOfBirth,
             email:this.state.email
-        };
-        console.log(user);
-        //Todo: add user api call
+        };*/
+        let user =
+            {
+                name:this.state.firstName,
+            };
+        ApiHelper.createParticipant(user).then(r => console.log(r));
         event.preventDefault();
     };
 
