@@ -21,35 +21,20 @@ import java.util.List;
 import java.util.Map;
 
 public class CreateTest implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    private final Logger logger = LogManager.getLogger(this.getClass());
 
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         TablesMapperTest tablesMapperTest = new TablesMapperTest();
-        ObjectMapper mapper = new ObjectMapper();
         Test test = new Test();
-        Language language = new Language();
-        List<Question> questions;
-
-
-
-
         try {
-            Gson gson = new Gson();
-            questions = (ArrayList<Question>) input.get("questions");
             LinkedHashMap<String, String> languageObject= (LinkedHashMap<String, String>) input.get("language");
-            logger.error("Error language. " + languageObject.get("label") + " " + languageObject.get("value"));
-            String label = languageObject.get("label").toString();
-            String value = languageObject.get("value").toString();
-            language.setLabel(label);
-            language.setValue(value);
+            Language language = new Language(languageObject.get("label"), languageObject.get("value"));
             test.setTitle(input.get("title").toString());
             test.setLanguage(language);
-            test.setQuestions(questions);
+            test.setQuestions((ArrayList<Question>) input.get("questions"));
             tablesMapperTest.saveTest(test);
             return ApiResponseHandler.createResponse("sucess.", 200);
         } catch (IOException e) {
-            logger.error("Error in saving product: " + e);
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);
         }
     }

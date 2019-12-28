@@ -84,7 +84,6 @@ functions:
           path: participant/read
           method: get
           cors: true
-          timeout: 45
 
 
   readParticipants:
@@ -94,7 +93,6 @@ functions:
           path: participants/read
           method: get
           cors: true
-          timeout: 45
 
   updateParticipant:
     handler: panda3.lambda.paarticipants.UpdateParticipant
@@ -111,7 +109,6 @@ functions:
           method: post
           path: tests/create
           cors: true
-          timeout: 45
 
   readTests:
     handler: panda3.lambda.tests.ReadTests
@@ -120,7 +117,6 @@ functions:
           path: tests/read
           method: get
           cors: true
-          timeout: 45
 
 
 

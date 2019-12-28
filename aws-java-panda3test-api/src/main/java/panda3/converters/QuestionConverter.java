@@ -12,13 +12,11 @@ import java.lang.reflect.Type;
 public class QuestionConverter implements DynamoDBTypeConverter<String, List<Question>> {
     @Override
     public String convert(List<Question> questions) {
-        Gson gson = new Gson();
-        return gson.toJson(questions);
+        return new Gson().toJson(questions);
     }
 
     @Override
     public List<Question> unconvert(String s) {;
-        Gson gson = new Gson();
-        return gson.fromJson(s, new TypeToken<List<Question>>(){}.getType());
+        return new Gson().fromJson(s, new TypeToken<List<Question>>(){}.getType());
     }
 }

@@ -41,5 +41,12 @@ public class TablesMapperTest {
         this.mapper.save(test);
     }
 
+    public void deleteTest(String id) throws IOException {
+        Test result = this.mapper.load(Test.class, id);
+        this.mapper.delete(result);
+    }
 
+    public Test getTest(String id) throws IOException {
+        return this.mapper.load(Test.class, id);
+    }
 }

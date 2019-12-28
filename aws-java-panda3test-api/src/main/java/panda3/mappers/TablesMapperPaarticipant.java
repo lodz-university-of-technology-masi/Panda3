@@ -29,8 +29,7 @@ public class TablesMapperPaarticipant {
     }
 
     public Participant getAllParticipant(String id) throws IOException {
-        Participant result = this.mapper.load(Participant.class, id);
-        return result;
+        return this.mapper.load(Participant.class, id);
     }
 
 
