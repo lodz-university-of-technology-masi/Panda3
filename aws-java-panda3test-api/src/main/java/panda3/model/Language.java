@@ -4,6 +4,8 @@ public class Language {
     private String label;
     private String value;
 
+    public Language(){}
+
     public Language(String label, String value) {
         this.label = label;
         this.value = value;
@@ -23,5 +25,13 @@ public class Language {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Language{" +
+                "label='" + label + '\'' +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

@@ -5,12 +5,12 @@ import java.util.List;
 public class Question {
     private String question;
     private String type;
-    private List<String> answersToChoose;
+//    private List<String> answersToChoose;
 
-    public Question(String question, String type, List<String> answersToChoose) {
+    public Question(String question, String type) {
         this.question = question;
         this.type = type;
-        this.answersToChoose = answersToChoose;
+//        this.answersToChoose = answersToChoose;
     }
 
     public String getQuestion() {
@@ -29,11 +29,11 @@ public class Question {
         this.type = type;
     }
 
-    public List<String> getAnswersToChoose() {
-        return answersToChoose;
-    }
-
-    public void setAnswersToChoose(List<String> answersToChoose) {
-        this.answersToChoose = answersToChoose;
-    }
+//    public List<String> getAnswersToChoose() {
+//        return answersToChoose;
+//    }
+//
+//    public void setAnswersToChoose(List<String> answersToChoose) {
+//        this.answersToChoose = answersToChoose;
+//    }
 }

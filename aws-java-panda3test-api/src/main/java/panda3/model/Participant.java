@@ -32,7 +32,7 @@ public class Participant {
     }
 
 
-    @DynamoDBAttribute(attributeName = "names")
+    @DynamoDBAttribute(attributeName = "name")
     public String getName() {
         return name;
     }
