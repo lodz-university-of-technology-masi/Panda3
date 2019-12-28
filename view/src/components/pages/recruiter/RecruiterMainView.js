@@ -19,6 +19,8 @@ import TestCreator from "./TestCreator/TestCreator";
 import Translator from "./Translator";
 import PendingSubmissions from "./SubmissionManager/PendingSubmissions";
 import TestChecker from "./SubmissionManager/TestChecker";
+import { ReactSVG } from 'react-svg'
+import Panda from '../../../resources/panda.svg';
 
 class RecruiterMainView extends Component {
     // eslint-disable-next-line no-useless-constructor
@@ -31,8 +33,8 @@ class RecruiterMainView extends Component {
         return (
             <Router>
                 <Container fluid={true}>
-                    <Row style={{background: "LightBlue", padding: "0.5rem"}}>
-                        <Col md="auto">Welcome, {this.props.username}</Col>
+                    <Row className="d-flex" style={{background: "LightBlue", padding: "0.5rem"}}>
+                        <Col className="d-flex align-items-center" md="auto">Welcome, {this.props.username}</Col>
                         <Col md="auto">
                             <Link to="/users">
                             <SplitButton variant="primary" title={"Users"}>
@@ -44,6 +46,9 @@ class RecruiterMainView extends Component {
                         </Col>
                         <Col md="auto">
                             <Link to="/test-creator"><Button>Test Creator</Button></Link>
+                        </Col>
+                        <Col className="d-flex align-items-center justify-content-end">
+                            <ReactSVG className="panda" src={Panda}/>
                         </Col>
                     </Row>
                     <Switch>

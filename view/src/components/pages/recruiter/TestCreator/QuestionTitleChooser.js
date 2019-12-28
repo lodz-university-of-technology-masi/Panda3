@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Form from "react-bootstrap/Form";
+import PropTypes from 'prop-types';
 
 class QuestionTitleChooser extends Component {
     render() {
@@ -14,5 +15,12 @@ class QuestionTitleChooser extends Component {
         </div>
     }
 }
+QuestionTitleChooser.propTypes = {
+    value: PropTypes.string,
+    onChange:PropTypes.func,
+};
 
+QuestionTitleChooser.defaultProps = {
+    value:''
+};
 export default  QuestionTitleChooser;

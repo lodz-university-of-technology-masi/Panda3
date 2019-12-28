@@ -10,6 +10,7 @@ import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 import Alert from "react-bootstrap/Alert";
+import LoadingSpinner from "../../LoadingSpinner";
 
 class Translator extends Component {
     constructor(props) {
@@ -44,9 +45,9 @@ class Translator extends Component {
 
     render() {
         if(this.state.loading){
-            return null;
+            return LoadingSpinner;
         }
-        else if(this.state.loading){
+        else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
         }
         const options = Object.keys(this.state.languages).map((key) => ({label:this.state.languages[key], value:key}));

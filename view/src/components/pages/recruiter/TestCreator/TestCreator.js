@@ -16,6 +16,7 @@ import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 import TranslationSpinner from "../../../TranslationSpinner";
+import LoadingSpinner from "../../../LoadingSpinner";
 
 class TestCreator extends Component{
     constructor(props) {
@@ -49,22 +50,20 @@ class TestCreator extends Component{
             const options = Object.keys(languages).map((key) => ({label:languages[key], value:key}));
             this.setState({
                 languages: options,
-                loading: false
-            });
+                loading:false,
+        });
         } catch (e) {
             this.setState({
                 error:true,
-                loading: false
+                loading:false,
             })
         }
-
     };
 
     fetchTestData = (id) => {
         console.log(id);
         let response = JSON.parse("{\"title\":\"Test\",\"language\":\"EN\",\"questions\":[{\"question\":\"ABF\",\"type\":\"O\"},{\"question\":\"fhfgh\",\"type\":\"W\",\"answers\":[\"addfgs\",\"dfhdh\",\"esgrd\",\"fhg\"]},{\"question\":\"fjfgjfhjh\",\"type\":\"L\"}]}");
         this.setState({test: response});
-        this.setState({loading:false});
     };
 
     setTestType = (type) => {
@@ -109,7 +108,6 @@ class TestCreator extends Component{
                 canSubmit:false
             })
         }
-        console.log(this.state);
     };
 
     handleTestTitle = (event) => {
@@ -151,8 +149,11 @@ class TestCreator extends Component{
 
     deleteQuestion = () => {
         this.setState((prevState) => ({
-            test:update(prevState.test,{questions:{$splice:[[this.state.counter, 1]]}})
-        }), () => this.DecrementCounter);
+            test:update(prevState.test,{questions:{$splice:[[prevState.counter, 1]]}})
+        }));
+        if(this.state.counter > 0){
+            this.DecrementCounter();
+        }
     };
 
     setQuestions = () => {
@@ -196,14 +197,15 @@ class TestCreator extends Component{
 
     render() {
         if(this.state.loading){
-            return null;
+            return LoadingSpinner();
         } else if(this.state.translating){
             return TranslationSpinner();
         }
         else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
         }
-
+        console.log(this.state.counter);
+        console.log(this.state.test.questions);
         return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
             <div>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>

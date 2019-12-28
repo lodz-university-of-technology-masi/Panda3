@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import Button from 'react-bootstrap/Button';
 import BasicTable from "../../BasicTable";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import {Link} from "react-router-dom";
+import DropdownMenu from "react-bootstrap/DropdownMenu";
+import DropdownToggle from "react-bootstrap/DropdownToggle";
+import Dropdown from "react-bootstrap/Dropdown";
 
 class RecruiterTests extends Component {
     constructor(props) {
@@ -28,13 +29,18 @@ class RecruiterTests extends Component {
                     let translatePath = '/translate/' + table.row.original.testId;
                     let submissionsPath = '/submissions/' + table.row.original.testId;
                     return (
-                        <Row className="justify-content-center" style={{width:"auto"}}>
-                            <Col md={"auto"}><Link to={path}><Button variant="info">Manage Access</Button></Link></Col>
-                            <Col md={"auto"}><Link to={submissionsPath}><Button variant="info">View Submissions</Button></Link></Col>
-                            <Col md={"auto"}><Link to={modifyPath}><Button variant="warning">Modify</Button></Link></Col>
-                            <Col md={"auto"}><Link to={translatePath}><Button variant="info">Translate</Button></Link></Col>
-                            <Col md={"auto"}><Button data-id={table.row.original.testId} variant="danger" onClick={this.deleteTest}>Delete</Button></Col>
-                        </Row>
+                            <Dropdown>
+                                <DropdownToggle variant="primary" id="dropdown-basic">
+                                    Test Menu
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <Link to={submissionsPath}><Button className="mr-1 ml-1" variant="info">View Submissions</Button></Link>
+                                    <Link to={modifyPath}><Button variant="warning">Modify</Button></Link>
+                                    <Link to={translatePath}><Button className="mr-1 ml-1" variant="info">Translate</Button></Link>
+                                    <Link to={path}><Button variant="info">Manage Access</Button></Link>
+                                    <Button className="mr-1 ml-1" data-id={table.row.original.testId} variant="danger" onClick={this.deleteTest}>Delete</Button>
+                                </DropdownMenu>
+                            </Dropdown>
                     )
                 }
             }]

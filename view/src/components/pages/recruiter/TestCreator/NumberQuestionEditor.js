@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
          <div>
              <Row className="d-flex" style={{marginLeft:"1rem", marginRight:"1rem"}}>
                  <input className="form-control-lg form-control"
-                        placeholder={'Answer'}
+                        placeholder={'Answer - number'}
                         readOnly={true}
                         type="number"
                         style={{width:"auto"}}
