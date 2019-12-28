@@ -24,10 +24,10 @@ class RecruiterTests extends Component {
                 id: 'action',
                 Header: 'Action',
                 Cell: table => {
-                    let path = '/test/' + table.row.original.testId;
                     let modifyPath = '/modify-test/' + table.row.original.testId;
                     let translatePath = '/translate/' + table.row.original.testId;
                     let submissionsPath = '/submissions/' + table.row.original.testId;
+                    let managePath = '/manage-access/' + table.row.original.testId;
                     return (
                             <Dropdown>
                                 <DropdownToggle variant="primary" id="dropdown-basic">
@@ -37,7 +37,7 @@ class RecruiterTests extends Component {
                                     <Link to={submissionsPath}><Button className="mr-1 ml-1" variant="info">View Submissions</Button></Link>
                                     <Link to={modifyPath}><Button variant="warning">Modify</Button></Link>
                                     <Link to={translatePath}><Button className="mr-1 ml-1" variant="info">Translate</Button></Link>
-                                    <Link to={path}><Button variant="info">Manage Access</Button></Link>
+                                    <Link to={managePath}><Button variant="info">Manage Access</Button></Link>
                                     <Button className="mr-1 ml-1" data-id={table.row.original.testId} variant="danger" onClick={this.deleteTest}>Delete</Button>
                                 </DropdownMenu>
                             </Dropdown>

@@ -204,8 +204,6 @@ class TestCreator extends Component{
         else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
         }
-        console.log(this.state.counter);
-        console.log(this.state.test.questions);
         return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
             <div>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
