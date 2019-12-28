@@ -21,6 +21,7 @@ import PendingSubmissions from "./SubmissionManager/PendingSubmissions";
 import TestChecker from "./SubmissionManager/TestChecker";
 import { ReactSVG } from 'react-svg'
 import Panda from '../../../resources/panda.svg';
+import AccessManager from "./AccessManager";
 
 class RecruiterMainView extends Component {
     // eslint-disable-next-line no-useless-constructor
@@ -29,7 +30,6 @@ class RecruiterMainView extends Component {
     }
 
     render() {
-        console.log(this.props.match);
         return (
             <Router>
                 <Container fluid={true}>
@@ -60,6 +60,7 @@ class RecruiterMainView extends Component {
                         <Route path="/translate/:id">{withRouter(Translator)}</Route>
                         <Route path="/submissions/:id">{withRouter(PendingSubmissions)}</Route>
                         <Route path="/check-test/:id">{withRouter(TestChecker)}</Route>
+                        <Route path="/manage-access/:id">{withRouter(AccessManager)}</Route>
                     </Switch>
                 </Container>
             </Router>

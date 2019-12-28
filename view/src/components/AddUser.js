@@ -51,8 +51,9 @@ class AddUser extends Component {
     };
 
 render() {
-    return <Container className="justify-items-center" style={{width:"auto"}}>
-        <Form className="justify-items-center" onSubmit={(e) => this.handleSubmit(e)}>
+    return <Container className="justify-items-center mt-3">
+        <Form className="justify-items-center" onSubmit={(e) => this.handleSubmit(e)}
+              style={{position:"absolute", left:"40%", top:"25%", padding:"0.5rem", borderStyle:"solid", borderWidth:"0.3rem", borderRadius:"1rem",borderColor:"lightGray"}}>
             <Row>
                 <Col md="auto">
                     <Form.Group>
@@ -83,7 +84,7 @@ render() {
                 </Form.Group>
                 </Col>
             </Row>
-            <Row className="justify-content-start">
+            <Row className="justify-content-around">
                 <Col md="auto">
                     <Button variant="success" type="submit">
                         Submit
