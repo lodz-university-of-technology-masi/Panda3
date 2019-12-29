@@ -3,22 +3,22 @@ package panda3.model;
 import java.util.List;
 
 public class Question {
-    private String question;
+    private String questionName;
     private String type;
-//    private List<String> answersToChoose;
+    private List<String> answers;
 
-    public Question(String question, String type) {
-        this.question = question;
+    public Question(String questionName, String type, List<String> answers) {
+        this.questionName = questionName;
         this.type = type;
-//        this.answersToChoose = answersToChoose;
+        this.answers = answers;
     }
 
     public String getQuestion() {
-        return question;
+        return questionName;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestion(String questionName) {
+        this.questionName = questionName;
     }
 
     public String getType() {
@@ -29,11 +29,11 @@ public class Question {
         this.type = type;
     }
 
-//    public List<String> getAnswersToChoose() {
-//        return answersToChoose;
-//    }
-//
-//    public void setAnswersToChoose(List<String> answersToChoose) {
-//        this.answersToChoose = answersToChoose;
-//    }
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+    }
 }

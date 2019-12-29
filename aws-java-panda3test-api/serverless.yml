@@ -60,7 +60,7 @@ package:
   artifact: target/hello-dev.jar
 
 functions:
-
+  # participants lambdas
   createParticipant:
     handler: panda3.lambda.paarticipants.CreateParticipant
     events:
@@ -102,6 +102,8 @@ functions:
           method: put
           cors: true
 
+
+  # tests lambdas
   createTest:
     handler: panda3.lambda.tests.CreateTest
     events:
@@ -118,14 +120,40 @@ functions:
           method: get
           cors: true
 
+  readTest:
+    handler: panda3.lambda.tests.ReadTest
+    events:
+      - http:
+          path: test/read/{id}
+          method: get
+          cors: true
 
 
+  deleteTest:
+    handler: panda3.lambda.tests.DeleteTest
+    events:
+      - http:
+          path: tests/delete
+          method: delete
+          cors: true
+
+
+
+  updateTest:
+    handler: panda3.lambda.tests.UpdateTest
+    events:
+      - http:
+          path: tests/update
+          method: put
+          cors: true
+
+  # lambdas for testing
   test:
     handler: panda3.lambda.testingLambdas.SimpleTest
     events:
       - http:
           path: participants/test
-          method: get
+          method: post
           cors: true
 
 resources:

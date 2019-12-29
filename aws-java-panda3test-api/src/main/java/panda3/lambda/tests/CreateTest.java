@@ -13,6 +13,7 @@ import panda3.model.Language;
 import panda3.model.Question;
 import panda3.model.Test;
 import panda3.responses.ApiResponseHandler;
+import panda3.validator.TestValidator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,18 +22,20 @@ import java.util.List;
 import java.util.Map;
 
 public class CreateTest implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-
+    private ObjectMapper mapper = new ObjectMapper();
+    private TablesMapperTest tablesMapperTest;
     @Override
+
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
-        TablesMapperTest tablesMapperTest = new TablesMapperTest();
+        this.tablesMapperTest = new TablesMapperTest();
         Test test = new Test();
         try {
-            LinkedHashMap<String, String> languageObject= (LinkedHashMap<String, String>) input.get("language");
-            Language language = new Language(languageObject.get("label"), languageObject.get("value"));
-            test.setTitle(input.get("title").toString());
-            test.setLanguage(language);
-            test.setQuestions((ArrayList<Question>) input.get("questions"));
-            tablesMapperTest.saveTest(test);
+            JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
+            JsonNode language = body.get("language");
+            test.setTitle(body.get("title").asText());
+            test.setLanguage(new Language(language.get("label").textValue(), language.get("value").textValue()));
+            test.setQuestions(mapper.convertValue(body.get("questions"), ArrayList.class));
+            this.tablesMapperTest.saveTest(test);
             return ApiResponseHandler.createResponse("sucess.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);
