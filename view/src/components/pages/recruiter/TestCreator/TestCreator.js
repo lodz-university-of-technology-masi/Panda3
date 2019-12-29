@@ -17,6 +17,7 @@ import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 import TranslationSpinner from "../../../TranslationSpinner";
 import LoadingSpinner from "../../../LoadingSpinner";
+import ApiHelper from "../../../utils/API";
 
 class TestCreator extends Component{
     constructor(props) {
@@ -101,8 +102,7 @@ class TestCreator extends Component{
             this.setState({
                 canSubmit:true
             });
-            let json = JSON.stringify(test);
-            console.log(json);
+            ApiHelper.createTest(test);
         } else{
             this.setState({
                 canSubmit:false

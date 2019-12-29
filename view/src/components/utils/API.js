@@ -42,6 +42,8 @@ export const ApiHelper = {
     },
 
     getTests: async() => {
-        await API.get(API_NAME, '/tests/read', {}).then(r => console.log(r))
+     return await API.get(API_NAME, '/tests/read', {}).then(r => console.log(r))
     }
 };
+
+export default ApiHelper;
