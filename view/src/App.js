@@ -2,6 +2,8 @@ import React from 'react'
 import Amplify from 'aws-amplify'
 import Helmet from "react-helmet"
 import HomeController from "./components/HomeController"
+import {API_NAME, API_MAIN_EP, REGION} from "./components/utils/API";
+
 
 Amplify.configure({
     Auth: {
@@ -9,15 +11,15 @@ Amplify.configure({
         region: 'eu-central-1',
         //userPoolId: '',
        // userPoolWebClientId: '',
-        mandatorySignIn: true,
+        mandatorySignIn: false,
     },
     API: {
-        region: 'eu-central-1',
+        region: REGION,
         endpoints: [
             {
-                name: "name",
-                endpoint: "ep",
-            }
+                name: API_NAME,
+                endpoint: API_MAIN_EP,
+            },
         ]
     }
 });
