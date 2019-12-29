@@ -7,15 +7,19 @@ import DropdownToggle from "react-bootstrap/DropdownToggle";
 import Dropdown from "react-bootstrap/Dropdown";
 import ApiHelper from "../../utils/API";
 import LoadingSpinner from "../../LoadingSpinner";
+import Alert from "react-bootstrap/Alert";
 
 class RecruiterTests extends Component {
     constructor(props) {
         super(props);
         this.state ={
+            error:null,
+            loading:true,
             tests: [],
             columns: [{
                 Header: 'Id',
-                accessor: 'id'
+                accessor: 'id',
+                show:false
             },{
                 Header: 'Title',
                 accessor: 'title'
@@ -58,26 +62,28 @@ class RecruiterTests extends Component {
     };
 
     componentDidMount = async () => {
-        try{
-            const data = await ApiHelper.getTests();
-            console.log(data);
-            this.setState({
-                test: data,
-                loading:false,
-            });
-        }catch (e) {
-            const data = JSON.parse('[{"id":"f0093e08-42f6-4da1-b7a5-02157c27a66c","title":"Title","language":{"label":"English","value":"en"},"questions":[{"type":"O","answers":null,"question":null},{"type":"W","answers":["A1","A2","A3","A4"],"question":null},{"type":"L","answers":null,"question":null}]},{"id":"8da57c6c-3780-42d4-a269-a441c3b6956d","title":"T","language":{"label":"English","value":"en"},"questions":[{"type":"O","answers":null,"question":null}]},{"id":"7fae1ecb-cd1e-48e1-b1ad-2fa1edf4e13f","title":"T","language":{"label":"English","value":"en"},"questions":[{"type":"O","answers":null,"question":null}]}]');
-            this.setState({
-                test: data,
-                loading:false,
-            });
-        }
-
+            await ApiHelper.getTests().then( tests =>
+                this.setState({
+                    tests: tests,
+                    loading:false,
+                })
+            ).catch(e =>
+                {
+                    console.log(e);
+                    this.setState({
+                        loading:false,
+                        error:true
+                    })
+                }
+            )
     };
 
     render() {
         if(this.state.loading){
             return LoadingSpinner();
+        }
+        else if(this.state.error){
+            return <Alert variant="danger">Fetch error</Alert>;
         }
         return <div>
             <span>Tests:</span>

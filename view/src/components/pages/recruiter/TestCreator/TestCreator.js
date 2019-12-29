@@ -44,27 +44,31 @@ class TestCreator extends Component{
 
     componentDidMount = async () => {
         if(this.props.match.params.id !== undefined){
-            this.fetchTestData(this.props.match.params.id);
+          await this.fetchTestData(this.props.match.params.id);
         }
         const languages = await getLanguages();
         try{
             const options = Object.keys(languages).map((key) => ({label:languages[key], value:key}));
             this.setState({
                 languages: options,
-                loading:false,
+                loading:false
         });
         } catch (e) {
             this.setState({
                 error:true,
-                loading:false,
+                loading:false
             })
         }
     };
 
-    fetchTestData = (id) => {
-        console.log(id);
-        let response = JSON.parse("{\"title\":\"Test\",\"language\":\"EN\",\"questions\":[{\"question\":\"ABF\",\"type\":\"O\"},{\"question\":\"fhfgh\",\"type\":\"W\",\"answers\":[\"addfgs\",\"dfhdh\",\"esgrd\",\"fhg\"]},{\"question\":\"fjfgjfhjh\",\"type\":\"L\"}]}");
-        this.setState({test: response});
+    fetchTestData = async (id) => {
+       await ApiHelper.getByTestId(id).then( test =>
+           this.setState({test:test})
+       ).catch(() =>
+           this.setState({
+           error:true,
+           loading:false
+       }));
     };
 
     setTestType = (type) => {
