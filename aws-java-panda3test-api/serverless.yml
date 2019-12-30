@@ -153,6 +153,25 @@ functions:
           method: put
           cors: true
 
+  # lambdas for answers
+  createAnswer:
+    handler: panda3.lambda.answers.CreateAnswer
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/create
+          method: post
+          cors: true
+
+  readAnswers:
+    handler: panda3.lambda.answers.ReadAnswers
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/read
+          method: get
+          cors: true
+
   # lambdas for testing
   test:
     handler: panda3.lambda.testingLambdas.SimpleTest
@@ -164,6 +183,20 @@ functions:
 
 resources:
   Resources:
+    answersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: answers_table
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
     participantsTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -209,6 +242,8 @@ resources:
         ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
+
+
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

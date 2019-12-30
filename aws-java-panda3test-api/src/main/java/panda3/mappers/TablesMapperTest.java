@@ -44,19 +44,8 @@ public class TablesMapperTest {
         this.mapper.delete(result);*/
     }
 
-    public List<Test> getTest(String id) throws IOException {
-       //Test test = null;
-        HashMap<String, AttributeValue> av = new HashMap<String, AttributeValue>();
-        av.put(":v1", new AttributeValue().withS(id));
-
-        DynamoDBQueryExpression<Test> queryExp = new DynamoDBQueryExpression<Test>()
-                .withKeyConditionExpression("id = :v1")
-                .withExpressionAttributeValues(av);
-
-        PaginatedQueryList<Test> result = this.mapper.query(Test.class, queryExp);
-        /*if (result.size() > 0) {
-            test = result.get(0);
-        }*/
-       return result;
+    public Test getTest(String id) throws IOException {
+        List<Test> results = this.mapper.scan(Test.class, new DynamoDBScanExpression());
+        return results.get(0);
     }
 }
