@@ -8,6 +8,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import ApiHelper from "../../utils/API";
 import LoadingSpinner from "../../LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
+import Row from  "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 
 class RecruiterTests extends Component {
     constructor(props) {
@@ -15,11 +17,11 @@ class RecruiterTests extends Component {
         this.state ={
             error:null,
             loading:true,
+            deleted:null,
             tests: [],
             columns: [{
                 Header: 'Id',
-                accessor: 'id',
-                show:false
+                accessor: 'id'
             },{
                 Header: 'Title',
                 accessor: 'title'
@@ -54,11 +56,11 @@ class RecruiterTests extends Component {
         }
     }
 
-    deleteTest = (event) => {
-        let idToDel = event.target.attributes['data-id'].value
+    deleteTest = async (event) => {
+        let idToDel = event.target.attributes['data-id'].value;
         event.preventDefault();
-        alert("id to del:" + idToDel);
-        //TODO: deleteEvent request
+        await ApiHelper.deleteTest(idToDel).then(() => this.setState({deleted:true})).catch(() => this.setState({deleted:false}))
+
     };
 
     componentDidMount = async () => {
@@ -78,6 +80,14 @@ class RecruiterTests extends Component {
             )
     };
 
+   /*const DeletedConfirm = () =>{
+        if (this.state.deleted === null) return null;
+        else if (this.state.deleted) return <Row className="justify-content-center"><Col md={"auto"}><Alert
+            variant="success">Test Deleted</Alert></Col></Row>
+        return <Row className="justify-content-center"><Col md={"auto"}><Alert variant="danger">Deleted
+                Error</Alert></Col></Row>
+    };*/
+
     render() {
         if(this.state.loading){
             return LoadingSpinner();
@@ -86,7 +96,15 @@ class RecruiterTests extends Component {
             return <Alert variant="danger">Fetch error</Alert>;
         }
         return <div>
-            <span>Tests:</span>
+            <Row>
+                <Col>
+                    <span>Tests:</span>
+                </Col>
+                <Col>
+                    <Button>Import from csv</Button>
+                </Col>
+            </Row>
+            <deletedConfirm/>
             <BasicTable
                 data={this.state.tests}
                 columns={this.state.columns}
