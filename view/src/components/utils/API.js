@@ -21,41 +21,43 @@ export const ApiHelper = {
         await API.post(API_NAME, '/participants/create', {body: JSON.stringify(participant)}).then(r => console.log(r))
     },
 
-    deleteParticipant: async(id) => {
-        await API.post(API_NAME,'/participants/delete',{body:id}).then(r => console.log(r))
+    deleteParticipant: async (id) => {
+        await API.post(API_NAME, '/participants/delete', {body: id}).then(r => console.log(r))
     },
 
-    getParticipant: async() => {
-        await API.get(API_NAME,'/participant/read' ,{}).then(r => console.log(r))
+    getParticipant: async () => {
+        await API.get(API_NAME, '/participant/read', {}).then(r => console.log(r))
     },
 
-    getParticipants: async() => {
-        await API.get(API_NAME,'/participants/read',{}).then(r => console.log(r))
+    getParticipants: async () => {
+        await API.get(API_NAME, '/participants/read', {}).then(r => console.log(r))
     },
 
-    updateParticipant: async() => {
-        await API.put(API_NAME,'/participants/update',{}).then(r => console.log(r))
+    updateParticipant: async () => {
+        await API.put(API_NAME, '/participants/update', {}).then(r => console.log(r))
     },
 
     createTest: async (test) => {
-       return await API.post(API_NAME,'/tests/create',{body:test})
+        return await API.post(API_NAME, '/tests/create', {body: test})
     },
 
-    getTests: async() => {
-     return await API.get(API_NAME, '/tests/read', {})
+    getTests: async () => {
+        return await API.get(API_NAME, '/tests/read', {})
     },
 
-    getByTestId: async(id) => {
+    getByTestId: async (id) => {
         let path = '/tests/' + id;
-        return await API.get(API_NAME,path,{})
+        return await API.get(API_NAME, path, {})
     },
 
-    deleteTest:  async(id) => {
+    deleteTest: async (id) => {
         let path = '/tests/delete/' + id;
-        return await API.del(API_NAME,path,{})
+        return await API.del(API_NAME, path, {})
     },
 
-
+    createSubmission: async (body) => {
+        let path = '/tests/delete/';
+        return await API.post(API_NAME,path,{body:body})
+    },
 };
-
 export default ApiHelper;

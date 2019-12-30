@@ -32,13 +32,13 @@ class CandidateTestView extends Component{
     IncrementCounter = () => {
         this.setState((prevState) => ({
             counter: prevState.counter + 1
-        })/*, () => console.log(this.state.answers)*/);
+        }));
     };
 
     DecrementCounter = () => {
         this.setState((prevState) => ({
             counter: prevState.counter - 1
-        })/*, () => console.log(this.state.answers)*/);
+        }));
     };
 
     fetchTestData = async (id) => {
@@ -51,10 +51,23 @@ class CandidateTestView extends Component{
             }));
     };
 
-    SubmitTest = () => {
-        //Todo:call to api
-        let json = JSON.stringify(this.state.answers);
-        console.log(json);
+    SubmitTest = async() => {
+        this.setState({
+            loading:true
+        });
+        //TODO: userid
+        let body = {
+            testId: this.props.match.params.id,
+            userId: 'test',
+            answers: this.state.answers
+        };
+        await ApiHelper.createSubmission(body).then(() =>
+            this.props.history.push('/tests')
+        ).catch(e => alert(e)).then(() =>
+            this.setState({
+                loading:false
+            })
+        );
     };
 
     onAnswer(value){
@@ -105,7 +118,7 @@ class CandidateTestView extends Component{
                 <Button onClick={this.DecrementCounter} disabled={this.state.counter === 0}>Previous</Button>
                 {
                     this.state.counter === this.state.test.questions.length - 1
-                        ?<Link to="/tests"><Button onClick={this.SubmitTest} variant="success" disabled={this.state.answers.length < this.state.test.questions.length}>Submit</Button></Link>
+                        ?<Button onClick={this.SubmitTest} variant="success" disabled={this.state.answers.length < this.state.test.questions.length}>Submit</Button>
                         :<Button onClick={this.IncrementCounter}>Next</Button>
                 }
             </Row>

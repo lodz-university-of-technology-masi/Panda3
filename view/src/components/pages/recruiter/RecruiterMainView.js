@@ -22,6 +22,7 @@ import TestChecker from "./SubmissionManager/TestChecker";
 import { ReactSVG } from 'react-svg'
 import Panda from '../../../resources/panda.svg';
 import AccessManager from "./AccessManager";
+import TestImporter from "./TestImporter";
 
 class RecruiterMainView extends Component {
     // eslint-disable-next-line no-useless-constructor
@@ -47,6 +48,9 @@ class RecruiterMainView extends Component {
                         <Col md="auto">
                             <Link to="/test-creator"><Button>Test Creator</Button></Link>
                         </Col>
+                        <Col md="auto">
+                            <Link to="/import"><Button>Import tests</Button></Link>
+                        </Col>
                         <Col className="d-flex align-items-center justify-content-end">
                             <ReactSVG className="panda" src={Panda}/>
                         </Col>
@@ -61,6 +65,7 @@ class RecruiterMainView extends Component {
                         <Route path="/submissions/:id">{withRouter(PendingSubmissions)}</Route>
                         <Route path="/check-test/:id">{withRouter(TestChecker)}</Route>
                         <Route path="/manage-access/:id">{withRouter(AccessManager)}</Route>
+                        <Route path="/import">{withRouter(TestImporter)}</Route>
                     </Switch>
                 </Container>
             </Router>
