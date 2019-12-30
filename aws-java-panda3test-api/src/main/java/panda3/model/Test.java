@@ -7,6 +7,7 @@ import panda3.converters.QuestionConverter;
 
 import java.util.List;
 import java.util.Map;
+import com.google.gson.Gson;
 
 @DynamoDBTable(tableName = "tests_table")
 public class Test {
@@ -57,4 +58,5 @@ public class Test {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
 }

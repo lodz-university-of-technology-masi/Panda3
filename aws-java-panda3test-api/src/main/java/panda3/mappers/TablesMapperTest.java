@@ -40,12 +40,12 @@ public class TablesMapperTest {
     }
 
     public void deleteTest(String id) throws IOException {
-        Test result = this.getTest(id);
-        this.mapper.delete(result);
+        /*Test result = this.getTest(id);
+        this.mapper.delete(result);*/
     }
 
-    public Test getTest(String id) throws IOException {
-        Test test = null;
+    public List<Test> getTest(String id) throws IOException {
+       //Test test = null;
         HashMap<String, AttributeValue> av = new HashMap<String, AttributeValue>();
         av.put(":v1", new AttributeValue().withS(id));
 
@@ -54,9 +54,9 @@ public class TablesMapperTest {
                 .withExpressionAttributeValues(av);
 
         PaginatedQueryList<Test> result = this.mapper.query(Test.class, queryExp);
-        if (result.size() > 0) {
+        /*if (result.size() > 0) {
             test = result.get(0);
-        }
-        return test;
+        }*/
+       return result;
     }
 }
