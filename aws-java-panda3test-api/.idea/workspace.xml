@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="855017b5-38bc-4157-8844-e4075c55fab5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serverless.yml" beforeDir="false" afterPath="$PROJECT_DIR$/serverless.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../view/src/components/utils/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/utils/API.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -183,7 +184,7 @@
       <workItem from="1577442289771" duration="23399000" />
       <workItem from="1577523415320" duration="20508000" />
       <workItem from="1577622971088" duration="21705000" />
-      <workItem from="1577723156394" duration="4714000" />
+      <workItem from="1577723156394" duration="5575000" />
     </task>
     <task id="LOCAL-00001" summary="workspace">
       <created>1577713441792</created>
@@ -199,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577727153885</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="delete">
+      <created>1577728065520</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1577728065520</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,7 +229,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="workspace" />
     <MESSAGE value="..." />
-    <option name="LAST_COMMIT_MESSAGE" value="..." />
+    <MESSAGE value="delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete" />
   </component>
   <component name="mavenExecuteGoalHistory">
     <option value="" />

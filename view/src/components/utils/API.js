@@ -1,6 +1,6 @@
 import {API} from "aws-amplify";
 export const API_NAME = "Panda3API";
-export const API_MAIN_EP = "https://0i2wyfdivk.execute-api.us-east-1.amazonaws.com/dev";
+export const API_MAIN_EP = "https://y6p1h6b8sh.execute-api.us-east-1.amazonaws.com/dev";
 export const REGION = 'us-east-1';
 
 /*
@@ -38,7 +38,7 @@ export const ApiHelper = {
     },
 
     createTest: async (test) => {
-        await API.post(API_NAME,'/tests/create',{body:JSON.stringify(test)}).then(r => console.log(r))
+       return await API.get(API_NAME,'/tests/create',{body:JSON.stringify(test)})
     },
 
     getTests: async() => {
@@ -46,8 +46,13 @@ export const ApiHelper = {
     },
 
     getByTestId: async(id) => {
-        let path = '/test/read/' + id;
+        let path = '/tests/' + id;
         return await API.get(API_NAME,path,{})
+    },
+
+    deleteTest:  async(id) => {
+        let path = '/tests/delete/' + id;
+        return await API.del(API_NAME,path,{})
     },
 
 

@@ -8,6 +8,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import ApiHelper from "../../utils/API";
 import LoadingSpinner from "../../LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
+import Row from  "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 
 class RecruiterTests extends Component {
     constructor(props) {
@@ -15,11 +17,11 @@ class RecruiterTests extends Component {
         this.state ={
             error:null,
             loading:true,
+            deleted:null,
             tests: [],
             columns: [{
                 Header: 'Id',
-                accessor: 'id',
-                show:false
+                accessor: 'id'
             },{
                 Header: 'Title',
                 accessor: 'title'
@@ -36,47 +38,57 @@ class RecruiterTests extends Component {
                     let submissionsPath = '/submissions/' + table.row.original.id;
                     let managePath = '/manage-access/' + table.row.original.id;
                     return (
-                            <Dropdown>
-                                <DropdownToggle variant="primary" id="dropdown-basic">
-                                    Test Menu
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <Link to={submissionsPath}><Button className="mr-1 ml-1" variant="info">View Submissions</Button></Link>
-                                    <Link to={modifyPath}><Button variant="warning">Modify</Button></Link>
-                                    <Link to={translatePath}><Button className="mr-1 ml-1" variant="info">Translate</Button></Link>
-                                    <Link to={managePath}><Button variant="info">Manage Access</Button></Link>
-                                    <Button className="mr-1 ml-1" data-id={table.row.original.id} variant="danger" onClick={this.deleteTest}>Delete</Button>
-                                </DropdownMenu>
-                            </Dropdown>
+                        <Dropdown>
+                            <DropdownToggle variant="primary" id="dropdown-basic">
+                                Test Menu
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <Link to={submissionsPath}><Button className="mr-1 ml-1" variant="info">View Submissions</Button></Link>
+                                <Link to={modifyPath}><Button variant="warning">Modify</Button></Link>
+                                <Link to={translatePath}><Button className="mr-1 ml-1" variant="info">Translate</Button></Link>
+                                <Link to={managePath}><Button variant="info">Manage Access</Button></Link>
+                                <Button className="mr-1 ml-1" data-id={table.row.original.id} variant="danger" onClick={this.deleteTest}>Delete</Button>
+                            </DropdownMenu>
+                        </Dropdown>
                     )
                 }
             }]
         }
     }
 
-    deleteTest = (event) => {
-        let idToDel = event.target.attributes['data-id'].value
+    deleteTest = async (event) => {
+        let idToDel = event.target.attributes['data-id'].value;
         event.preventDefault();
-        alert("id to del:" + idToDel);
-        //TODO: deleteEvent request
+        await ApiHelper.deleteTest(idToDel).then(() => alert("Test deleted")).then(this.fetch).catch((e)=>alert(e))
     };
 
-    componentDidMount = async () => {
-            await ApiHelper.getTests().then( tests =>
-                this.setState({
-                    tests: tests,
-                    loading:false,
-                })
-            ).catch(e =>
-                {
-                    console.log(e);
-                    this.setState({
-                        loading:false,
-                        error:true
-                    })
-                }
-            )
+    fetch = async() => {
+        return ApiHelper.getTests().then( tests =>
+            this.setState({
+                tests: tests,
+                loading:false,
+            })
+        )
     };
+    componentDidMount = async () => {
+        await this.fetch().catch(e =>
+            {
+                console.log(e);
+                this.setState({
+                    loading:false,
+                    error:true
+                })
+            }
+        )
+    };
+
+    /*const DeletedConfirm = () =>{
+         if (this.state.deleted === null) return null;
+         else if (this.state.deleted) return <Row className="justify-content-center"><Col md={"auto"}><Alert
+             variant="success">Test Deleted</Alert></Col></Row>
+         return <Row className="justify-content-center"><Col md={"auto"}><Alert variant="danger">Deleted
+                 Error</Alert></Col></Row>
+     };*/
 
     render() {
         if(this.state.loading){
@@ -86,7 +98,14 @@ class RecruiterTests extends Component {
             return <Alert variant="danger">Fetch error</Alert>;
         }
         return <div>
-            <span>Tests:</span>
+            <Row>
+                <Col>
+                    <span>Tests:</span>
+                </Col>
+                <Col>
+                    <Button>Import from csv</Button>
+                </Col>
+            </Row>
             <BasicTable
                 data={this.state.tests}
                 columns={this.state.columns}
