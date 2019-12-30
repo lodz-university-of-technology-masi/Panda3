@@ -6,7 +6,6 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.serverless.DynamoDBAdapter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import panda3.model.Participant;
 import panda3.model.Test;
 
 import java.io.IOException;
@@ -18,6 +17,7 @@ public class TablesMapperTest {
     private AmazonDynamoDB client;
     private DynamoDBMapper mapper;
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     public TablesMapperTest(){
         DynamoDBMapperConfig mapperConfig = DynamoDBMapperConfig.builder()
@@ -44,8 +44,9 @@ public class TablesMapperTest {
         this.mapper.delete(result);*/
     }
 
-    public List<Test> getTest(String id) throws IOException {
-       //Test test = null;
+    public Test getTest(String id) throws IOException {
+        logger.debug(id);
+        Test test = null;
         HashMap<String, AttributeValue> av = new HashMap<String, AttributeValue>();
         av.put(":v1", new AttributeValue().withS(id));
 
@@ -54,9 +55,11 @@ public class TablesMapperTest {
                 .withExpressionAttributeValues(av);
 
         PaginatedQueryList<Test> result = this.mapper.query(Test.class, queryExp);
-        /*if (result.size() > 0) {
+        logger.debug(result);
+        if (result.size() > 0) {
             test = result.get(0);
-        }*/
-       return result;
+        }
+        logger.debug(test);
+       return test;
     }
 }

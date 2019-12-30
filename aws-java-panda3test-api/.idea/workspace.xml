@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="855017b5-38bc-4157-8844-e4075c55fab5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serverless.yml" beforeDir="false" afterPath="$PROJECT_DIR$/serverless.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/panda3/converters/LanguageConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/converters/LanguageConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panda3/lambda/tests/ReadTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/lambda/tests/ReadTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java" afterDir="false" />
     </list>
@@ -12,6 +13,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
@@ -34,6 +38,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1Vi5ZTpuINvs6AsO3ogDeRPCt3i" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -178,6 +186,7 @@
       <workItem from="1577442289771" duration="23399000" />
       <workItem from="1577523415320" duration="20508000" />
       <workItem from="1577622971088" duration="21705000" />
+      <workItem from="1577723156394" duration="3840000" />
     </task>
     <task id="LOCAL-00001" summary="workspace">
       <created>1577713441792</created>
@@ -197,7 +206,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

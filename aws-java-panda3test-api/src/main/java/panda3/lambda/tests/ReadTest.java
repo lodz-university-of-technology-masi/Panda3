@@ -10,6 +10,7 @@ import panda3.model.Test;
 import panda3.responses.ApiResponseHandler;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class ReadTest implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
@@ -18,8 +19,8 @@ public class ReadTest implements RequestHandler<Map<String, Object>, ApiGatewayR
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         Map<String,String> pathParameters =  (Map<String,String>)input.get("pathParameters");
         try {
-            //Test test = ;
-            return ApiResponseHandler.createResponse(new TablesMapperTest().getTest(pathParameters.get("id")), 200);
+            Test test = new TablesMapperTest().getTest(pathParameters.get("id"));
+            return ApiResponseHandler.createResponse(test, 200);
         } catch (Exception e) {
             return ApiResponseHandler.createResponse(e.getMessage(), 401);
         }
