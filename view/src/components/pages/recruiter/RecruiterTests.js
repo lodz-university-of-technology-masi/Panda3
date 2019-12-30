@@ -38,18 +38,32 @@ class RecruiterTests extends Component {
                     let submissionsPath = '/submissions/' + table.row.original.id;
                     let managePath = '/manage-access/' + table.row.original.id;
                     return (
-                        <Dropdown>
-                            <DropdownToggle variant="primary" id="dropdown-basic">
-                                Test Menu
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <Link to={submissionsPath}><Button className="mr-1 ml-1" variant="info">View Submissions</Button></Link>
-                                <Link to={modifyPath}><Button variant="warning">Modify</Button></Link>
-                                <Link to={translatePath}><Button className="mr-1 ml-1" variant="info">Translate</Button></Link>
-                                <Link to={managePath}><Button variant="info">Manage Access</Button></Link>
-                                <Button className="mr-1 ml-1" data-id={table.row.original.id} variant="danger" onClick={this.deleteTest}>Delete</Button>
-                            </DropdownMenu>
-                        </Dropdown>
+                        <Row className="justify-content-center">
+                            <Col md={"auto"}>
+                                <Dropdown>
+                                    <DropdownToggle variant="primary" id="dropdown-basic">
+                                        Test Menu
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <Link to={submissionsPath}><Button variant="info">View Submissions</Button></Link>
+                                        <Link to={translatePath}><Button className="mt-1 mb-1" variant="info">Translate</Button></Link>
+                                        <Link to={managePath}><Button variant="info">Manage Access</Button></Link>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </Col>
+                            <Col md={"auto"}>
+                                <Dropdown>
+                                    <DropdownToggle variant="primary" id="dropdown-basic">
+                                        Edit Menu
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <Link to={modifyPath}><Button variant="warning">Modify</Button></Link>
+                                        <Button className="mr-1 ml-1" data-id={table.row.original.id} variant="danger" onClick={this.deleteTest}>Delete</Button>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </Col>
+                        </Row>
+
                     )
                 }
             }]

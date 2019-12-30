@@ -38,7 +38,7 @@ export const ApiHelper = {
     },
 
     createTest: async (test) => {
-       return await API.get(API_NAME,'/tests/create',{body:JSON.stringify(test)})
+       return await API.post(API_NAME,'/tests/create',{body:test})
     },
 
     getTests: async() => {
