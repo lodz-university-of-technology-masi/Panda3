@@ -13,16 +13,15 @@ import java.util.Map;
 
 public class DeleteTest implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
     private TablesMapperTest tablesMapperTest;
-
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
+        Map<String,String> pathParameters =  (Map<String,String>)input.get("pathParameters");
         tablesMapperTest = new TablesMapperTest();
         try {
-            JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
-            tablesMapperTest.deleteTest(body.get("id").textValue());
+            tablesMapperTest.deleteTest(pathParameters.get("id"));
             return ApiResponseHandler.createResponse("sucess.", 200);
         } catch (IOException e) {
-            return ApiResponseHandler.createResponse("cannot connect to database.", 401);
+            return ApiResponseHandler.createResponse("cannot connect to database." , 401);
         }
     }
 

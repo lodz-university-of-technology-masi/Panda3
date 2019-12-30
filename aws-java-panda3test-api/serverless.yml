@@ -124,7 +124,7 @@ functions:
     handler: panda3.lambda.tests.ReadTest
     events:
       - http:
-          path: test/read/{id}
+          path: tests/{id}
           method: get
           cors: true
 
@@ -133,7 +133,7 @@ functions:
     handler: panda3.lambda.tests.DeleteTest
     events:
       - http:
-          path: tests/delete
+          path: tests/delete/{id}
           method: delete
           cors: true
 
