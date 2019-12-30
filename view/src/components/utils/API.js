@@ -46,12 +46,7 @@ export const ApiHelper = {
     },
 
     getByTestId: async(id) => {
-        let path = '/tests/' + id;
-        return await API.get(API_NAME,path,{})
-    },
-
-    deleteTest:  async(id) => {
-        let path = '/test/delete/' + id;
+        let path = '/test/read/' + id;
         return await API.get(API_NAME,path,{})
     },
 
