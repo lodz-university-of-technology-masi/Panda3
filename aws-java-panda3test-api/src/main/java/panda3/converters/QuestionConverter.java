@@ -16,7 +16,5 @@ public class QuestionConverter implements DynamoDBTypeConverter<String, List<Que
     }
 
     @Override
-    public List<Question> unconvert(String s) {;
-        return new Gson().fromJson(s, new TypeToken<List<Question>>(){}.getType());
-    }
+    public List<Question> unconvert(String s) { return new Gson().fromJson(s, new TypeToken<List<Question>>(){}.getType()); }
 }
