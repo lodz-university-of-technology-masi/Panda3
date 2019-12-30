@@ -88,6 +88,7 @@ functions:
 
   readParticipants:
     handler: panda3.lambda.paarticipants.ReadParticipants
+    Policies: AmazonDynamoDBFullAccess
     events:
       - http:
           path: participants/read
@@ -106,6 +107,7 @@ functions:
   # tests lambdas
   createTest:
     handler: panda3.lambda.tests.CreateTest
+    Policies: AmazonDynamoDBFullAccess
     events:
       - http:
           method: post
@@ -114,6 +116,7 @@ functions:
 
   readTests:
     handler: panda3.lambda.tests.ReadTests
+    Policies: AmazonDynamoDBFullAccess
     events:
       - http:
           path: tests/read
@@ -122,6 +125,7 @@ functions:
 
   readTest:
     handler: panda3.lambda.tests.ReadTest
+    Policies: AmazonDynamoDBFullAccess
     events:
       - http:
           path: tests/{id}
@@ -131,6 +135,7 @@ functions:
 
   deleteTest:
     handler: panda3.lambda.tests.DeleteTest
+    Policies: AmazonDynamoDBFullAccess
     events:
       - http:
           path: tests/delete/{id}
@@ -141,6 +146,7 @@ functions:
 
   updateTest:
     handler: panda3.lambda.tests.UpdateTest
+    Policies: AmazonDynamoDBFullAccess
     events:
       - http:
           path: tests/update
