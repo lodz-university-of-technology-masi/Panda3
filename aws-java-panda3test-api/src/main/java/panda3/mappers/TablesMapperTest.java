@@ -40,8 +40,8 @@ public class TablesMapperTest {
     }
 
     public void deleteTest(String id) throws IOException {
-        /*Test result = this.getTest(id);
-        this.mapper.delete(result);*/
+        Test result = this.getTest(id);
+        this.mapper.delete(result);
     }
 
     public Test getTest(String id) throws IOException {
