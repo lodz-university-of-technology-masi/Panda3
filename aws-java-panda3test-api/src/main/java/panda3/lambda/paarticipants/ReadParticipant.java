@@ -15,9 +15,10 @@ public class ReadParticipant implements RequestHandler<Map<String, Object>, ApiG
 
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
+        Map<String,String> pathParameters =  (Map<String,String>)input.get("pathParameters");
 
         try {
-            Participant participant = new TablesMapperPaarticipant().getAllParticipant(input.get("id").toString());
+            Participant participant = new TablesMapperPaarticipant().getAllParticipant(pathParameters.get("id"));
             return ApiResponseHandler.createResponse(participant, 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);

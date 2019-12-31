@@ -3,14 +3,18 @@ package panda3.mappers;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.serverless.DynamoDBAdapter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import panda3.model.Participant;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TablesMapperPaarticipant {
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -29,7 +33,13 @@ public class TablesMapperPaarticipant {
     }
 
     public Participant getAllParticipant(String id) throws IOException {
-        return this.mapper.load(Participant.class, id);
+        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+        eav.put(":p_id", new AttributeValue().withS(id));
+        DynamoDBQueryExpression<Participant> query = new DynamoDBQueryExpression<Participant>()
+                .withKeyConditionExpression("id = :p_id")
+                .withExpressionAttributeValues(eav);
+        return this.mapper.query(Participant.class, query).get(0);
+
     }
 
 

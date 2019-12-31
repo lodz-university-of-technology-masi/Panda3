@@ -82,7 +82,7 @@ functions:
     handler: panda3.lambda.paarticipants.ReadParticipant
     events:
       - http:
-          path: participant/read
+          path: participants/read/{id}
           method: get
           cors: true
 
@@ -154,6 +154,61 @@ functions:
           method: put
           cors: true
 
+  # answers lambdas
+  creatAnswer:
+    handler: panda3.lambda.answers.CreateAnswer
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/create
+          method: post
+          cors: true
+
+  addUserToTest:
+    handler: panda3.lambda.answers.CreateTestForUser
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/add/user
+          method: post
+          cors: true
+
+  addUserTestResult:
+    handler: panda3.lambda.answers.CreateAnswerResults
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/add
+          method: post
+          cors: true
+
+  readAnswer:
+    handler: panda3.lambda.answers.ReadAnswer
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/read/single/{id}
+          method: get
+          cors: true
+
+  readAnswers:
+    handler: panda3.lambda.answers.ReadAnswers
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/read
+          method: get
+          cors: true
+
+  readUserAnswers:
+    handler: panda3.lambda.answers.ReadUserAnswers
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/read/{testId}/user/{userId}
+          method: get
+          cors: true
+
   # lambdas for testing
   test:
     handler: panda3.lambda.testingLambdas.SimpleTest
@@ -178,6 +233,26 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+
+
+    answersTabel:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: answer_table
+        AttributeDefinitions:
+          - AttributeName: testId
+            AttributeType: S
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: testId
+            KeyType: HASH
+          - AttributeName: userId
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
     GatewayResponseDefault4XX:
       Type: 'AWS::ApiGateway::GatewayResponse'
       Properties:
