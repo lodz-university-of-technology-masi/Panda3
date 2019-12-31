@@ -4,11 +4,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {Link} from "react-router-dom";
 import BasicTable from "../../../BasicTable";
+import LoadingSpinner from "../../../LoadingSpinner";
 
 class PendingSubmissions extends Component {
     constructor(props) {
         super(props);
         this.state ={
+            loading:false,
             submissions: [],
             columns: [{
                 Header: 'Id',
@@ -45,6 +47,9 @@ class PendingSubmissions extends Component {
     }
 
     render() {
+        if(this.state.loading){
+            return LoadingSpinner();
+        }
         return <div>
             <span>Pending Submissions for test {this.props.match.params.id}</span>
             <BasicTable

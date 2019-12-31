@@ -10,6 +10,7 @@ import LoadingSpinner from "../../LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
 import Row from  "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import {reverse} from "../../utils/utils";
 
 class RecruiterTests extends Component {
     constructor(props) {
@@ -78,11 +79,11 @@ class RecruiterTests extends Component {
     };
 
     fetch = async() => {
-        return ApiHelper.getTests().then( tests =>
+        return ApiHelper.getTests().then( tests =>{
             this.setState({
                 tests: tests,
                 loading:false,
-            })
+            })}
         )
     };
     componentDidMount = async () => {

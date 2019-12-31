@@ -57,9 +57,10 @@ class CandidateTestView extends Component{
         //TODO: userid
         let body = {
             testId: this.props.match.params.id,
-            userId: 'test',
+            userId: "0775de48-324e-406d-b043-beeda717127c",
             answers: this.state.answers
         };
+        console.log(JSON.stringify(body));
         await ApiHelper.createSubmission(body).then(() =>
             this.props.history.push('/tests')
         ).catch(e => alert(e)).then(() =>
@@ -93,7 +94,7 @@ class CandidateTestView extends Component{
         }
 
         let question = this.state.test.questions[this.state.counter];
-        return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
+        return <Container className="d-flex justify-content-between bg-items-color" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
             <span className="d-flex">
                 {this.state.test.title}

@@ -8,10 +8,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import panda3.model.Participant;
 import panda3.model.Test;
+import panda3.model.TestAnswer;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TablesMapperTest {
     private DynamoDBAdapter db_adapter;
@@ -45,7 +48,11 @@ public class TablesMapperTest {
     }
 
     public Test getTest(String id) throws IOException {
-        List<Test> results = this.mapper.scan(Test.class, new DynamoDBScanExpression());
-        return results.get(0);
+        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+        eav.put(":v_t_id", new AttributeValue().withS(id));
+        DynamoDBQueryExpression<Test> query = new DynamoDBQueryExpression<Test>()
+                .withKeyConditionExpression("id = :v_t_id")
+                .withExpressionAttributeValues(eav);
+        return this.mapper.query(Test.class, query).get(0);
     }
 }

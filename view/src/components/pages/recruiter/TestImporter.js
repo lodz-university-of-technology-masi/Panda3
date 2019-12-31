@@ -19,7 +19,7 @@ class TestImporter extends Component {
 
     render() {
         return <Container className="d-flex justify-content-center">
-            <Form className="align-items-center justify-content-center" onSubmit={(e) => this.handleSubmit(e)} style={{position:"absolute", top:"25%",padding:"0.2rem",borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"5rem", borderRadius:"1rem"}}>
+            <Form className="align-items-center justify-content-center bg-items-color" onSubmit={(e) => this.handleSubmit(e)} style={{position:"absolute", top:"25%",padding:"0.2rem",borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"5rem", borderRadius:"1rem"}}>
                 <Row className="justify-content-center">
                     <Col md="auto">
                         <Form.Group>

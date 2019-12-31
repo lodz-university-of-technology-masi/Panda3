@@ -57,7 +57,7 @@ export const ApiHelper = {
     },
 
     createSubmission: async (body) => {
-        let path = '/tests/delete/';
+        let path = '/answers/create';
         return await API.post(API_NAME,path,{body:body})
     },
 
