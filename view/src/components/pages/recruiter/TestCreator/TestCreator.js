@@ -104,12 +104,14 @@ class TestCreator extends Component{
         }
         if(ValidateTest(test)){
             this.setState({
-                canSubmit:true
+                canSubmit:true,
+                loading:true
             });
-            ApiHelper.createTest(test).then(()=>alert("Test added")).catch((e)=>alert(e));
+            ApiHelper.createTest(test).then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
         } else{
             this.setState({
-                canSubmit:false
+                canSubmit:false,
+                loading:false
             })
         }
     };

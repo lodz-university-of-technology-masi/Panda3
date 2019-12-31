@@ -10,8 +10,8 @@ import {
     Link,
     withRouter
 } from "react-router-dom";
-import UserManagement from "../../UserManagement";
-import AddUser from "../../AddUser"
+import UserManagement from "./UserManagement";
+import AddUser from "./AddUser"
 import SplitButton from "react-bootstrap/SplitButton";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import RecruiterTests from "./RecruiterTests";

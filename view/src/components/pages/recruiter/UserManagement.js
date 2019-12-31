@@ -1,30 +1,29 @@
 import React, {Component} from 'react'
-import BasicTable from "./BasicTable";
+import BasicTable from "../../BasicTable";
 import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import LoadingSpinner from "../../LoadingSpinner";
+import Alert from "react-bootstrap/Alert";
+import ApiHelper from "../../utils/API";
 
 class UserManagement extends Component {
     constructor(props) {
         super(props);
         this.state ={
             users: [],
+            loading:true,
+            error:null,
             columns: [{
                 Header: 'Id',
                 accessor: 'id'
             }, {
                 Header: 'First Name',
-                accessor: 'firstName'
+                accessor: 'name'
             }, {
                 Header: 'Last Name',
-                accessor: 'lastName',
-            }, {
-                Header: 'Date of birth',
-                accessor: 'dob',
-            }, {
-                Header: 'E-mail',
-                accessor: 'email',
+                accessor: 'surname',
             },{
                 id: 'action',
                 Header: 'Action',
@@ -45,19 +44,36 @@ class UserManagement extends Component {
         }
     }
 
-    componentDidMount() {
-        const data = [{
-            id: '1',
-            firstName:'Testname',
-            lastName:'TestLastname',
-            dob:'10.05.1995',
-            email:'xxx@example.com'
-        }];
-        this.setState({users:data})
-    }
+    fetch = async() => {
+        return ApiHelper.getParticipants().then( data =>
+            this.setState({
+                users: data,
+                loading:false,
+            })
+        )
+    };
+
+    componentDidMount = async() => {
+        await this.fetch().catch(e =>
+            {
+                console.log(e);
+                this.setState({
+                    loading:false,
+                    error:true
+                })
+            }
+        )
+    };
+
 
     render() {
-        return <div>
+        if(this.state.loading){
+            return LoadingSpinner();
+        }
+        else if(this.state.error){
+            return <Alert variant="danger">Fetch error</Alert>;
+        }
+        return <div style={{height:"100%"}}>
             <span>Users:</span>
             <BasicTable
                 data={this.state.users}

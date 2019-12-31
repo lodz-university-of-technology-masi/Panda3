@@ -3,10 +3,9 @@ import Container from "react-bootstrap/Container";
 import "@kenshooui/react-multi-select/dist/style.css"
 import LoadingSpinner from "../../LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
-import update from "immutability-helper";
 import MultiSelect from "@kenshooui/react-multi-select";
 import Button from "react-bootstrap/Button";
-import {Link} from "react-router-dom";
+import ApiHelper from "../../utils/API";
 
 class AccessManager extends Component{
     constructor(props) {
@@ -14,6 +13,7 @@ class AccessManager extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.state = {
             error:null,
+            success:null,
             loading:true,
             users:[],
             selectedItems: [],
@@ -21,39 +21,32 @@ class AccessManager extends Component{
         }
     }
 
-    fetchUsers = () =>{
-      let users = [{
-          username:'joe1',
-          id:'testid1'
-          },{
-          username:'joe',
-          id:'testid2'
-      }];
-      const items = Object.keys(users).map((key) => ({id:key, label:users[key].username}));
+    fetchUsers = async() =>{
+      let users = await ApiHelper.getParticipants().catch( e => alert(e));
+      const items = Object.keys(users).map((key) => ({id:key, label:users[key].name + ' ' + users[key].surname}));
         this.setState({
             users:users,
             items: items,
-            loading:false
         });
     };
 
-    Submit = () => {
+    Submit = async() => {
+        this.setState({loading:true});
         const users = this.state.selectedItems.map(item => this.state.users[item.id].id);
         const body = {
             testId:this.props.match.params.id,
             users:users
         };
-        console.log(body);
+        await ApiHelper.addUsersToTest(body).then(() => this.setState({success:true})).catch(() => this.setState({success:false})).finally(() => this.setState({loading:false}))
     };
 
     handleChange(selectedItems) {
         this.setState({ selectedItems });
     }
 
-    componentDidMount() {
-        console.log(this.props.match.params.id);
-        this.fetchUsers();
-    }
+    componentDidMount = async() => {
+        await this.fetchUsers().then(()=>this.setState({loading:false}))
+    };
 
      messages = {
         searchPlaceholder: "Search...",
@@ -75,7 +68,7 @@ class AccessManager extends Component{
         const { items, selectedItems } = this.state;
 
         return <Container>
-            <div className="d-flex"  style={{padding:"0.5rem", borderStyle:"solid", borderWidth:"0.3rem", borderRadius:"1rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", width:"auto", flexDirection:"column"}}>
+            <div className="d-flex bg-items-color"  style={{padding:"0.5rem", borderStyle:"solid", borderWidth:"0.3rem", borderRadius:"1rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", width:"auto", flexDirection:"column"}}>
                 <label className="text-center" style={{fontWeight:"bold", fontSize:"2rem"}}>Select users</label>
                 <MultiSelect
                     items={items}
@@ -83,7 +76,14 @@ class AccessManager extends Component{
                     onChange={this.handleChange}
                     messages={this.messages}
                 />
-                <Button style={{width:"100%"}} variant="success" onClick={this.Submit}>Save</Button>
+                <Button className="mb-2" style={{width:"100%"}} variant="success" onClick={this.Submit}>Save</Button>
+                {
+                    this.state.success === true
+                        ?  <Alert variant="success">Permissions changed</Alert>
+                    : this.state.success === null ? null :
+                        <Alert variant="danger">Error changing permissions</Alert>
+
+                }
             </div>
         </Container>
     }

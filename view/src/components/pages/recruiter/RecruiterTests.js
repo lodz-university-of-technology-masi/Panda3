@@ -73,7 +73,8 @@ class RecruiterTests extends Component {
     deleteTest = async (event) => {
         let idToDel = event.target.attributes['data-id'].value;
         event.preventDefault();
-        await ApiHelper.deleteTest(idToDel).then(() => this.setState({loading:true})).then(this.fetch).catch((e)=>alert(e))
+        this.setState({loading:true});
+        await ApiHelper.deleteTest(idToDel).then(this.fetch).catch((e)=>alert(e)).finally(()=>this.setState({loading:false}))
     };
 
     fetch = async() => {
