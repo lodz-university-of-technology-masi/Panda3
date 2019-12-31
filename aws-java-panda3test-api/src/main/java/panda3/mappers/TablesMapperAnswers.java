@@ -6,6 +6,7 @@ import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.serverless.DynamoDBAdapter;
+import panda3.creators.TestAnswerCreator;
 import panda3.model.TestAnswer;
 
 import java.io.IOException;
@@ -61,6 +62,13 @@ public class TablesMapperAnswers {
 
     public void saveTestAnswer(TestAnswer answer) throws IOException {
         this.mapper.save(answer);
+    }
+
+
+
+    public void saveUsersToTest(String testId, List<String> userId) throws IOException {
+        for(String uId : userId)
+            this.mapper.save(TestAnswerCreator.addUserToTest(uId, testId));
     }
 
     public void updateTestAnswer(TestAnswer answer) throws IOException {
