@@ -1,8 +1,48 @@
+html, body, #app, #app>div {
+    height: 91.7vh;
+}
 body{
-    background-color: #ffffff;
+    background: linear-gradient(318deg, #6cc0f0, #1b89f3, #b3e2f3);
+    background-size: 600% 600%;
+
+    -webkit-animation: AnimationName 51s ease infinite;
+    -moz-animation: AnimationName 51s ease infinite;
+    animation: AnimationName 51s ease infinite;
+
+    min-height: 100%;
+}
+
+body > div{
+    height: 100%;
+    min-height: 100%;
+}
+
+.bg-items-color{
+    background-color: white;
+}
+
+.top-menu{
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .panda > div > svg{
     height: 2rem;
     width: 2rem;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 15%}
+    50%{background-position:100% 86%}
+    100%{background-position:0% 15%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 15%}
+    50%{background-position:100% 86%}
+    100%{background-position:0% 15%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 15%}
+    50%{background-position:100% 86%}
+    100%{background-position:0% 15%}
 }

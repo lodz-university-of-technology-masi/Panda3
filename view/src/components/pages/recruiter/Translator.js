@@ -49,12 +49,6 @@ class Translator extends Component {
         ))).catch(() => this.setState({translating:false}))
     };
 
-    AbortController = new AbortController();
-
-    componentWillUnmount() {
-        this.AbortController.abort();
-    }
-
     render() {
         if(this.state.loading){
             return LoadingSpinner();

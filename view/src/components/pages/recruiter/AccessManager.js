@@ -22,7 +22,13 @@ class AccessManager extends Component{
     }
 
     fetchUsers = () =>{
-      let users = [{username:'joe1'},{username:'joe'}];
+      let users = [{
+          username:'joe1',
+          id:'testid1'
+          },{
+          username:'joe',
+          id:'testid2'
+      }];
       const items = Object.keys(users).map((key) => ({id:key, label:users[key].username}));
         this.setState({
             users:users,
@@ -32,8 +38,12 @@ class AccessManager extends Component{
     };
 
     Submit = () => {
-        const users = this.state.selectedItems.map(item => this.state.users[item.id]);
-        console.log(users);
+        const users = this.state.selectedItems.map(item => this.state.users[item.id].id);
+        const body = {
+            testId:this.props.match.params.id,
+            users:users
+        };
+        console.log(body);
     };
 
     handleChange(selectedItems) {
@@ -73,7 +83,7 @@ class AccessManager extends Component{
                     onChange={this.handleChange}
                     messages={this.messages}
                 />
-                <Link to="/view-tests"><Button style={{width:"100%"}} variant="success" onClick={this.Submit}>Save</Button></Link>
+                <Button style={{width:"100%"}} variant="success" onClick={this.Submit}>Save</Button>
             </div>
         </Container>
     }

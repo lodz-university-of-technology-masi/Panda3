@@ -111,7 +111,7 @@ class RecruiterTests extends Component {
         else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
         }
-        return <div>
+        return <div style={{height:"100%"}}>
             <Row>
                 <Col>
                     <span>Tests:</span>
