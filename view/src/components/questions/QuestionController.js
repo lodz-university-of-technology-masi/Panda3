@@ -8,6 +8,7 @@ class QuestionController extends Component {
 
     render() {
         let answer = this.props.defaultVal;
+        console.log(this.props.param);
         switch (this.props.param.type) {
             case "O":
                 return <OpenQuestion
@@ -19,7 +20,7 @@ class QuestionController extends Component {
             case "W":
                 return <ClosedQuestion
                     title={this.props.param.question}
-                    options={this.props.param.options}
+                    options={this.props.param.answers}
                     onAnswer={this.props.onAnswer}
                     defaultAnswer={answer}
                     readOnly={this.props.readOnly}

@@ -106,7 +106,7 @@ class TestCreator extends Component{
             this.setState({
                 canSubmit:true
             });
-            ApiHelper.createTest(test);
+            ApiHelper.createTest(test).then(()=>alert("Test added")).catch((e)=>alert(e));
         } else{
             this.setState({
                 canSubmit:false

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import {getLanguages} from "../../utils/Yandex";
+import {getLanguages, translateTest} from "../../utils/Yandex";
 import Button from "react-bootstrap/Button";
 import VirtualizedSelect from 'react-virtualized-select';
 
@@ -11,14 +11,17 @@ import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "../../LoadingSpinner";
+import TranslationSpinner from "../../TranslationSpinner";
+import ApiHelper from "../../utils/API";
 
 class Translator extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            translating:false,
             loading:true,
             error:false,
-            language:null,
+            language:{label:'English', value:'en'},
             languages:[]
         }
     }
@@ -38,14 +41,26 @@ class Translator extends Component {
         }
     };
 
-    translate = (event) => {
+    translate = async (event) => {
         event.preventDefault();
-        console.log(this.state.language.value);
+        this.setState({translating:true});
+        await ApiHelper.getByTestId(this.props.match.params.id).then(test => translateTest(test,this.state.language).then(test => ApiHelper.createTest(test).then(() =>
+            this.props.history.push('/view-tests')
+        ))).catch(() => this.setState({translating:false}))
     };
+
+    AbortController = new AbortController();
+
+    componentWillUnmount() {
+        this.AbortController.abort();
+    }
 
     render() {
         if(this.state.loading){
-            return LoadingSpinner;
+            return LoadingSpinner();
+        }
+        else if(this.state.translating){
+            return TranslationSpinner();
         }
         else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
