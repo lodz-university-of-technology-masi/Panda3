@@ -11,6 +11,7 @@ import panda3.mappers.TablesMapperPaarticipant;
 import panda3.mappers.TablesMapperTest;
 import panda3.model.TestAnswer;
 import panda3.responses.ApiResponseHandler;
+import panda3.validator.AnswerValidator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,10 +24,9 @@ public class CreateAnswer implements RequestHandler<Map<String, Object>, ApiGate
         try {
             TablesMapperAnswers tablesMapperAnswers = new TablesMapperAnswers();
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
-            if(new TablesMapperTest().getTest(body.get("testId").asText()) == null)
-                return ApiResponseHandler.createResponse("such user don't exists.", 200);
-            if(new TablesMapperPaarticipant().getAllParticipant(body.get("userId").asText()) == null)
-                return ApiResponseHandler.createResponse("such test don't exists.", 200);
+            String message = AnswerValidator.checkExistenceSingle(body);
+            if(message.equals(""))
+                return ApiResponseHandler.createResponse(message, 404);
             TestAnswer answer = tablesMapperAnswers.getUserTestAnswers(body.get("userId").asText(), body.get("testId").asText());
             tablesMapperAnswers.updateTestAnswer(TestAnswerCreator.addUserAnswer(answer, new ObjectMapper().convertValue( body.get("answers"), ArrayList.class)));
             return ApiResponseHandler.createResponse(answer, 200);

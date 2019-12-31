@@ -11,6 +11,7 @@ import panda3.mappers.TablesMapperPaarticipant;
 import panda3.mappers.TablesMapperTest;
 import panda3.model.TestAnswer;
 import panda3.responses.ApiResponseHandler;
+import panda3.validator.AnswerValidator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +22,10 @@ public class CreateTestForUser implements RequestHandler<Map<String, Object>, Ap
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         try {
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
-            new TablesMapperAnswers().saveTestAnswer(TestAnswerCreator.addUserToTest(body.get("userId").asText(), body.get("testId").asText()));
+            String message = AnswerValidator.checkExistenceWithList(body);
+            if(!message.equals(""))
+                return ApiResponseHandler.createResponse(message, 404);
+            new TablesMapperAnswers().saveUsersToTest(body.get("testId").asText() ,new ObjectMapper().convertValue( body.get("users"), ArrayList.class));
             return ApiResponseHandler.createResponse("sucess.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);
