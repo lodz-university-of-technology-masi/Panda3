@@ -60,7 +60,7 @@ class ActiveTests extends Component {
         else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
         }
-        return <div>
+        return <div style={{height:"100%"}}>
             <span>Active Tests:</span>
             <BasicTable
                 data={this.state.tests}

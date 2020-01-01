@@ -97,7 +97,7 @@ class TestChecker extends Component{
         if(this.state.loading){
             return null;
         }
-        return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"25rem", borderRadius:"1rem", flexDirection:"column"}}>
+        return <Container className="d-flex justify-content-between bg-items-color" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"25rem", borderRadius:"1rem", flexDirection:"column"}}>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
             <span className="d-flex">
                 {this.state.test.title}

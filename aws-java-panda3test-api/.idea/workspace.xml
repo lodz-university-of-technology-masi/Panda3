@@ -3,13 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="855017b5-38bc-4157-8844-e4075c55fab5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/serverless.yml" beforeDir="false" afterPath="$PROJECT_DIR$/serverless.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panda3/lambda/answers/CreateAnswer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/lambda/answers/CreateAnswer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperAnswers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperAnswers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperPaarticipant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperPaarticipant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../view/src/components/AddUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/AddUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../view/src/components/UserManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/UserManagement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../view/src/components/pages/recruiter/AccessManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/AccessManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../view/src/components/pages/recruiter/RecruiterMainView.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/RecruiterMainView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../view/src/components/pages/recruiter/RecruiterTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/RecruiterTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../view/src/components/pages/recruiter/TestCreator/TestCreator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/TestCreator/TestCreator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../view/src/components/utils/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/utils/API.js" afterDir="false" />
+
     </list>
-    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,9 +316,9 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -501,6 +509,8 @@
       <workItem from="1577804362812" duration="614000" />
       <workItem from="1577815798664" duration="10842000" />
       <workItem from="1577877522930" duration="6681000" />
+      <workItem from="1577739270042" duration="606000" />
+      <workItem from="1577792959990" duration="581000" />
     </task>
     <task id="LOCAL-00001" summary="workspace">
       <created>1577713441792</created>
@@ -604,12 +614,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>

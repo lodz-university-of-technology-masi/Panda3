@@ -38,8 +38,8 @@ function BasicTable({columns, data}) {
 
 
     return (
-        <Container fluid={true}>
-            <Table striped bordered {...getTableProps()}>
+        <Container fluid={true} style={{height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
+            <Table striped bordered {...getTableProps()} className="bg-items-color">
                 <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -64,7 +64,7 @@ function BasicTable({columns, data}) {
                 )}
                 </tbody>
             </Table>
-            <Row className="align-items-center justify-content-start">
+            <Row className="align-items-center justify-content-start" style={{justifySelf:"start", marginBottom:"1rem"}}>
                 <Col md="auto">
                     <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
                         {'<<'}

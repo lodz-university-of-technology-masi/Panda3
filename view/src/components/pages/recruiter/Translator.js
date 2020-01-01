@@ -49,12 +49,6 @@ class Translator extends Component {
         ))).catch(() => this.setState({translating:false}))
     };
 
-    AbortController = new AbortController();
-
-    componentWillUnmount() {
-        this.AbortController.abort();
-    }
-
     render() {
         if(this.state.loading){
             return LoadingSpinner();
@@ -67,7 +61,7 @@ class Translator extends Component {
         }
         const options = Object.keys(this.state.languages).map((key) => ({label:this.state.languages[key], value:key}));
 
-        return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"5rem", borderRadius:"1rem", flexDirection:"column"}}>
+        return <Container className="d-flex justify-content-between bg-items-color" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"5rem", borderRadius:"1rem", flexDirection:"column"}}>
             <Row className="d-flex justify-content-center align-items-center" style={{margin:"1rem"}}>
                 <Col md="auto">Test: {this.props.match.params.id}</Col>
                 <Col md={'auto'}>

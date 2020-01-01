@@ -104,12 +104,14 @@ class TestCreator extends Component{
         }
         if(ValidateTest(test)){
             this.setState({
-                canSubmit:true
+                canSubmit:true,
+                loading:true
             });
-            ApiHelper.createTest(test).then(()=>alert("Test added")).catch((e)=>alert(e));
+            ApiHelper.createTest(test).then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
         } else{
             this.setState({
-                canSubmit:false
+                canSubmit:false,
+                loading:false
             })
         }
     };
@@ -208,7 +210,7 @@ class TestCreator extends Component{
         else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
         }
-        return <Container className="d-flex justify-content-between" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
+        return <Container className="d-flex justify-content-between bg-items-color" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
             <div>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
             <div className="d-flex"  style={{width:"auto", flexDirection:"column"}}>

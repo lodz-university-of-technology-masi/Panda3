@@ -18,7 +18,8 @@ endpoints:
 export const ApiHelper = {
 
     createParticipant: async (participant) => {
-        await API.post(API_NAME, '/participants/create', {body: JSON.stringify(participant)}).then(r => console.log(r))
+        console.log(participant);
+       return await API.post(API_NAME, '/participants/create', {body: participant})
     },
 
     deleteParticipant: async (id) => {
@@ -30,7 +31,7 @@ export const ApiHelper = {
     },
 
     getParticipants: async () => {
-        await API.get(API_NAME, '/participants/read', {}).then(r => console.log(r))
+       return await API.get(API_NAME, '/participants/read', {})
     },
 
     updateParticipant: async () => {
@@ -56,8 +57,13 @@ export const ApiHelper = {
     },
 
     createSubmission: async (body) => {
-        let path = '/tests/delete/';
+        let path = '/answers/create';
         return await API.post(API_NAME,path,{body:body})
     },
+
+    addUsersToTest: async (body) => {
+        let path = '/answers/add/user';
+        return await API.post(API_NAME,path,{body:body})
+    }
 };
 export default ApiHelper;

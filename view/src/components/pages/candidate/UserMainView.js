@@ -26,7 +26,7 @@ class UserMainView extends Component {
     render() {
         return (
             <Router>
-                <Container fluid={true}>
+                <Container fluid={true} style={{height:"100%"}}>
                     <Row style={{background: "LightBlue", padding: "0.5rem"}}>
                         <Col className="d-flex align-items-center" md="auto">Welcome, {this.props.username}</Col>
                         <Col md="auto"><Link to="/tests"><Button variant="primary">Active tests</Button></Link></Col>

@@ -8,7 +8,6 @@ class QuestionController extends Component {
 
     render() {
         let answer = this.props.defaultVal;
-        console.log(this.props.param);
         switch (this.props.param.type) {
             case "O":
                 return <OpenQuestion

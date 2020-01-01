@@ -10,8 +10,8 @@ import {
     Link,
     withRouter
 } from "react-router-dom";
-import UserManagement from "../../UserManagement";
-import AddUser from "../../AddUser"
+import UserManagement from "./UserManagement";
+import AddUser from "./AddUser"
 import SplitButton from "react-bootstrap/SplitButton";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import RecruiterTests from "./RecruiterTests";
@@ -33,8 +33,8 @@ class RecruiterMainView extends Component {
     render() {
         return (
             <Router>
-                <Container fluid={true}>
-                    <Row className="d-flex" style={{background: "LightBlue", padding: "0.5rem"}}>
+                <Container fluid={true} style={{height:"100%"}}>
+                    <Row className="d-flex top-menu">
                         <Col className="d-flex align-items-center" md="auto">Welcome, {this.props.username}</Col>
                         <Col md="auto">
                             <Link to="/users">
