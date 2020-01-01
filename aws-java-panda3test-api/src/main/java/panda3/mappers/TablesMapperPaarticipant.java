@@ -10,8 +10,10 @@ import com.serverless.DynamoDBAdapter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import panda3.model.Participant;
+import panda3.model.TestAnswer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +57,15 @@ public class TablesMapperPaarticipant {
     }
 
 
-
+    public List<Participant> getTestUsers(String testId) throws IOException{
+        List<TestAnswer> answers = new TablesMapperAnswers().getObjectsWithTestId(testId);
+        List<Participant> answer = new ArrayList<Participant>();
+        for(TestAnswer ans : answers){
+            if(ans.getAnswers() != null)
+                answer.add(this.getAllParticipant(ans.getUserId()));
+        }
+        return answer;
+    }
 
     public void deleteParticipant(String id) throws IOException {
         Participant result = this.mapper.load(Participant.class, id);

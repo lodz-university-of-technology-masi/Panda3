@@ -25,7 +25,7 @@ public class CreateAnswer implements RequestHandler<Map<String, Object>, ApiGate
             TablesMapperAnswers tablesMapperAnswers = new TablesMapperAnswers();
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
             String message = AnswerValidator.checkExistenceSingle(body);
-            if(message.equals(""))
+            if(!message.equals(""))
                 return ApiResponseHandler.createResponse(message, 404);
             TestAnswer answer = tablesMapperAnswers.getUserTestAnswers(body.get("userId").asText(), body.get("testId").asText());
             tablesMapperAnswers.updateTestAnswer(TestAnswerCreator.addUserAnswer(answer, new ObjectMapper().convertValue( body.get("answers"), ArrayList.class)));

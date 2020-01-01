@@ -134,6 +134,15 @@ functions:
           cors: true
 
 
+  readMyTests:
+    handler: panda3.lambda.tests.ReadMyTests
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: x
+          method: get
+          cors: true
+
   deleteTest:
     handler: panda3.lambda.tests.DeleteTest
     Policies: AmazonDynamoDBFullAccess
@@ -160,7 +169,7 @@ functions:
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
-          path: answers/create
+          path: answers/commit/answer
           method: post
           cors: true
 
@@ -169,7 +178,7 @@ functions:
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
-          path: answers/add/user
+          path: answers/add/users
           method: post
           cors: true
 
@@ -178,9 +187,38 @@ functions:
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
-          path: answers/add
+          path: answers/check
           method: post
           cors: true
+
+  readTestAnswers:
+    handler: panda3.lambda.answers.ReadTestToCheck
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/test/answers/{testId}
+          method: get
+          cors: true
+
+  readUsersFromTest:
+    handler: panda3.lambda.paarticipants.ReadTestUsers
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/test/users/{testId}
+          method: get
+          cors: true
+
+
+  readTestResults:
+    handler: panda3.lambda.answers.ReadUserResults
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: answers/test/result/{userId}
+          method: get
+          cors: true
+
 
   readAnswer:
     handler: panda3.lambda.answers.ReadAnswer

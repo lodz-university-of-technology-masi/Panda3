@@ -5,11 +5,16 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ScanRequest;
+import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.serverless.DynamoDBAdapter;
 import panda3.creators.TestAnswerCreator;
+import panda3.model.Participant;
 import panda3.model.TestAnswer;
+import panda3.model.TestResult;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +65,47 @@ public class TablesMapperAnswers {
         return this.mapper.query(TestAnswer.class, query).get(0);
     }
 
+
+    public List<Participant> getTestUsers(String testId) throws IOException{
+        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+        eav.put(":val1", new AttributeValue().withS(testId));
+        DynamoDBScanExpression scanRequest = new DynamoDBScanExpression()
+                .withFilterExpression("testId = :val1")
+                .withExpressionAttributeValues(eav);
+        List<TestAnswer> all = this.mapper.scan(TestAnswer.class, scanRequest);
+        List<Participant> answer = new ArrayList<Participant>();
+        for(TestAnswer ans : all){
+            if(ans.getAnswers() != null && ans.getResult() == null)
+                answer.add(new TablesMapperPaarticipant().getAllParticipant(ans.getUserId()));
+        }
+        return answer;
+    }
+
+    public List<TestResult> getResultUser(String userId) throws IOException{
+        List<TestAnswer> all = this.getUserTests(userId);
+        List<TestResult> answer = new ArrayList<TestResult>();
+        for(TestAnswer ans : all){
+            if(ans.getResult() != null)
+
+                answer.add(new TestResult(new TablesMapperTest().getTest(ans.getTestId()).getTitle()  , ans.getResult()));
+        }
+
+        return answer;
+    }
+
+
+    public List<TestAnswer> getObjectsWithTestId(String testId) throws IOException {
+        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+        eav.put(":val1", new AttributeValue().withS(testId));
+        DynamoDBScanExpression scanRequest = new DynamoDBScanExpression()
+                .withFilterExpression("testId = :val1")
+                .withExpressionAttributeValues(eav);
+        return this.mapper.scan(TestAnswer.class, scanRequest);
+    }
+
+
+
+
     public void saveTestAnswer(TestAnswer answer) throws IOException {
         this.mapper.save(answer);
     }
@@ -74,5 +120,15 @@ public class TablesMapperAnswers {
     public void updateTestAnswer(TestAnswer answer) throws IOException {
         this.deleteTestAnswer(answer.getTestId());
         this.mapper.save(answer);
+    }
+
+
+    public List<TestAnswer> getUserTests(String userId) throws IOException {
+        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+        eav.put(":val1", new AttributeValue().withS(userId));
+        DynamoDBScanExpression scanRequest = new DynamoDBScanExpression()
+                .withFilterExpression("userId = :val1")
+                .withExpressionAttributeValues(eav);
+        return this.mapper.scan(TestAnswer.class, scanRequest);
     }
 }
