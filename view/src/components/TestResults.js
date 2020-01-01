@@ -1,40 +1,58 @@
 import React, {Component} from 'react'
 import BasicTable from "./BasicTable";
+import LoadingSpinner from "./LoadingSpinner";
+import ApiHelper from "./utils/API";
+import Alert from "react-bootstrap/Alert";
 
 class TestResults extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            tests: [],
+            loading:true,
+            results: [],
             columns: [{
-                Header: 'Title',
-                accessor: 'title'
+                Header: 'Test',
+                accessor: 'testId'
             }, {
-                id: 'score',
-                Header: 'Score',
-                accessor: d => d.score
-            },{
-                id: 'maxScore',
-                Header: 'Max Score',
-                accessor: d => d.maxScore
+                Header: 'Result',
+                accessor: 'result'
             }]
         }
     }
 
-    componentDidMount() {
-        const data = [{
-            title: 'Przykladowy Test',
-            score: 36,
-            maxScore: 50
-        }];
-        this.setState({tests:data})
-    }
+    fetch = async() => {
+        //TODO:userId
+        const user = "0775de48-324e-406d-b043-beeda717127c";
+        return ApiHelper.getResults(user).then( data =>
+            this.setState({
+                results: data,
+                loading:false,
+            })
+        )
+    };
+
+    componentDidMount = async() => {
+        await this.fetch().catch(e =>
+            {
+                console.log(e);
+                this.setState({
+                    loading:false,
+                    error:true
+                })
+            }
+        )
+    };
 
     render() {
+        if(this.state.loading){
+            return LoadingSpinner();
+        } else if(this.state.error){
+            return <Alert variant="danger">Fetch error</Alert>;
+        }
         return <div>
             <span>Results:</span>
             <BasicTable
-                data={this.state.tests}
+                data={this.state.results}
                 columns={this.state.columns}
             />
         </div>

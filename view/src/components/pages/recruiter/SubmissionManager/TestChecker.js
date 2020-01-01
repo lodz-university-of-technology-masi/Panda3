@@ -7,6 +7,7 @@ import QuestionController from "../../../questions/QuestionController";
 import update from 'immutability-helper';
 import {Link} from "react-router-dom";
 import ApiHelper from "../../../utils/API";
+import LoadingSpinner from "../../../LoadingSpinner";
 
 class TestChecker extends Component{
     constructor(props) {
@@ -53,9 +54,17 @@ class TestChecker extends Component{
     };
 
     SubmitTest = () => {
-        //Todo:call to api
-        let json = JSON.stringify(this.state.result);
-        console.log(json);
+        this.setState({loading:true});
+        let body = {
+            userId: this.props.match.params.userId,
+            testId: this.props.match.params.testId,
+            result: '100%'
+        };
+        console.log(JSON.stringify(body));
+        let redirect = '/submissions/' + this.props.match.params.testId;
+        ApiHelper.checkTest(body).then(() =>
+            this.props.history.push(redirect)
+        ).catch(e => alert(e));
     };
 
 
@@ -72,10 +81,8 @@ class TestChecker extends Component{
     };
 
     render() {
-        console.log(this.state.result);
-        console.log(this.state.result.length < this.state.test.questions.length);
         if(this.state.loading){
-            return null;
+            return LoadingSpinner();
         }
         return <Container className="d-flex justify-content-between bg-items-color" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"25rem", borderRadius:"1rem", flexDirection:"column"}}>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
@@ -105,7 +112,7 @@ class TestChecker extends Component{
                 <Button onClick={this.DecrementCounter} disabled={this.state.counter === 0}>Previous</Button>
                 {
                     this.state.counter === this.state.test.questions.length - 1
-                        ?<Link to={"/submissions/" + this.props.match.params.id}><Button onClick={this.SubmitTest} variant="success" disabled={this.state.result[this.state.counter] === undefined}>Submit</Button></Link>
+                        ?<Button onClick={this.SubmitTest} variant="success" disabled={this.state.result[this.state.counter] === undefined}>Submit</Button>
                         : this.state.result[this.state.counter] === undefined
                           ? null
                             :<Button onClick={this.IncrementCounter}>Next</Button>

@@ -57,7 +57,7 @@ export const ApiHelper = {
     },
 
     createSubmission: async (body) => {
-        let path = '/answers/create';
+        let path = '/answers/commit/answer';
         return await API.post(API_NAME,path,{body:body})
     },
 
@@ -71,7 +71,6 @@ export const ApiHelper = {
         return await API.get(API_NAME,path,{})
     },
 
-
     addUsersToTest: async (body) => {
         let path = '/answers/add/users';
         return await API.post(API_NAME,path,{body:body})
@@ -80,6 +79,17 @@ export const ApiHelper = {
     getAnswersToCheck: async(testId, userId) => {
         let path ='/answers/read/'+ testId +'/user/' + userId;
         return await API.get(API_NAME,path,{})
-    }
+    },
+
+    checkTest: async(body) => {
+        let path = '/answers/check';
+        return await API.post(API_NAME,path,{body:body})
+    },
+
+    getResults: async(userId) => {
+        let path = '/answers/test/result/' + userId;
+        return await API.get(API_NAME,path,{})
+    },
+
 };
 export default ApiHelper;
