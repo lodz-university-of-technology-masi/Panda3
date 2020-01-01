@@ -16,7 +16,7 @@ public class ReadUserAnswers implements RequestHandler<Map<String, Object>, ApiG
         Map<String,String> pathParameters =  (Map<String,String>)input.get("pathParameters");
 
         try {
-            List<String> answers= new TablesMapperAnswers().getUserTestAnswers(pathParameters.get("userId"), pathParameters.get("testId"));
+            List<String> answers= new TablesMapperAnswers().getUserTestAnswers(pathParameters.get("userId"), pathParameters.get("testId")).getAnswers();
             if(answers == null)
                 return ApiResponseHandler.createResponse("nothing was found.", 200);
             return ApiResponseHandler.createResponse(answers, 200);

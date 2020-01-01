@@ -45,6 +45,7 @@ public class    TablesMapperTest {
 
     public void deleteTest(String id) throws IOException {
         Test result = this.getTest(id);
+        new TablesMapperAnswers().deleteAllTestsOnList(id);
         this.mapper.delete(result);
     }
 
