@@ -19,7 +19,6 @@ import Panda from "../../../resources/panda.svg";
 class UserMainView extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
     }
 
 

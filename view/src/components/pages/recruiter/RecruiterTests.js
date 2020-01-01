@@ -46,9 +46,9 @@ class RecruiterTests extends Component {
                                         Test Menu
                                     </DropdownToggle>
                                     <DropdownMenu>
-                                        <Link to={submissionsPath}><Button variant="info">View Submissions</Button></Link>
-                                        <Link to={translatePath}><Button className="mt-1 mb-1" variant="info">Translate</Button></Link>
-                                        <Link to={managePath}><Button variant="info">Manage Access</Button></Link>
+                                        <Link to={submissionsPath}><Button className="ml-1" variant="info">View Submissions</Button></Link>
+                                        <Link to={translatePath}><Button className="ml-1 mt-1 mb-1" variant="info">Translate</Button></Link>
+                                        <Link to={managePath}><Button className="ml-1" variant="info">Manage Access</Button></Link>
                                     </DropdownMenu>
                                 </Dropdown>
                             </Col>
@@ -58,8 +58,8 @@ class RecruiterTests extends Component {
                                         Edit Menu
                                     </DropdownToggle>
                                     <DropdownMenu>
-                                        <Link to={modifyPath}><Button variant="warning">Modify</Button></Link>
-                                        <Button className="mr-1 ml-1" data-id={table.row.original.id} variant="danger" onClick={this.deleteTest}>Delete</Button>
+                                        <Link to={modifyPath}><Button className="ml-1" variant="warning">Modify</Button></Link>
+                                        <Button className="ml-1" data-id={table.row.original.id} variant="danger" onClick={this.deleteTest}>Delete</Button>
                                     </DropdownMenu>
                                 </Dropdown>
                             </Col>

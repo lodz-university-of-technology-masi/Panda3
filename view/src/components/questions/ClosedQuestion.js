@@ -26,7 +26,7 @@ class ClosedQuestion extends React.Component {
 
     render() {
         let options = this.state.options.map((option, index)=> {
-            return <Row key={option} className="d-flex align-content-center justify-content-start">
+            return <Row key={index} className="d-flex align-content-center justify-content-start">
                 <input
                     disabled={this.props.readOnly}
                     checked={this.state.answers[index]}

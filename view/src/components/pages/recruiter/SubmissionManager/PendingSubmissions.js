@@ -56,7 +56,6 @@ class PendingSubmissions extends Component {
                 })
             }
         );
-        console.log(this.state.submissions);
     };
 
     render() {

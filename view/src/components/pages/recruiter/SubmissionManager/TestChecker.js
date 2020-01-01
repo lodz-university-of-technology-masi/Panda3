@@ -55,12 +55,12 @@ class TestChecker extends Component{
 
     SubmitTest = () => {
         this.setState({loading:true});
+        //TODO: result???
         let body = {
             userId: this.props.match.params.userId,
             testId: this.props.match.params.testId,
             result: '100%'
         };
-        console.log(JSON.stringify(body));
         let redirect = '/submissions/' + this.props.match.params.testId;
         ApiHelper.checkTest(body).then(() =>
             this.props.history.push(redirect)
@@ -70,6 +70,15 @@ class TestChecker extends Component{
 
     componentDidMount = async() => {
         await this.fetchTestData().then(() => this.setState({loading:false})).catch((e) => alert(e));
+        console.log(this.state);
+        for (let i=0;i<this.state.result.length;i++){
+            if(this.state.test.questions[i].type === 'W'){
+                let json = JSON.parse(this.state.answers[i]);
+                this.setState((prevState) => ({
+                    answers: update(prevState.answers,{[i]:{$set:json}})
+                }));
+            }
+        }
     };
 
     getVerdict = () => {

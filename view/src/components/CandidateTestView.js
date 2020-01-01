@@ -50,7 +50,7 @@ class CandidateTestView extends Component{
             }));
     };
 
-    SubmitTest = async() => {
+    SubmitTest = () => {
         this.setState({
             loading:true
         });
@@ -60,7 +60,7 @@ class CandidateTestView extends Component{
             userId: "0775de48-324e-406d-b043-beeda717127c",
             answers: this.state.answers
         };
-        await ApiHelper.createSubmission(body).then(() =>
+        ApiHelper.createSubmission(body).then(() =>
             this.props.history.push('/tests')
         ).catch(e => alert(e)).then(() =>
             this.setState({

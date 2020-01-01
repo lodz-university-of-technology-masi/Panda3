@@ -23,7 +23,7 @@ class HomeController extends Component {
     render() {
         const {isAdmin} = this.state;
         const {username} = this.state;
-        if (true) { //zmienic na true by testowac widok admina
+        if (false) { //zmienic na true by testowac widok admina
             return <RecruiterMainView username={username}/>;
         }
         return <UserMainView username={username}/>;

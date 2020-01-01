@@ -3,18 +3,6 @@ export const API_NAME = "Panda3API";
 export const API_MAIN_EP = "https://y6p1h6b8sh.execute-api.us-east-1.amazonaws.com/dev";
 export const REGION = 'us-east-1';
 
-/*
-endpoints:
-  POST - https://0i2wyfdivk.execute-api.us-east-1.amazonaws.com/dev/participants/create
-  DELETE - https://0i2wyfdivk.execute-api.us-east-1.amazonaws.com/dev/participants/delete
-  GET - https://0i2wyfdivk.execute-api.us-east-1.amazonaws.com/dev/participant/read
-  GET - https://0i2wyfdivk.execute-api.us-east-1.amazonaws.com/dev/participants/read
-  PUT - https://0i2wyfdivk.execute-api.us-east-1.amazonaws.com/dev/participants/update
-  POST - https://0i2wyfdivk.execute-api.us-east-1.amazonaws.com/dev/tests/create
-  GET - https://0i2wyfdivk.execute-api.us-east-1.amazonaws.com/dev/tests/read
-  GET - https://0i2wyfdivk.execute-api.us-east-1.amazonaws.com/dev/participants/test
- */
-
 export const ApiHelper = {
 
     createParticipant: async (participant) => {
@@ -88,6 +76,11 @@ export const ApiHelper = {
 
     getResults: async(userId) => {
         let path = '/answers/test/result/' + userId;
+        return await API.get(API_NAME,path,{})
+    },
+
+    getUsersTests: async(userId) => {
+        let path = '/tests/user/' + userId;
         return await API.get(API_NAME,path,{})
     },
 

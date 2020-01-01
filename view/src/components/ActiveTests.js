@@ -29,7 +29,7 @@ class ActiveTests extends Component {
                 Cell: table => {
                     let path = '/test/' + table.row.original.id;
                     return (
-                        <Link to={path}><Button variant="primary">View</Button></Link>
+                        <Link to={path}><Button variant="primary">Solve</Button></Link>
                     )
                 }
             }]
@@ -37,7 +37,7 @@ class ActiveTests extends Component {
     }
 
     componentDidMount = async () => {
-        await ApiHelper.getTests().then( tests =>
+        await ApiHelper.getUsersTests("0775de48-324e-406d-b043-beeda717127c").then( tests =>
             this.setState({
                 tests: tests,
                 loading:false,
