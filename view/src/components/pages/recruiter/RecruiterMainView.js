@@ -63,7 +63,7 @@ class RecruiterMainView extends Component {
                         <Route path="/modify-test/:id">{withRouter(TestCreator)}</Route>
                         <Route path="/translate/:id">{withRouter(Translator)}</Route>
                         <Route path="/submissions/:id">{withRouter(PendingSubmissions)}</Route>
-                        <Route path="/check-test/:id">{withRouter(TestChecker)}</Route>
+                        <Route path="/check-test/:testId/:userId">{withRouter(TestChecker)}</Route>
                         <Route path="/manage-access/:id">{withRouter(AccessManager)}</Route>
                         <Route path="/import">{withRouter(TestImporter)}</Route>
                     </Switch>

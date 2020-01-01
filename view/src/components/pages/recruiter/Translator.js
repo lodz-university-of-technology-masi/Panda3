@@ -44,7 +44,7 @@ class Translator extends Component {
     translate = async (event) => {
         event.preventDefault();
         this.setState({translating:true});
-        await ApiHelper.getByTestId(this.props.match.params.id).then(test => translateTest(test,this.state.language).then(test => ApiHelper.createTest(test).then(() =>
+        await ApiHelper.getTestById(this.props.match.params.id).then(test => translateTest(test,this.state.language).then(test => ApiHelper.createTest(test).then(() =>
             this.props.history.push('/view-tests')
         ))).catch(() => this.setState({translating:false}))
     };

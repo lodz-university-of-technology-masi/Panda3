@@ -41,7 +41,7 @@ class CandidateTestView extends Component{
     };
 
     fetchTestData = async (id) => {
-        await ApiHelper.getByTestId(id).then( test =>
+        await ApiHelper.getTestById(id).then(test =>
             this.setState({test:test})
         ).catch(() =>
             this.setState({

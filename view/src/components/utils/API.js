@@ -46,7 +46,7 @@ export const ApiHelper = {
         return await API.get(API_NAME, '/tests/read', {})
     },
 
-    getByTestId: async (id) => {
+    getTestById: async (id) => {
         let path = '/tests/' + id;
         return await API.get(API_NAME, path, {})
     },
@@ -66,15 +66,20 @@ export const ApiHelper = {
         return await API.get(API_NAME,path,{})
     },
 
-    getSubmissmissions: async(testId) => {
-        let path = '/answers/test/users/' + testId;
+    getSubmissions: async(testId) => {
+        let path = '/answers/test/answers/' + testId;
         return await API.get(API_NAME,path,{})
     },
 
 
     addUsersToTest: async (body) => {
-        let path = '/answers/add/user';
+        let path = '/answers/add/users';
         return await API.post(API_NAME,path,{body:body})
+    },
+
+    getAnswersToCheck: async(testId, userId) => {
+        let path ='/answers/read/'+ testId +'/user/' + userId;
+        return await API.get(API_NAME,path,{})
     }
 };
 export default ApiHelper;

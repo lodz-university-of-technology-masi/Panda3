@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import QuestionController from "../../../questions/QuestionController";
 import update from 'immutability-helper';
 import {Link} from "react-router-dom";
+import ApiHelper from "../../../utils/API";
 
 class TestChecker extends Component{
     constructor(props) {
@@ -42,31 +43,11 @@ class TestChecker extends Component{
         }));
     };
 
-    fetchTestData = () => {
-        const data = {
-            title: 'Przykladowy Test',
-            questions:[
-                {
-                    question:'What is your name and surname?',
-                    type:'O',
-                },{
-                    question:'What does Cyclomatic Complexity measure?',
-                    type:'W',
-                    options:[
-                        'complexity of software',
-                        'duplication of code',
-                        'robustness',
-                        'number of lines of code'
-                    ]
-                },{
-                    question:'How many principles were in the original Agile Manifesto?',
-                    type:'L'
-                }
-            ]
-        };
-        const answers = JSON.parse('["Kowalski",[false,true,false,false],"4"]');
+    fetchTestData = async() => {
+        const test = await ApiHelper.getTestById(this.props.match.params.testId);
+        const answers = await ApiHelper.getAnswersToCheck(this.props.match.params.testId, this.props.match.params.userId).catch((e)=>alert(e));
         this.setState({
-            test: data,
+            test: test,
             answers:answers,
             result:Array(answers.length)})
     };
@@ -78,10 +59,9 @@ class TestChecker extends Component{
     };
 
 
-    componentDidMount() {
-        this.fetchTestData();
-        this.setState({loading:false});
-    }
+    componentDidMount = async() => {
+        await this.fetchTestData().then(() => this.setState({loading:false})).catch((e) => alert(e));
+    };
 
     getVerdict = () => {
        switch (this.state.result[this.state.counter]) {

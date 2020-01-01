@@ -5,24 +5,28 @@ import Col from "react-bootstrap/Col";
 import {Link} from "react-router-dom";
 import BasicTable from "../../../BasicTable";
 import LoadingSpinner from "../../../LoadingSpinner";
+import ApiHelper from "../../../utils/API";
 
 class PendingSubmissions extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            loading:false,
+            loading:true,
             submissions: [],
             columns: [{
                 Header: 'Id',
                 accessor: 'id'
             },{
-                Header: 'Candidate',
-                accessor: 'user'
+                Header: 'Name',
+                accessor: 'name'
+            },{
+                Header: 'Surname',
+                accessor: 'surname'
             },{
                 id: 'action',
                 Header: 'Action',
                 Cell: table => {
-                    let path = '/check-test/' + table.row.original.id;
+                    let path = '/check-test/' + this.props.match.params.id + '/' + table.row.original.id;
                     return (
                         <Row className="justify-content-center" style={{width:"auto"}}>
                             <Col md={"auto"}><Link to={path}><Button variant="success">Check</Button></Link></Col>
@@ -33,18 +37,27 @@ class PendingSubmissions extends Component {
         }
     }
 
-    componentDidMount() {
-        const data = [{
-            id:'1',
-            test: 'Sample test',
-            user: 'Kowalski'
-        },{
-            id:'2',
-            test: 'Przykladowy Test',
-            user: 'Benek69'
-        }];
-        this.setState({submissions: data})
-    }
+    fetch = async() => {
+        return ApiHelper.getSubmissions(this.props.match.params.id).then( data =>
+            this.setState({
+                submissions: data,
+                loading:false,
+            })
+        )
+    };
+
+    componentDidMount = async () => {
+        await this.fetch().catch(e =>
+            {
+                console.log(e);
+                this.setState({
+                    loading:false,
+                    error:true
+                })
+            }
+        );
+        console.log(this.state.submissions);
+    };
 
     render() {
         if(this.state.loading){
