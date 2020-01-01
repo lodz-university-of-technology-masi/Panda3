@@ -139,7 +139,7 @@ functions:
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
-          path: x
+          path: /tests/user/{userId}
           method: get
           cors: true
 

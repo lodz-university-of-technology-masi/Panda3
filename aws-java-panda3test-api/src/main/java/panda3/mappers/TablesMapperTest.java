@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TablesMapperTest {
+public class    TablesMapperTest {
     private DynamoDBAdapter db_adapter;
     private AmazonDynamoDB client;
     private DynamoDBMapper mapper;

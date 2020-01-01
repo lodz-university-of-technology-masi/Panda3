@@ -41,14 +41,14 @@ public class TablesMapperAnswers {
     }
 
 
-    public TestAnswer getUserTestAnswers(String userId, String testId) throws IOException {
+    public List<String> getUserTestAnswers(String userId, String testId) throws IOException {
         Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
         eav.put(":v_u_id", new AttributeValue().withS(userId));
         eav.put(":v_t_id", new AttributeValue().withS(testId));
         DynamoDBQueryExpression<TestAnswer> query = new DynamoDBQueryExpression<TestAnswer>()
                 .withKeyConditionExpression("userId = :v_u_id and testId = :v_t_id")
                 .withExpressionAttributeValues(eav);
-        return this.mapper.query(TestAnswer.class, query).get(0);
+        return this.mapper.query(TestAnswer.class, query).get(0).getAnswers();
     }
 
     public void deleteTestAnswer(String id) throws IOException {
