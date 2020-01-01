@@ -22,11 +22,18 @@ class AccessManager extends Component{
     }
 
     fetchUsers = async() =>{
-      let users = await ApiHelper.getParticipants().catch( e => alert(e));
-      const items = Object.keys(users).map((key) => ({id:key, label:users[key].name + ' ' + users[key].surname}));
+
+      let users = await ApiHelper.getParticipants().catch((e)=>alert(e));
+      let usersWithAccess = await ApiHelper.getUserWithAccess(this.props.match.params.id).catch((e)=>alert(e));;
+      console.log(users);
+      console.log(usersWithAccess);
+
+      let items = Object.keys(users).map((key) => ({id:key, label:users[key].name + ' ' + users[key].surname}));
+      let selectedItems = Object.keys(usersWithAccess).map((key) => ({id:key, label:users[key].name + ' ' + users[key].surname}));
         this.setState({
             users:users,
             items: items,
+            selectedItems: selectedItems
         });
     };
 

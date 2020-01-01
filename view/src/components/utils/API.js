@@ -61,6 +61,17 @@ export const ApiHelper = {
         return await API.post(API_NAME,path,{body:body})
     },
 
+    getUserWithAccess: async(testId) => {
+        let path = '/answers/test/users/' + testId;
+        return await API.get(API_NAME,path,{})
+    },
+
+    getSubmissmissions: async(testId) => {
+        let path = '/answers/test/users/' + testId;
+        return await API.get(API_NAME,path,{})
+    },
+
+
     addUsersToTest: async (body) => {
         let path = '/answers/add/user';
         return await API.post(API_NAME,path,{body:body})
