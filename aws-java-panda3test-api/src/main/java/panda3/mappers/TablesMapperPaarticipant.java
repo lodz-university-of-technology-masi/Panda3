@@ -61,7 +61,6 @@ public class TablesMapperPaarticipant {
         List<TestAnswer> answers = new TablesMapperAnswers().getObjectsWithTestId(testId);
         List<Participant> answer = new ArrayList<Participant>();
         for(TestAnswer ans : answers){
-            if(ans.getAnswers() != null)
                 answer.add(this.getAllParticipant(ans.getUserId()));
         }
         return answer;

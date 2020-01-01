@@ -3,21 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="855017b5-38bc-4157-8844-e4075c55fab5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-
       <change beforePath="$PROJECT_DIR$/serverless.yml" beforeDir="false" afterPath="$PROJECT_DIR$/serverless.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panda3/lambda/answers/CreateAnswer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/lambda/answers/CreateAnswer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperAnswers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperAnswers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperPaarticipant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperPaarticipant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../view/src/components/AddUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/AddUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../view/src/components/UserManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/UserManagement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../view/src/components/pages/recruiter/AccessManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/AccessManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../view/src/components/pages/recruiter/RecruiterMainView.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/RecruiterMainView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../view/src/components/pages/recruiter/RecruiterTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/RecruiterTests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../view/src/components/pages/recruiter/TestCreator/TestCreator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/pages/recruiter/TestCreator/TestCreator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../view/src/components/utils/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/../view/src/components/utils/API.js" afterDir="false" />
-
     </list>
+    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,31 +25,28 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/serverless.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="141" column="17" selection-start-line="141" selection-start-column="17" selection-end-line="141" selection-end-column="17" />
+            <state relative-caret-position="353">
+              <caret line="206" column="13" lean-forward="true" selection-start-line="206" selection-start-column="13" selection-end-line="206" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/answers/CreateTestForUser.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/answers/ReadTestToCheck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="21" column="89" lean-forward="true" selection-start-line="21" selection-start-column="89" selection-end-line="21" selection-end-column="89" />
+            <state relative-caret-position="253">
+              <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/paarticipants/ReadTestUsers.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="19" column="88" selection-start-line="19" selection-start-column="76" selection-end-line="19" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperAnswers.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="108" column="20" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="20" />
-              <folding>
-                <element signature="e#3320#3333#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,29 +55,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperPaarticipant.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="59" column="41" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="41" />
-              <folding>
-                <element signature="e#2451#2464#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="438">
+              <caret line="62" column="38" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperAnswers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" column="56" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
+            <state relative-caret-position="961">
+              <caret line="121" column="33" selection-start-line="121" selection-start-column="33" selection-end-line="121" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/tests/ReadMyTests.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/answers/CreateTestForUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="15" column="24" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="24" />
+            <state relative-caret-position="276">
+              <caret line="27" column="53" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,10 +83,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/paarticipants/ReadParticipant.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="16" column="89" selection-start-line="16" selection-start-column="89" selection-end-line="24" selection-end-column="9" />
+            <state relative-caret-position="23">
+              <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,6 +112,10 @@
       <find>{testId}</find>
       <find>answers/add/user</find>
       <find>save</find>
+      <find>tests/user/{userId}</find>
+      <find>add</find>
+      <find>saveUsersToTest</find>
+      <find>answers/test/users/{testId}</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -151,13 +142,13 @@
         <option value="$PROJECT_DIR$/src/main/java/panda3/lambda/answers/ReadTestToCheck.java" />
         <option value="$PROJECT_DIR$/src/main/java/panda3/model/TestResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/panda3/lambda/tests/ReadTestUser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperPaarticipant.java" />
         <option value="$PROJECT_DIR$/src/main/java/panda3/lambda/paarticipants/ReadTestUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/panda3/lambda/paarticipants/ReadTestUsers.java" />
         <option value="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperAnswers.java" />
         <option value="$PROJECT_DIR$/src/main/java/panda3/lambda/tests/ReadMyTests.java" />
-        <option value="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java" />
         <option value="$PROJECT_DIR$/serverless.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperPaarticipant.java" />
       </list>
     </option>
   </component>
@@ -193,6 +184,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -305,7 +297,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -537,13 +528,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38220000" />
+    <option name="totallyTimeSpent" value="40644000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.17704518" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17704518" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="aws.explorer" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -553,7 +544,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32988507" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27931035" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.07471264" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -584,7 +575,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32988507" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27931035" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.07471264" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -598,7 +589,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Maven" order="4" visible="true" weight="0.12576313" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.12576313" />
       <window_info anchor="right" id="Palette" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
@@ -614,6 +605,12 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -795,77 +792,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/answers/ReadTestToCheck.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="21" column="90" selection-start-line="21" selection-start-column="76" selection-end-line="21" selection-end-column="90" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/paarticipants/ReadTestUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="20" column="58" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/paarticipants/ReadTestUsers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperPaarticipant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="59" column="41" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="41" />
-          <folding>
-            <element signature="e#2451#2464#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/paarticipants/ReadTestUser.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/paarticipants/ReadParticipant.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="16" column="89" selection-start-line="16" selection-start-column="89" selection-end-line="24" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="56" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/answers/CreateTestForUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="21" column="89" lean-forward="true" selection-start-line="21" selection-start-column="89" selection-end-line="21" selection-end-column="89" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperAnswers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="108" column="20" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="20" />
-          <folding>
-            <element signature="e#3320#3333#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -879,10 +810,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/answers/CreateTestForUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="27" column="53" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperAnswers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="961">
+          <caret line="121" column="33" selection-start-line="121" selection-start-column="33" selection-end-line="121" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/paarticipants/ReadTestUsers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="19" column="88" selection-start-line="19" selection-start-column="76" selection-end-line="19" selection-end-column="88" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/lambda/answers/ReadTestToCheck.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/panda3/mappers/TablesMapperPaarticipant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="62" column="38" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/serverless.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="141" column="17" selection-start-line="141" selection-start-column="17" selection-end-line="141" selection-end-column="17" />
+        <state relative-caret-position="353">
+          <caret line="206" column="13" lean-forward="true" selection-start-line="206" selection-start-column="13" selection-end-line="206" selection-end-column="13" />
         </state>
       </provider>
     </entry>
