@@ -23,12 +23,54 @@ import { ReactSVG } from 'react-svg'
 import Panda from '../../../resources/panda.svg';
 import AccessManager from "./AccessManager";
 import TestImporter from "./TestImporter";
+import {getLanguages, getSynonyms} from "../../utils/Yandex";
+import VirtualizedSelect from "react-virtualized-select";
+import 'react-select/dist/react-select.css'
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
+import SynonymViewer from "./SynonymViewer";
+import {getSelectionText} from "../../utils/utils";
 
 class RecruiterMainView extends Component {
-    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
+        this.state = {
+            loading:true,
+            error:null,
+            languages:[],
+            synonymsUrl:'/synonyms/',
+            language:{label:'English', value:'en'},
+        }
     }
+
+    setSynonymsURL = () =>{
+        let text = getSelectionText();
+        this.setState((prevState) => ({
+            synonymsUrl:'/synonyms/'+ prevState.language.value +'/'+ text
+        }));
+    };
+
+    handleLanguage = (selectValue) => {
+        this.setState({
+            language:selectValue
+        });
+    };
+
+    componentDidMount = async () => {
+        const languages = await getLanguages();
+        try{
+            const options = Object.keys(languages).map((key) => ({label:languages[key], value:key}));
+            this.setState({
+                languages: options,
+                loading:false
+            });
+        } catch (e) {
+            this.setState({
+                error:true,
+                loading:false
+            })
+        }
+    };
 
     render() {
         return (
@@ -52,6 +94,17 @@ class RecruiterMainView extends Component {
                             <Link to="/import"><Button>Import tests</Button></Link>
                         </Col>
                         <Col className="d-flex align-items-center justify-content-end">
+                            <div className="d-flex align-items-center">
+                                <a href={this.state.synonymsUrl} target="_blank" rel="noopener noreferrer"><Button onClick={this.setSynonymsURL} className="mr-1">Get Synonyms in </Button></a>
+                        <VirtualizedSelect
+                            options={this.state.languages}
+                            onChange={(selectValue) => this.handleLanguage(selectValue)}
+                            value={this.state.language}
+                            style={{minWidth:"8rem"}}
+                        />
+                        </div>
+                        </Col>
+                        <Col md="auto" className="d-flex align-items-center justify-content-end">
                             <ReactSVG className="panda" src={Panda}/>
                         </Col>
                     </Row>
@@ -66,6 +119,7 @@ class RecruiterMainView extends Component {
                         <Route path="/check-test/:testId/:userId">{withRouter(TestChecker)}</Route>
                         <Route path="/manage-access/:id">{withRouter(AccessManager)}</Route>
                         <Route path="/import">{withRouter(TestImporter)}</Route>
+                        <Route path="/synonyms/:lang/:text">{withRouter(SynonymViewer)}</Route>
                     </Switch>
                 </Container>
             </Router>
