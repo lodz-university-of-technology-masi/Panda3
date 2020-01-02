@@ -22,8 +22,19 @@ public class TestAnswerCreator {
 
 
 
-    public static TestAnswer addRecruiterResult(TestAnswer answer, String result){
-        answer.setResult(result);
+    public static TestAnswer addRecruiterResult(TestAnswer answer, List<Boolean> results){
+        answer.setResult(TestAnswerCreator.calculatePercent(results));
         return answer;
+    }
+
+
+    public static String calculatePercent(List<Boolean> results){
+        float flag = 0;
+        for(boolean b : results){
+            if(b)
+                flag+= 1.0f;
+        }
+        float answer = flag/results.size();
+        return answer + "%";
     }
 }
