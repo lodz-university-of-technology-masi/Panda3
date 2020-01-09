@@ -6,13 +6,13 @@ import {API_NAME, API_MAIN_EP, REGION} from "./components/utils/API";
 
 
 Amplify.configure({
-    /*Auth: {
-        identityPoolId: 'eu-central-1:d8667c34-8b20-4412-bb1b-b07038ec560b',
-        region: 'eu-central-1',
-        //userPoolId: '',
-       // userPoolWebClientId: '',
-        mandatorySignIn: false,
-    },*/
+    Auth: {
+        identityPoolId: 'us-east-1:c1ead9a5-abd9-46c9-87e0-1db205e0b394',
+        region: 'us-east-1',
+        userPoolId: 'us-east-1_FFFN7zGGO',
+        userPoolWebClientId: '32ffim0p5i69sbjgr4v22legvv',
+        mandatorySignIn: true,
+    },
     API: {
         region: REGION,
         endpoints: [
