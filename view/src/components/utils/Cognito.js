@@ -1,4 +1,4 @@
-import Auth from 'aws-amplify'
+import {Auth} from 'aws-amplify'
 
 export function logout() {
     Auth.signOut()
