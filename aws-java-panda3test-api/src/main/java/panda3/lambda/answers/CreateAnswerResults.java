@@ -22,7 +22,7 @@ public class CreateAnswerResults implements RequestHandler<Map<String, Object>, 
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
             TestAnswer answer = tablesMapperAnswers.getUserTestAnswers(body.get("userId").asText(), body.get("testId").asText());
             tablesMapperAnswers.updateTestAnswer(TestAnswerCreator.addRecruiterResult(answer, new ObjectMapper().convertValue( body.get("results"), ArrayList.class)));
-            return ApiResponseHandler.createResponse(new ObjectMapper().convertValue( body.get("results"), ArrayList.class), 200);
+            return ApiResponseHandler.createResponse("sucess.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);
         }

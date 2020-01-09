@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.serverless.ApiGatewayResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import panda3.creators.TestCreator;
 import panda3.mappers.TablesMapperTest;
 import panda3.model.Language;
 import panda3.model.Question;
@@ -23,19 +24,15 @@ import java.util.Map;
 
 public class CreateTest implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
     private ObjectMapper mapper = new ObjectMapper();
-    private TablesMapperTest tablesMapperTest;
-    @Override
 
+    @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
-        this.tablesMapperTest = new TablesMapperTest();
+        TablesMapperTest tablesMapperTest = new TablesMapperTest();
         Test test = new Test();
         try {
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
-            JsonNode language = body.get("language");
-            test.setTitle(body.get("title").asText());
-            test.setLanguage(new Language(language.get("label").textValue(), language.get("value").textValue()));
-            test.setQuestions(mapper.convertValue(body.get("questions"), ArrayList.class));
-            this.tablesMapperTest.saveTest(test);
+            test = TestCreator.createTestJSON(body, mapper.convertValue(body.get("questions"), ArrayList.class));
+            tablesMapperTest.saveTest(test);
             return ApiResponseHandler.createResponse("sucess.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);

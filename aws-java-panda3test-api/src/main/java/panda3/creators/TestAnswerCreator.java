@@ -35,6 +35,6 @@ public class TestAnswerCreator {
                 flag+= 1.0f;
         }
         float answer = flag/results.size();
-        return answer + "%";
+        return answer * 100.0f + "%";
     }
 }

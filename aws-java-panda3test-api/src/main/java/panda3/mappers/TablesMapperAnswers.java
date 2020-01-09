@@ -118,7 +118,7 @@ public class TablesMapperAnswers {
     }
 
     public void updateTestAnswer(TestAnswer answer) throws IOException {
-        this.deleteTestAnswer(answer.getTestId());
+        this.mapper.delete(answer);
         this.mapper.save(answer);
     }
 

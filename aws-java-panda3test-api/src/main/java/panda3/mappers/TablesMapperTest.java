@@ -49,6 +49,11 @@ public class    TablesMapperTest {
         this.mapper.delete(result);
     }
 
+    public void updateTest(Test test) throws IOException    {
+        this.mapper.delete(test);
+        this.saveTest(test);
+    }
+
     public Test getTest(String id) throws IOException {
         Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
         eav.put(":t_id", new AttributeValue().withS(id));

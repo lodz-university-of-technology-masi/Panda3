@@ -23,7 +23,6 @@ public class CreateParticipant implements RequestHandler<Map<String, Object>, Ap
         try {
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
             participant.setName(body.get("name").asText());
-            participant.setSurname(body.get("surname").asText());
             tablesMapperPaarticipant.saveParticipant(participant);
             return ApiResponseHandler.createResponse("sucess.", 200);
         } catch (IOException e) {
