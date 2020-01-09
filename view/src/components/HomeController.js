@@ -3,33 +3,41 @@ import {withAuthenticator} from "aws-amplify-react";
 import {Auth} from 'aws-amplify';
 import UserMainView from "./pages/candidate/UserMainView";
 import RecruiterMainView from "./pages/recruiter/RecruiterMainView";
+import LoadingSpinner from "./LoadingSpinner";
 
 class HomeController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAdmin: false
+            loading:true,
+            isRecruiter: false,
+            username:''
         }
     }
 
     componentDidMount = async () => {
-        const session = await Auth.currentSession();
-        const groups = session.getIdToken().decodePayload()['cognito:groups'];
-        const username = session.getIdToken().payload['cognito:username'];
-        this.setState(username);
-        this.setState({isAdmin: groups && groups.includes('Admin')})
+        await Auth.currentSession().then(
+            r => {
+                const payload = r.getIdToken().decodePayload();
+                if(payload.profile === 'Recruiter' ){
+                    this.setState({isRecruiter:true})
+                }
+                this.setState({username:payload.email})
+            }
+        ).finally(() => this.setState({loading:false}));
     };
 
     render() {
-        const {isAdmin} = this.state;
+        if(this.state.loading){
+            return LoadingSpinner();
+        }
+        const {isRecruiter} = this.state;
         const {username} = this.state;
-        if (true) { //zmienic na true by testowac widok admina
+        if (isRecruiter) {
             return <RecruiterMainView username={username}/>;
         }
         return <UserMainView username={username}/>;
     }
 }
 
-//Czekamy na cognito
-//export default withAuthenticator(HomeController, false)
-export default HomeController;
+export default withAuthenticator(HomeController, false)
