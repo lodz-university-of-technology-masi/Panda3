@@ -30,6 +30,8 @@ import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 import SynonymViewer from "./SynonymViewer";
 import {getSelectionText} from "../../utils/utils";
+import {Auth} from "aws-amplify";
+import {logout} from "../../utils/Cognito";
 
 class RecruiterMainView extends Component {
     constructor(props) {
@@ -92,6 +94,9 @@ class RecruiterMainView extends Component {
                         </Col>
                         <Col md="auto">
                             <Link to="/import"><Button>Import tests</Button></Link>
+                        </Col>
+                        <Col md="auto">
+                            <Button onClick={logout}>Logout</Button>
                         </Col>
                         <Col className="d-flex align-items-center justify-content-end">
                             <div className="d-flex align-items-center">
