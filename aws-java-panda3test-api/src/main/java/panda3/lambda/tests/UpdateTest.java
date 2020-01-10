@@ -28,7 +28,7 @@ public class UpdateTest implements RequestHandler<Map<String, Object>, ApiGatewa
         Test test = new Test();
         try {
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
-            test = TestCreator.createTestJSON(body, mapper.convertValue(body.get("questions"), ArrayList.class));
+            test = TestCreator.createUpdateTestJSON(body, mapper.convertValue(body.get("questions"), ArrayList.class));
             this.tablesMapperTest.updateTest(test);
             return ApiResponseHandler.createResponse("sucess.", 200);
         } catch (IOException e) {

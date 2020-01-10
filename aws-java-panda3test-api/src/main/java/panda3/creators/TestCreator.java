@@ -18,4 +18,11 @@ public class TestCreator {
         return test;
     }
 
+
+
+    public static Test createUpdateTestJSON(JsonNode body, List<Question> questions){
+        Test test = TestCreator.createTestJSON(body, questions);
+        test.setId(body.get("id").asText());
+        return test;
+    }
 }

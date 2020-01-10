@@ -2,6 +2,8 @@ package panda3.service.cognito;
 
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClientBuilder;
+import com.amazonaws.services.cognitoidp.model.ListUsersInGroupRequest;
+import com.amazonaws.services.cognitoidp.model.ListUsersInGroupResult;
 import com.amazonaws.services.cognitoidp.model.ListUsersRequest;
 import com.amazonaws.services.cognitoidp.model.ListUsersResult;
 import org.apache.logging.log4j.LogManager;
@@ -20,9 +22,7 @@ public class CognitoService {
 
 
     public List<Participant> getCognitoUsers(){
-        LOG.info("Call UserListFromCognito::listUser");
         ListUsersResult users = identityProvider.listUsers(new ListUsersRequest().withUserPoolId(IdentyficatorsController.USER_POOL_ID));
-        LOG.info("Call UserListFromCognito::endList");
         return users.getUsers().stream().map(ParticipantCreator::CreateParticipant)
                 .collect(Collectors.toList());
     }
@@ -41,13 +41,9 @@ public class CognitoService {
 
 
     public List<Participant> getParticipantsWithProfile(String profile){
-        List<Participant> participants = getCognitoUsers();
-        List<Participant> answers = new ArrayList<Participant>();
-        for(Participant participant : participants){
-            if(participant.getProfile().equals(profile))
-                answers.add(participant);
-        }
-        return answers;
+        ListUsersInGroupResult users = identityProvider.listUsersInGroup(new ListUsersInGroupRequest().withGroupName(profile));
+        return users.getUsers().stream().map(ParticipantCreator::CreateParticipant)
+                .collect(Collectors.toList());
     }
 
 }
