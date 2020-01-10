@@ -60,21 +60,6 @@ package:
 
 functions:
   # participants lambdas
-  createParticipant:
-    handler: panda3.lambda.paarticipants.CreateParticipant
-    events:
-      - http:
-          method: post
-          path: participants/create
-          cors: true
-
-  deleteParticipant:
-    handler: panda3.lambda.paarticipants.DeleteParticipant
-    events:
-      - http:
-          path: participants/delete
-          method: delete
-          cors: true
 
   readParticipant:
     handler: panda3.lambda.paarticipants.ReadParticipant
@@ -111,14 +96,6 @@ functions:
       - http:
           path: users/all/read
           method: get
-          cors: true
-
-  updateParticipant:
-    handler: panda3.lambda.paarticipants.UpdateParticipant
-    events:
-      - http:
-          path: participants/update
-          method: put
           cors: true
 
 
