@@ -11,9 +11,6 @@ import {
     withRouter
 } from "react-router-dom";
 import UserManagement from "./UserManagement";
-import AddUser from "./AddUser"
-import SplitButton from "react-bootstrap/SplitButton";
-import DropdownItem from "react-bootstrap/DropdownItem";
 import RecruiterTests from "./RecruiterTests";
 import TestCreator from "./TestCreator/TestCreator";
 import Translator from "./Translator";
@@ -30,7 +27,6 @@ import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
 import SynonymViewer from "./SynonymViewer";
 import {getSelectionText} from "../../utils/utils";
-import {Auth} from "aws-amplify";
 import {logout} from "../../utils/Cognito";
 
 class RecruiterMainView extends Component {
@@ -79,12 +75,9 @@ class RecruiterMainView extends Component {
             <Router>
                 <Container fluid={true} style={{height:"100%"}}>
                     <Row className="d-flex top-menu">
-                        <Col className="d-flex align-items-center" md="auto">Welcome, {this.props.username}</Col>
+                        <Col className="d-flex align-items-center" md="auto">Welcome, {this.props.user.name}</Col>
                         <Col md="auto">
-                            <Link to="/users">
-                            <SplitButton variant="primary" title={"Users"}>
-                                <DropdownItem as="button"><Link to="/add-user">Add User</Link></DropdownItem>
-                            </SplitButton></Link>
+                            <Link to="/users"><Button variant="primary">Candidates</Button></Link>
                         </Col>
                         <Col md="auto">
                             <Link to="/view-tests"><Button>View Tests</Button></Link>
@@ -115,7 +108,6 @@ class RecruiterMainView extends Component {
                     </Row>
                     <Switch>
                         <Route path="/users" component={UserManagement}/>
-                        <Route path="/add-user" component={AddUser}/>
                         <Route path="/view-tests"><RecruiterTests/></Route>
                         <Route path="/test-creator" component={TestCreator}/>
                         <Route path="/modify-test/:id">{withRouter(TestCreator)}</Route>

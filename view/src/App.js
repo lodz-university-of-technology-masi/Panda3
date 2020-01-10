@@ -4,13 +4,12 @@ import Helmet from "react-helmet"
 import HomeController from "./components/HomeController"
 import {API_NAME, API_MAIN_EP, REGION} from "./components/utils/API";
 
-
 Amplify.configure({
     Auth: {
-        identityPoolId: 'eu-central-1:d8667c34-8b20-4412-bb1b-b07038ec560b',
-        region: 'eu-central-1',
-        userPoolId: 'us-east-1_FFFN7zGGO',
-        userPoolWebClientId: 'apvtmrhm839mp6tfocualf093',
+        identityPoolId: 'us-east-1:9542f1b5-845e-4057-bc00-a940917f4457',
+        region: 'us-east-1',
+        userPoolId: 'us-east-1_no7qa6ygZ',
+        userPoolWebClientId: '42n9c0k2ngao1fjnukr3u4pr7h',
         mandatorySignIn: true,
     },
     API: {
@@ -24,8 +23,6 @@ Amplify.configure({
     }
 });
 
-
-
 function App() {
   return (
         <div style={{width:"100%", height:"100%", margin:"0auto"}}>
@@ -33,9 +30,7 @@ function App() {
                 <meta charSet="utf-8" />
                 <title>Panda3</title>
             </Helmet>
-            <HomeController/>
-            <div className="container">
-            </div>
+                <HomeController/>
         </div>
   );
 }

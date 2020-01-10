@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {withAuthenticator} from "aws-amplify-react";
 import {Auth} from 'aws-amplify';
 import UserMainView from "./pages/candidate/UserMainView";
 import RecruiterMainView from "./pages/recruiter/RecruiterMainView";
 import LoadingSpinner from "./LoadingSpinner";
+import {withAuthenticator} from "aws-amplify-react";
 
 class HomeController extends Component {
     constructor(props) {
@@ -11,7 +11,6 @@ class HomeController extends Component {
         this.state = {
             loading:true,
             isRecruiter: false,
-            username:''
         }
     }
 
@@ -19,25 +18,36 @@ class HomeController extends Component {
         await Auth.currentSession().then(
             r => {
                 const payload = r.getIdToken().decodePayload();
-                if(payload.profile === 'Recruiter' ){
+                console.log(payload);
+                const groups = payload['cognito:groups'];
+                if(groups.includes('Recruiters')){
                     this.setState({isRecruiter:true})
                 }
-                this.setState({username:payload.email})
+                this.setState({user:payload})
             }
         ).finally(() => this.setState({loading:false}));
+    };
+
+    getHome = (user)  => {
+        const {isRecruiter} = this.state;
+        if (isRecruiter) {
+            return <RecruiterMainView user={user}/>;
+        }
+        return <UserMainView user={user}/>;
     };
 
     render() {
         if(this.state.loading){
             return LoadingSpinner();
         }
-        const {isRecruiter} = this.state;
-        const {username} = this.state;
-        if (isRecruiter) {
-            return <RecruiterMainView username={username}/>;
-        }
-        return <UserMainView username={username}/>;
+        return this.getHome(this.state.user)
     }
 }
 
-export default withAuthenticator(HomeController, false)
+export default withAuthenticator(HomeController, {
+    signUpConfig: {
+        hiddenDefaults: ["phone_number"],
+        signUpFields: [
+            { label: "Name", key: "name", required: true, type: "string" }
+        ]
+    }});
