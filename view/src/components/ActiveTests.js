@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
 import ApiHelper from "./utils/API";
+import Container from "react-bootstrap/Container";
+import Error from "./Error";
 
 class ActiveTests extends Component {
     constructor(props) {
@@ -53,20 +55,25 @@ class ActiveTests extends Component {
         )
     };
 
+    getTestComponent = () => {
+        if(this.state.tests.length ===  0)
+            return <span className="noTests">No tests to solve right now</span>;
+        return <BasicTable
+            data={this.state.tests}
+            columns={this.state.columns}
+        />
+    };
+
     render() {
         if(this.state.loading){
             return LoadingSpinner();
         }
         else if(this.state.error){
-            return <Alert variant="danger">Fetch error</Alert>;
+            return Error();
         }
-        return <div style={{height:"100%"}}>
-            <span>Active Tests:</span>
-            <BasicTable
-                data={this.state.tests}
-                columns={this.state.columns}
-            />
-        </div>
+        return <Container className="grayBorder bg-items-color m1rem p_d" style={{height:"100%"}}>
+            {this.getTestComponent()}
+        </Container>
     }
 }
 

@@ -28,6 +28,7 @@ import 'react-virtualized-select/styles.css'
 import SynonymViewer from "./SynonymViewer";
 import {getSelectionText} from "../../utils/utils";
 import {logout} from "../../utils/Cognito";
+import Bamboo from "../../../resources/bamboo.svg";
 
 class RecruiterMainView extends Component {
     constructor(props) {
@@ -75,7 +76,7 @@ class RecruiterMainView extends Component {
             <Router>
                 <Container fluid={true} style={{height:"100%"}}>
                     <Row className="d-flex top-menu">
-                        <Col className="d-flex align-items-center" md="auto">Welcome, {this.props.user.name}</Col>
+                        <Col className="d-flex align-items-center welcome" md="auto">Welcome, {this.props.user.name}</Col>
                         <Col md="auto">
                             <Link to="/users"><Button variant="primary">Candidates</Button></Link>
                         </Col>
@@ -89,7 +90,7 @@ class RecruiterMainView extends Component {
                             <Link to="/import"><Button>Import tests</Button></Link>
                         </Col>
                         <Col md="auto">
-                            <Button onClick={logout}>Logout</Button>
+                            <Button variant="dark" onClick={logout}>Logout</Button>
                         </Col>
                         <Col className="d-flex align-items-center justify-content-end">
                             <div className="d-flex align-items-center">
@@ -103,6 +104,7 @@ class RecruiterMainView extends Component {
                         </div>
                         </Col>
                         <Col md="auto" className="d-flex align-items-center justify-content-end">
+                            <ReactSVG className="panda" src={Bamboo}/>
                             <ReactSVG className="panda" src={Panda}/>
                         </Col>
                     </Row>
@@ -110,7 +112,7 @@ class RecruiterMainView extends Component {
                         <Route path="/users" component={UserManagement}/>
                         <Route path="/view-tests"><RecruiterTests/></Route>
                         <Route path="/test-creator" component={TestCreator}/>
-                        <Route path="/modify-test/:id">{withRouter(TestCreator)}</Route>
+                        <Route path="/modify-test/:id" render={(history) => <TestCreator match={history.match} modify={true}/>}/>
                         <Route path="/translate/:id">{withRouter(Translator)}</Route>
                         <Route path="/submissions/:id">{withRouter(PendingSubmissions)}</Route>
                         <Route path="/check-test/:testId/:userId">{withRouter(TestChecker)}</Route>

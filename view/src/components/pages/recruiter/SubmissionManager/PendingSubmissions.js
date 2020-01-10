@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import BasicTable from "../../../BasicTable";
 import LoadingSpinner from "../../../LoadingSpinner";
 import ApiHelper from "../../../utils/API";
+import Error from "../../../Error";
 
 class PendingSubmissions extends Component {
     constructor(props) {
@@ -61,7 +62,7 @@ class PendingSubmissions extends Component {
     render() {
         if(this.state.loading){
             return LoadingSpinner();
-        }
+        } else if(this.state.error) return Error();
         return <div>
             <span>Pending Submissions for test {this.props.match.params.id}</span>
             <BasicTable

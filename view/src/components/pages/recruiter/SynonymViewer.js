@@ -6,7 +6,6 @@ import {getSynonyms} from "../../utils/Yandex";
 import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
-import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "../../LoadingSpinner";
 import BasicTable from "../../BasicTable";
 
@@ -22,7 +21,7 @@ class SynonymViewer extends Component {
                 accessor: 'text'
             },{
                 id: 'synonyms',
-                Header: 'synonyms',
+                Header: 'Synonyms',
                 Cell: table => {
                     let synonyms = table.row.original.syn;
                     if(synonyms !== undefined){
@@ -56,7 +55,7 @@ class SynonymViewer extends Component {
             return LoadingSpinner();
         }
 
-        return <Container className="d-flex bg-items-color" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"5rem", borderRadius:"1rem", flexDirection:"column"}}>
+        return <Container className="d-flex bg-items-color grayBorder m1rem p_d" style={{minHeight:"5rem", flexDirection:"column"}}>
             <Row className="d-flex justify-content-start align-items-baseline">
                 <Col md="auto"><span style={{fontWeight:"bold", fontSize:"2rem"}}>{this.props.match.params.text}</span></Col>
                 <Col md="auto"><p style={{fontStyle:"italic", fontSize:"1rem"}}>{this.state.dicEntry[0].pos}</p></Col>

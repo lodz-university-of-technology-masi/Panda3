@@ -6,6 +6,7 @@ import Alert from "react-bootstrap/Alert";
 import MultiSelect from "@kenshooui/react-multi-select";
 import Button from "react-bootstrap/Button";
 import ApiHelper from "../../utils/API";
+import Error from "../../Error";
 
 class AccessManager extends Component{
     constructor(props) {
@@ -75,7 +76,7 @@ class AccessManager extends Component{
             return LoadingSpinner();
         }
         if(this.state.error){
-            return <Alert variant="danger">Fetch error</Alert>;
+            return Error();
         }
         const { items, selectedItems } = this.state;
 

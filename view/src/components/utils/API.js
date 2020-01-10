@@ -44,6 +44,11 @@ export const ApiHelper = {
         return await API.del(API_NAME, path, {})
     },
 
+    updateTest: async (test) => {
+        let path = '/tests/update';
+        return await API.put(API_NAME, path, {body:test})
+    },
+
     createSubmission: async (body) => {
         let path = '/answers/commit/answer';
         return await API.post(API_NAME,path,{body:body})

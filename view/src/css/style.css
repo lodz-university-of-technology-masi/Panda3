@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans&display=swap');
 html, body, #app, #app>div {
     height: 91.7vh;
+    font-family: 'PT Sans', sans-serif;
+
 }
 body{
     background: linear-gradient(318deg, #6cc0f0, #1b89f3, #b3e2f3);
@@ -52,4 +55,34 @@ body > div{
     border: 0.3rem solid slategray;
     margin-top: 0;
     margin-bottom: 0.5rem;
+}
+
+.grayBorder{
+    border-style:solid;
+    border-width:0.3rem;
+    border-color:LightGray;
+    border-radius:1rem;
+}
+
+.welcome{
+    font-size:large;
+    font-weight: bold;
+}
+
+.noTests{
+    justify-content: center;
+    width: 100%;
+    font-weight: bolder;
+    text-align: center;
+    display: flex;
+    font-size: x-large;
+    margin-top: 20%;
+}
+
+.m1rem{
+    margin-top: 1rem;
+}
+
+.p_d{
+    padding: 0.8rem;
 }

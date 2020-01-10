@@ -13,6 +13,7 @@ import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "../../LoadingSpinner";
 import TranslationSpinner from "../../TranslationSpinner";
 import ApiHelper from "../../utils/API";
+import Error from "../../Error";
 
 class Translator extends Component {
     constructor(props) {
@@ -57,7 +58,7 @@ class Translator extends Component {
             return TranslationSpinner();
         }
         else if(this.state.error){
-            return <Alert variant="danger">Fetch error</Alert>;
+            return Error();
         }
         const options = Object.keys(this.state.languages).map((key) => ({label:this.state.languages[key], value:key}));
 

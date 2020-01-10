@@ -3,13 +3,13 @@ import {Auth} from 'aws-amplify';
 import UserMainView from "./pages/candidate/UserMainView";
 import RecruiterMainView from "./pages/recruiter/RecruiterMainView";
 import LoadingSpinner from "./LoadingSpinner";
-import {withAuthenticator} from "aws-amplify-react";
+import {ForgotPassword, SignIn, RequireNewPassword, withAuthenticator} from "aws-amplify-react";
 
 class HomeController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading:true,
+            loading: true,
             isRecruiter: false,
         }
     }
@@ -20,15 +20,15 @@ class HomeController extends Component {
                 const payload = r.getIdToken().decodePayload();
                 console.log(payload);
                 const groups = payload['cognito:groups'];
-                if(groups.includes('Recruiters')){
-                    this.setState({isRecruiter:true})
+                if (groups && groups.includes('Recruiters')) {
+                    this.setState({isRecruiter: true})
                 }
-                this.setState({user:payload})
+                this.setState({user: payload})
             }
-        ).finally(() => this.setState({loading:false}));
+        ).finally(() => this.setState({loading: false}));
     };
 
-    getHome = (user)  => {
+    getHome = (user) => {
         const {isRecruiter} = this.state;
         if (isRecruiter) {
             return <RecruiterMainView user={user}/>;
@@ -37,17 +37,16 @@ class HomeController extends Component {
     };
 
     render() {
-        if(this.state.loading){
+        if (this.state.loading) {
             return LoadingSpinner();
         }
         return this.getHome(this.state.user)
     }
 }
 
-export default withAuthenticator(HomeController, {
-    signUpConfig: {
-        hiddenDefaults: ["phone_number"],
-        signUpFields: [
-            { label: "Name", key: "name", required: true, type: "string" }
-        ]
-    }});
+export default withAuthenticator(HomeController, false, [
+    <SignIn/>,
+    <ForgotPassword/>,
+    <RequireNewPassword/>
+]);
+

@@ -18,6 +18,8 @@ import 'react-virtualized-select/styles.css'
 import TranslationSpinner from "../../../TranslationSpinner";
 import LoadingSpinner from "../../../LoadingSpinner";
 import ApiHelper from "../../../utils/API";
+import PropTypes from "prop-types";
+import OpenQuestion from "../../../questions/OpenQuestion";
 
 class TestCreator extends Component{
     constructor(props) {
@@ -107,7 +109,10 @@ class TestCreator extends Component{
                 canSubmit:true,
                 loading:true
             });
-            ApiHelper.createTest(test).then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
+            let request;
+            if(this.props.modify) request = ApiHelper.updateTest(test);
+                else request =  ApiHelper.createTest(test);
+            request.then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
         } else{
             this.setState({
                 canSubmit:false,
@@ -201,6 +206,11 @@ class TestCreator extends Component{
         }
     };
 
+    getSubmitButton = () => {
+        if(this.props.modify) return <Button variant="warning" size="lg" onClick={this.SubmitTest}>Edit Test</Button>;
+        return <Button variant="success" size="lg" onClick={this.SubmitTest}>Submit Test</Button>;
+    };
+
     render() {
         if(this.state.loading){
             return LoadingSpinner();
@@ -208,9 +218,9 @@ class TestCreator extends Component{
             return TranslationSpinner();
         }
         else if(this.state.error){
-            return <Alert variant="danger">Fetch error</Alert>;
+            return ;
         }
-        return <Container className="d-flex justify-content-between bg-items-color" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
+        return <Container className="d-flex justify-content-between bg-items-color grayBorder m1rem" style={{ minHeight:"20rem", flexDirection:"column"}}>
             <div>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
             <div className="d-flex"  style={{width:"auto", flexDirection:"column"}}>
@@ -270,7 +280,7 @@ class TestCreator extends Component{
                 }
             </Row>
             <Row className="justify-content-end" style={{margin:"1rem"}}>
-                <Button variant="success" size="lg" onClick={this.SubmitTest}>Submit Test</Button>
+                {this.getSubmitButton()}
             </Row>
             <Row className="justify-content-end" style={{margin:"1rem"}}>
                 {
@@ -282,5 +292,13 @@ class TestCreator extends Component{
         </Container>
     }
 }
+
+TestCreator.propTypes = {
+    modify: PropTypes.bool,
+};
+
+TestCreator.defaultProps = {
+    modify: false,
+};
 
 export default TestCreator;

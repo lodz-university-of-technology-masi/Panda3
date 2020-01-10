@@ -3,6 +3,8 @@ import BasicTable from "./BasicTable";
 import LoadingSpinner from "./LoadingSpinner";
 import ApiHelper from "./utils/API";
 import Alert from "react-bootstrap/Alert";
+import Container from "react-bootstrap/Container";
+import Error from "./Error";
 
 class TestResults extends Component {
     constructor(props) {
@@ -43,19 +45,24 @@ class TestResults extends Component {
         )
     };
 
+    getResultComponent = () => {
+        if(this.state.results.length ===  0)
+            return <span className="noTests">No results</span>;
+        return <BasicTable
+            data={this.state.tests}
+            columns={this.state.columns}
+        />
+    };
+
     render() {
         if(this.state.loading){
             return LoadingSpinner();
         } else if(this.state.error){
-            return <Alert variant="danger">Fetch error</Alert>;
+            return Error();
         }
-        return <div>
-            <span>Results:</span>
-            <BasicTable
-                data={this.state.results}
-                columns={this.state.columns}
-            />
-        </div>
+        return <Container className="grayBorder bg-items-color" style={{height:"100%", padding:"0.8rem", marginTop:"0.5rem"}}>
+            {this.getResultComponent()}
+        </Container>
     }
 }
 

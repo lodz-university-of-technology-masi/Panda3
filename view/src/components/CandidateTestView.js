@@ -7,6 +7,7 @@ import update from 'immutability-helper';
 import ApiHelper from "./utils/API";
 import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "./LoadingSpinner";
+import Error from "./Error";
 
 class CandidateTestView extends Component{
     constructor(props) {
@@ -89,7 +90,7 @@ class CandidateTestView extends Component{
             return LoadingSpinner();
         }
         else if(this.state.error){
-            return <Alert variant="danger">Fetch error</Alert>;
+            return Error();
         }
 
         let question = this.state.test.questions[this.state.counter];

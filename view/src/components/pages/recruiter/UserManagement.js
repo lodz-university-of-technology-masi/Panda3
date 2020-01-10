@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import LoadingSpinner from "../../LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
 import ApiHelper from "../../utils/API";
+import Error from "../../Error";
 
 class UserManagement extends Component {
     constructor(props) {
@@ -71,7 +72,7 @@ class UserManagement extends Component {
             return LoadingSpinner();
         }
         else if(this.state.error){
-            return <Alert variant="danger">Fetch error</Alert>;
+            return Error();
         }
         return <div style={{height:"100%"}}>
             <span>Users:</span>

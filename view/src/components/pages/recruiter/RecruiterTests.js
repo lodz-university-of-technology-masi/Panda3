@@ -10,7 +10,7 @@ import LoadingSpinner from "../../LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
 import Row from  "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
-import {reverse} from "../../utils/utils";
+import Container from "react-bootstrap/Container";
 
 class RecruiterTests extends Component {
     constructor(props) {
@@ -21,9 +21,6 @@ class RecruiterTests extends Component {
             deleted:null,
             tests: [],
             columns: [{
-                Header: 'Id',
-                accessor: 'id'
-            },{
                 Header: 'Title',
                 accessor: 'title'
             }, {
@@ -113,17 +110,12 @@ class RecruiterTests extends Component {
         else if(this.state.error){
             return <Alert variant="danger">Fetch error</Alert>;
         }
-        return <div style={{height:"100%"}}>
-            <Row>
-                <Col>
-                    <span>Tests:</span>
-                </Col>
-            </Row>
+        return <Container className="grayBorder bg-items-color m1rem" style={{height:"100%", padding:"0.8rem"}}>
             <BasicTable
                 data={this.state.tests}
                 columns={this.state.columns}
             />
-        </div>
+        </Container>
     }
 }
 

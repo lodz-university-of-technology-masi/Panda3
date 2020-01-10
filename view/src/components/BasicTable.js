@@ -64,7 +64,7 @@ function BasicTable({columns, data}) {
                 )}
                 </tbody>
             </Table>
-            <Row className="align-items-center justify-content-start" style={{justifySelf:"start", marginBottom:"1rem"}}>
+            <Row className="align-items-center justify-content-start" style={{justifySelf:"start"}}>
                 <Col md="auto">
                     <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
                         {'<<'}
