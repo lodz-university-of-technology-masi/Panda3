@@ -30,6 +30,7 @@ import {getSelectionText} from "../../utils/utils";
 import {logout} from "../../utils/Cognito";
 import Bamboo from "../../../resources/bamboo.svg";
 
+
 class RecruiterMainView extends Component {
     constructor(props) {
         super(props);

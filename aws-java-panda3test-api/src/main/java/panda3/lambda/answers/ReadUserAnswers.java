@@ -4,7 +4,6 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.serverless.ApiGatewayResponse;
 import panda3.mappers.TablesMapperAnswers;
-import panda3.model.TestAnswer;
 import panda3.responses.ApiResponseHandler;
 
 import java.util.List;

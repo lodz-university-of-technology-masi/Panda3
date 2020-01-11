@@ -2,17 +2,13 @@ package panda3.service.cognito;
 
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClientBuilder;
-import com.amazonaws.services.cognitoidp.model.ListUsersInGroupRequest;
-import com.amazonaws.services.cognitoidp.model.ListUsersInGroupResult;
-import com.amazonaws.services.cognitoidp.model.ListUsersRequest;
-import com.amazonaws.services.cognitoidp.model.ListUsersResult;
+import com.amazonaws.services.cognitoidp.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import panda3.creators.ParticipantCreator;
 import panda3.identificators.IdentyficatorsController;
 import panda3.model.Participant;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +23,6 @@ public class CognitoService {
                 .collect(Collectors.toList());
     }
 
-
-
     public Participant getCognitoUser(String id){
         List<Participant> participants = getCognitoUsers();
         Participant answer = null;
@@ -38,7 +32,6 @@ public class CognitoService {
         }
         return answer;
     }
-
 
     public List<Participant> getParticipantsWithProfile(String profile){
         ListUsersInGroupResult users = identityProvider.listUsersInGroup(new ListUsersInGroupRequest().withGroupName(profile));

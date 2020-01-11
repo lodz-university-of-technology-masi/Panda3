@@ -1,28 +1,20 @@
 package panda3.model;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.serverless.DynamoDBAdapter;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-
 public class Participant {
     private String id;
     private String login;
     private String email;
     private String name;
     private String surname;
-    private String profile;
+    private String phone;
 
-    public Participant(String id, String login, String email, String name, String surname, String profile) {
+    public Participant(String id, String login, String email, String name, String surname, String phone) {
         this.id = id;
         this.login = login;
         this.email = email;
         this.name = name;
         this.surname = surname;
-        this.profile = profile;
+        this.phone = phone;
     }
 
     public Participant(){
@@ -69,11 +61,11 @@ public class Participant {
         this.surname = surname;
     }
 
-    public String getProfile() {
-        return profile;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

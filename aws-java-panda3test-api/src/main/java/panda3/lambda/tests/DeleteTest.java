@@ -2,8 +2,6 @@ package panda3.lambda.tests;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.serverless.ApiGatewayResponse;
 import panda3.mappers.TablesMapperTest;
 import panda3.responses.ApiResponseHandler;

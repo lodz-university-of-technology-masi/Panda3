@@ -15,7 +15,7 @@ public class ReadRecruiters implements RequestHandler<Map<String, Object>, ApiGa
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         try {
-            List<Participant> participants = new CognitoService().getParticipantsWithProfile(IdentyficatorsController.RECRUITERS_GROUPE);
+            List<Participant> participants = new CognitoService().getParticipantsWithProfile(IdentyficatorsController.RECRUITERS_GROUP);
             return ApiResponseHandler.createResponse(participants, 200);
         } catch (Exception e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);

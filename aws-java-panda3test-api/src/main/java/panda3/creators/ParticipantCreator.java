@@ -6,7 +6,7 @@ import panda3.model.Participant;
 
 public class ParticipantCreator {
     public static Participant CreateParticipant(UserType userType){
-        String email = "", name = "", surname = "", id = "",  profile ="";
+        String email = "", name = "", surname = "", id = "", phone="";
         for (AttributeType attribute : userType.getAttributes()) {
             if (attribute.getName().equals("sub")) {
                 id = attribute.getValue();
@@ -20,11 +20,11 @@ public class ParticipantCreator {
             if (attribute.getName().equals("family_name")) {
                 surname = attribute.getValue();
             }
-            if (attribute.getName().equals("profile")) {
-                profile = attribute.getValue();
+            if (attribute.getName().equals("phone_number")) {
+                phone = attribute.getValue();
             }
         }
 
-        return new Participant(id, userType.getUsername(), email, name, surname, profile);
+        return new Participant(id, userType.getUsername(), email, name, surname, phone);
     }
 }

@@ -3,9 +3,7 @@ package panda3.lambda.tests;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.serverless.ApiGatewayResponse;
-import panda3.mappers.TablesMapperPaarticipant;
 import panda3.mappers.TablesMapperTest;
-import panda3.model.Participant;
 import panda3.model.Test;
 import panda3.responses.ApiResponseHandler;
 
