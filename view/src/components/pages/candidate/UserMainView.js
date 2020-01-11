@@ -17,10 +17,16 @@ import {ReactSVG} from "react-svg";
 import Panda from "../../../resources/panda.svg";
 import Bamboo from "../../../resources/bamboo.svg";
 import {logout} from "../../utils/Cognito";
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
 
 class UserMainView extends Component {
     constructor(props) {
         super(props);
+        this.state ={
+            history:history
+        }
     }
 
 
@@ -33,7 +39,7 @@ class UserMainView extends Component {
                         <Col md="auto"><Link to="/tests"><Button variant="primary">Active tests</Button></Link></Col>
                         <Col md="auto"><Link to="/results"><Button variant="primary">My results</Button></Link></Col>
                         <Col md="auto">
-                            <Button variant="dark" onClick={logout}>Logout</Button>
+                            <Button variant="dark" onClick={()=>{this.state.history.push('/');logout()}}>Logout</Button>
                         </Col>
                         <Col className="d-flex align-items-center justify-content-end">
                             <ReactSVG className="panda" src={Bamboo}/>
@@ -41,6 +47,7 @@ class UserMainView extends Component {
                         </Col>
                     </Row>
                     <Switch>
+                        <Route exact path="/"><ActiveTests/></Route>
                         <Route path="/tests"><ActiveTests/></Route>
                         <Route path="/results"><TestResults/></Route>
                         <Route path="/test/:id">{withRouter(CandidateTestView)}</Route>

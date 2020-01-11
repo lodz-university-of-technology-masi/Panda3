@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import BasicTable from "./BasicTable";
 import LoadingSpinner from "./LoadingSpinner";
 import ApiHelper from "./utils/API";
-import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import Error from "./Error";
 

@@ -21,6 +21,10 @@ body > div{
 }
 
 .bg-items-color{
+    background-color: floralwhite;
+}
+
+.bg-table{
     background-color: white;
 }
 

@@ -7,6 +7,7 @@ import BasicTable from "../../../BasicTable";
 import LoadingSpinner from "../../../LoadingSpinner";
 import ApiHelper from "../../../utils/API";
 import Error from "../../../Error";
+import Container from "react-bootstrap/Container";
 
 class PendingSubmissions extends Component {
     constructor(props) {
@@ -59,17 +60,22 @@ class PendingSubmissions extends Component {
         );
     };
 
+    getMainComponent = () => {
+        if(this.state.submissions.length ===  0)
+            return <span className="noTests">No Submissions</span>;
+        return <BasicTable
+            data={this.state.submissions}
+            columns={this.state.columns}
+        />
+    };
+
     render() {
         if(this.state.loading){
             return LoadingSpinner();
         } else if(this.state.error) return Error();
-        return <div>
-            <span>Pending Submissions for test {this.props.match.params.id}</span>
-            <BasicTable
-                data={this.state.submissions}
-                columns={this.state.columns}
-            />
-        </div>
+        return <Container className="grayBorder bg-items-color m1rem" style={{height:"100%", padding:"0.8rem"}}>
+            {this.getMainComponent()}
+        </Container>
     }
 }
 

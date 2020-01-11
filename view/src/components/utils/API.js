@@ -19,7 +19,7 @@ export const ApiHelper = {
     },
 
     getParticipants: async () => {
-       return await API.get(API_NAME, '/participants/read', {})
+       return await API.get(API_NAME, '/users/all/read', {})
     },
 
     updateParticipant: async () => {
