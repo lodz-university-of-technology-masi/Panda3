@@ -8,20 +8,24 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.serverless.DynamoDBAdapter;
 import panda3.creators.TestAnswerCreator;
+import panda3.identificators.IdentyficatorsController;
 import panda3.model.Participant;
 import panda3.model.TestAnswer;
 import panda3.model.TestResult;
+import panda3.service.cognito.CognitoService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TablesMapperAnswers {
     private DynamoDBAdapter db_adapter;
     private AmazonDynamoDB client;
     private DynamoDBMapper mapper;
+    private CognitoService cognitoService;
 
 
     public TablesMapperAnswers(){
@@ -31,6 +35,7 @@ public class TablesMapperAnswers {
         this.db_adapter = DynamoDBAdapter.getInstance();
         this.client = this.db_adapter.getDbClient();
         this.mapper = this.db_adapter.createDbMapper(mapperConfig);
+        this.cognitoService = new CognitoService();
     }
 
 
@@ -64,21 +69,16 @@ public class TablesMapperAnswers {
         return this.mapper.query(TestAnswer.class, query).get(0);
     }
 
-
     public List<Participant> getTestUsers(String testId) throws IOException{
-        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
-        eav.put(":val1", new AttributeValue().withS(testId));
-        DynamoDBScanExpression scanRequest = new DynamoDBScanExpression()
-                .withFilterExpression("testId = :val1")
-                .withExpressionAttributeValues(eav);
-        List<TestAnswer> all = this.mapper.scan(TestAnswer.class, scanRequest);
-        List<Participant> answer = new ArrayList<Participant>();
-        for(TestAnswer ans : all){
-            if(ans.getAnswers() != null && ans.getResult() == null)
-                answer.add(new TablesMapperPaarticipant().getAllParticipant(ans.getUserId()));
-        }
-        return answer;
+        List<TestAnswer> answers = getObjectsWithTestId(testId);
+        List<Participant> candidates = cognitoService.getUsersInGroup(IdentyficatorsController.PARTICIPANT_GROUP);
+        return candidates.stream().filter(
+                participant -> answers.stream()
+                        .anyMatch(answer -> participant.getId()
+                                .contentEquals(answer.getUserId())))
+                .collect(Collectors.toList());
     }
+
 
     public List<TestResult> getResultUser(String userId) throws IOException{
         List<TestAnswer> all = this.getUserTests(userId);

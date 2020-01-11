@@ -14,14 +14,15 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class CreateTestForUser implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
+    private ObjectMapper mapper = new ObjectMapper();
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         try {
-            JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
+            JsonNode body = mapper.readTree((String) input.get("body"));
             String message = AnswerValidator.checkExistenceWithList(body);
             if(!message.equals(""))
                 return ApiResponseHandler.createResponse(message, 404);
-            new TablesMapperAnswers().saveUsersToTest(body.get("testId").asText() ,new ObjectMapper().convertValue( body.get("users"), ArrayList.class));
+            new TablesMapperAnswers().saveUsersToTest(body.get("testId").asText() ,mapper.convertValue( body.get("users"), ArrayList.class));
             return ApiResponseHandler.createResponse("sucess.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);

@@ -7,7 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import panda3.creators.ParticipantCreator;
 import panda3.identificators.IdentyficatorsController;
+import panda3.mappers.TablesMapperAnswers;
 import panda3.model.Participant;
+import panda3.model.TestAnswer;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +18,6 @@ import java.util.stream.Collectors;
 public class CognitoService {
     private static final Logger LOG = LogManager.getLogger(CognitoService.class);
     private AWSCognitoIdentityProvider identityProvider = AWSCognitoIdentityProviderClientBuilder.defaultClient();
-
 
     public List<Participant> getCognitoUsers(){
         ListUsersResult users = identityProvider.listUsers(new ListUsersRequest().withUserPoolId(IdentyficatorsController.USER_POOL_ID));
@@ -66,5 +67,4 @@ public class CognitoService {
     public AdminDeleteUserResult deleteUser(String username){
         return identityProvider.adminDeleteUser(new AdminDeleteUserRequest().withUserPoolId(IdentyficatorsController.USER_POOL_ID).withUsername(username));
     }
-
 }
