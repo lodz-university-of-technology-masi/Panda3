@@ -70,7 +70,6 @@ functions:
           method: get
           cors: true
 
-
   readRecruiters:
     handler: panda3.lambda.paarticipants.ReadRecruiters
     events:

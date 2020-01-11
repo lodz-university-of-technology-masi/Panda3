@@ -12,10 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ReadRecruiters implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
+
+    private CognitoService cognitoService = new CognitoService();
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         try {
-            List<Participant> participants = new CognitoService().getParticipantsWithProfile(IdentyficatorsController.RECRUITERS_GROUP);
+            List<Participant> participants = cognitoService.getUsersInGroup(IdentyficatorsController.RECRUITERS_GROUP);
             return ApiResponseHandler.createResponse(participants, 200);
         } catch (Exception e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);

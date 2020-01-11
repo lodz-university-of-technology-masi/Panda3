@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
 import {ApiHelper} from "../../utils/API";
-import {Auth} from 'aws-amplify'
 import LoadingSpinner from "../../LoadingSpinner";
 
 

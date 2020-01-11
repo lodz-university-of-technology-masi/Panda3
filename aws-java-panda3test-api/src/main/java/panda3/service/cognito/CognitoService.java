@@ -34,8 +34,11 @@ public class CognitoService {
         return answer;
     }
 
-    public List<Participant> getParticipantsWithProfile(String profile){
-        ListUsersInGroupResult users = identityProvider.listUsersInGroup(new ListUsersInGroupRequest().withGroupName(profile));
+    public List<Participant> getUsersInGroup(String group){
+        ListUsersInGroupResult users = identityProvider.listUsersInGroup(
+                new ListUsersInGroupRequest()
+                        .withUserPoolId(IdentyficatorsController.USER_POOL_ID)
+                        .withGroupName(group));
         return users.getUsers().stream().map(ParticipantCreator::CreateParticipant)
                 .collect(Collectors.toList());
     }
@@ -50,8 +53,12 @@ public class CognitoService {
                new AttributeType().withName("email").withValue(email)
        ).withTemporaryPassword("Panda3Pass").withDesiredDeliveryMediums(DeliveryMediumType.EMAIL));
         if(result.getSdkHttpMetadata().getHttpStatusCode() < 300){
-            //new TablesMapperPaarticipant().saveParticipant(ParticipantCreator.CreateParticipant(result.getUser()));
-            return true;
+            AdminAddUserToGroupResult addUserToGroupResult = identityProvider.adminAddUserToGroup(
+                    new AdminAddUserToGroupRequest()
+                            .withUserPoolId(IdentyficatorsController.USER_POOL_ID)
+                            .withGroupName(IdentyficatorsController.PARTICIPANT_GROUP)
+                            .withUsername(result.getUser().getUsername()));
+            if (addUserToGroupResult.getSdkHttpMetadata().getHttpStatusCode() < 300) return true;
         }
         return false;
     }
