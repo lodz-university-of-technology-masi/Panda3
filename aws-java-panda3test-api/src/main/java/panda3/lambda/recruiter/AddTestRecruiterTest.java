@@ -20,7 +20,7 @@ public class AddTestRecruiterTest implements RequestHandler<Map<String, Object>,
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         try {
-            RecruiterTests recruiterTests = new RecruiterTests();
+            RecruiterTests recruiterTests;
             TablesMapperRecruiters tablesMapperRecruiters = new TablesMapperRecruiters();
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
             if(!RecruiterTestValidator.checkUserTestId(body.get("userId").asText()))

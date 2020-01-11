@@ -61,15 +61,6 @@ package:
 functions:
   # participants lambdas
 
-  readParticipant:
-    handler: panda3.lambda.paarticipants.ReadParticipant
-    events:
-      - http:
-          path: participants/read/{id}
-          method: get
-          cors: true
-
-
   readParticipants:
     handler: panda3.lambda.paarticipants.ReadParticipants
     Policies: AmazonDynamoDBFullAccess
@@ -98,7 +89,14 @@ functions:
           method: get
           cors: true
 
-
+  addUser:
+    handler: panda3.lambda.paarticipants.AddUser
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: users/add
+          method: post
+          cors: true
 
   # tests lambdas
   createTest:
@@ -211,16 +209,6 @@ functions:
     events:
       - http:
           path: answers/test/result/{userId}
-          method: get
-          cors: true
-
-
-  readAnswer:
-    handler: panda3.lambda.answers.ReadAnswer
-    Policies: AmazonDynamoDBFullAccess
-    events:
-      - http:
-          path: answers/read/single/{id}
           method: get
           cors: true
 

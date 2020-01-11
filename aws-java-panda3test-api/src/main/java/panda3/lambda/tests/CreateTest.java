@@ -22,7 +22,7 @@ public class CreateTest implements RequestHandler<Map<String, Object>, ApiGatewa
         TablesMapperTest tablesMapperTest = new TablesMapperTest();
         Test test = new Test();
         try {
-            JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
+            JsonNode body = mapper.readTree((String) input.get("body"));
             test = TestCreator.createTestJSON(body, mapper.convertValue(body.get("questions"), ArrayList.class));
             tablesMapperTest.saveTest(test);
             return ApiResponseHandler.createResponse("sucess.", 200);
