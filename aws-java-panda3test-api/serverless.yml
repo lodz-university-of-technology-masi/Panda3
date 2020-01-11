@@ -98,6 +98,15 @@ functions:
           method: post
           cors: true
 
+  deleteUser:
+    handler: panda3.lambda.paarticipants.DeleteUser
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: users/delete
+          method: delete
+          cors: true
+
   # tests lambdas
   createTest:
     handler: panda3.lambda.tests.CreateTest

@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import panda3.creators.ParticipantCreator;
 import panda3.identificators.IdentyficatorsController;
-import panda3.mappers.TablesMapperPaarticipant;
 import panda3.model.Participant;
 
 import java.io.IOException;
@@ -55,6 +54,10 @@ public class CognitoService {
             return true;
         }
         return false;
+    }
+
+    public AdminDeleteUserResult deleteUser(String username){
+        return identityProvider.adminDeleteUser(new AdminDeleteUserRequest().withUserPoolId(IdentyficatorsController.USER_POOL_ID).withUsername(username));
     }
 
 }

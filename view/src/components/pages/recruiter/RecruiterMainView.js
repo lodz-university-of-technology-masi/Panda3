@@ -30,6 +30,7 @@ import {getSelectionText} from "../../utils/utils";
 import {logout} from "../../utils/Cognito";
 import Bamboo from "../../../resources/bamboo.svg";
 import { createBrowserHistory } from "history";
+import AddUser from "./AddUser";
 
 const history = createBrowserHistory();
 
@@ -116,7 +117,8 @@ class RecruiterMainView extends Component {
                     <Switch>
                         <Route exact path="/"><RecruiterTests/></Route>
                         <Route path="/view-tests"><RecruiterTests/></Route>
-                        <Route path="/candidates" component={UserManagement}/>
+                        <Route exact path="/candidates" component={UserManagement}/>
+                        <Route exact path="/candidates/add" component={AddUser}/>
                         <Route path="/test-creator" component={TestCreator}/>
                         <Route path="/modify-test/:id" render={(routing) => <TestCreator match={routing.match} history={routing.history} modify={true}/>}/>
                         <Route path="/translate/:id">{withRouter(Translator)}</Route>

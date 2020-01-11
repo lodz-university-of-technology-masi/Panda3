@@ -11,7 +11,7 @@ export const ApiHelper = {
     },
 
     deleteParticipant: async (id) => {
-        await API.post(API_NAME, '/participants/delete', {body: id}).then(r => console.log(r))
+        await API.del(API_NAME, '/users/delete', {body: id}).then(r => console.log(r))
     },
 
     getParticipant: async () => {
@@ -88,6 +88,11 @@ export const ApiHelper = {
         let path = '/tests/user/' + userId;
         return await API.get(API_NAME,path,{})
     },
+
+    addUser: async (body) => {
+        let path = '/users/add';
+        return await API.post(API_NAME,path,{body:body})
+    }
 
 };
 export default ApiHelper;

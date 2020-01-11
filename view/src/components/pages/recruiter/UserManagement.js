@@ -7,6 +7,7 @@ import LoadingSpinner from "../../LoadingSpinner";
 import ApiHelper from "../../utils/API";
 import Error from "../../Error";
 import Container from "react-bootstrap/Container";
+import {Link} from "react-router-dom";
 
 class UserManagement extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class UserManagement extends Component {
                     return (
                         <Row className="justify-content-md-center">
                             <Col md="auto">
-                                <Button variant="danger">Delete</Button>
+                                <Button variant="danger" data-id={table.row.original.id} onClick={this.deleteUser}>Delete</Button>
                             </Col>
                         </Row>
                     )
@@ -39,6 +40,13 @@ class UserManagement extends Component {
             }]
         }
     }
+
+    deleteUser = async (event) => {
+        let idToDel = event.target.attributes['data-id'].value;
+        event.preventDefault();
+        this.setState({loading:true});
+        await ApiHelper.deleteParticipant(idToDel).then(this.fetch).catch((e)=>alert(e)).finally(()=>this.setState({loading:false}))
+    };
 
     fetch = async() => {
         return ApiHelper.getParticipants().then( data =>
@@ -70,10 +78,11 @@ class UserManagement extends Component {
             return Error();
         }
         return <Container className="grayBorder bg-items-color m1rem" style={{height:"100%", padding:"0.8rem"}}>
-            <BasicTable
-                data={this.state.users}
-                columns={this.state.columns}
-            />
+            <Row className="m-2"><Link to={"/candidates/add"}><Button>New Candidate</Button></Link></Row>
+                <BasicTable
+                    data={this.state.users}
+                    columns={this.state.columns}
+                />
         </Container>
     }
 }
