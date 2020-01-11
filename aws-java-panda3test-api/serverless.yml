@@ -252,6 +252,35 @@ functions:
           method: post
           cors: true
 
+  #recruiter
+
+  getAllRecruiters:
+    handler: panda3.lambda.recruiter.ReadRecruiterTests
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: recruiter/read/all
+          method: get
+          cors: true
+
+  getRecruiterTests:
+    handler: panda3.lambda.recruiter.ReadRecruiterTest
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: recruiter/read/{userId}
+          method: get
+          cors: true
+
+  modificationOnTests:
+    handler: panda3.lambda.recruiter.AddTestRecruiterTest
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: recruiter/tests/add
+          method: post
+          cors: true
+
   # lambdas for testing
   test:
     handler: panda3.lambda.testingLambdas.SimpleTest
@@ -313,4 +342,16 @@ resources:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
 
-
+    recruiterTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: recruiters_table
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

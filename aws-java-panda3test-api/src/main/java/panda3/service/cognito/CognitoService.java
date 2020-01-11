@@ -38,5 +38,4 @@ public class CognitoService {
         return users.getUsers().stream().map(ParticipantCreator::CreateParticipant)
                 .collect(Collectors.toList());
     }
-
 }

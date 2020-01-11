@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import panda3.mappers.TablesMapperPaarticipant;
 import panda3.mappers.TablesMapperTest;
 import panda3.responses.ApiResponseHandler;
+import panda3.service.cognito.CognitoService;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class AnswerValidator {
         try{
             message = AnswerValidator.checkTestId(body.get("testId").asText());
             for(String id : (ArrayList<String>) new ObjectMapper().convertValue( body.get("users"), ArrayList.class)){
-                if(new TablesMapperPaarticipant().getAllParticipant(id) == null)
+                if(new CognitoService().getCognitoUser(id) == null)
                     return message + "such user don't exists: " + id + "\n";
             }
         }catch (Exception e){
