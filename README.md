@@ -1,4 +1,4 @@
-# TheRowdyruffBoys
+# Panda3
 1. Jakub Flaszka 216754 (lider)
 2. Bartłomiej Mikołajczyk 216837
 3. Michał Tęgi 216906
