@@ -19,7 +19,6 @@ import TranslationSpinner from "../../../TranslationSpinner";
 import LoadingSpinner from "../../../LoadingSpinner";
 import ApiHelper from "../../../utils/API";
 import PropTypes from "prop-types";
-import OpenQuestion from "../../../questions/OpenQuestion";
 
 class TestCreator extends Component{
     constructor(props) {

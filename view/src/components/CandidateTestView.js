@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import QuestionController from "./questions/QuestionController";
 import update from 'immutability-helper';
 import ApiHelper from "./utils/API";
-import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "./LoadingSpinner";
 import Error from "./Error";
 

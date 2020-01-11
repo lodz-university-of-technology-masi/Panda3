@@ -39,10 +39,10 @@ function BasicTable({columns, data}) {
 
     return (
         <Container fluid={true} style={{height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
-            <Table striped bordered {...getTableProps()} className="bg-items-color">
+            <Table striped bordered {...getTableProps()} className="bg-table">
                 <thead>
                 {headerGroups.map(headerGroup => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                    <tr {...headerGroup.getHeaderGroupProps()} className="text-center">
                         {headerGroup.headers.map(column => (
                             <th {...column.getHeaderProps()}>{column.render('Header')}</th>
                         ))}

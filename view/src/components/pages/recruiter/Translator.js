@@ -5,11 +5,9 @@ import Row from 'react-bootstrap/Row';
 import {getLanguages, translateTest} from "../../utils/Yandex";
 import Button from "react-bootstrap/Button";
 import VirtualizedSelect from 'react-virtualized-select';
-
 import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
-import Alert from "react-bootstrap/Alert";
 import LoadingSpinner from "../../LoadingSpinner";
 import TranslationSpinner from "../../TranslationSpinner";
 import ApiHelper from "../../utils/API";

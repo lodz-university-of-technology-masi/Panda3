@@ -77,9 +77,8 @@ class RecruiterMainView extends Component {
     };
 
     render() {
-        console.log(this.props);
         return (
-            <Router history={history}>
+            <Router>
                 <Container fluid={true} style={{height:"100%"}}>
                     <Row className="d-flex top-menu">
                         <Col className="d-flex align-items-center welcome" md="auto">Welcome, {this.props.user.name}</Col>

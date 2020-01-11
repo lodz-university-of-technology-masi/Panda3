@@ -18,7 +18,6 @@ import Panda from "../../../resources/panda.svg";
 import Bamboo from "../../../resources/bamboo.svg";
 import {logout} from "../../utils/Cognito";
 import { createBrowserHistory } from "history";
-import RecruiterTests from "../recruiter/RecruiterTests";
 
 const history = createBrowserHistory();
 

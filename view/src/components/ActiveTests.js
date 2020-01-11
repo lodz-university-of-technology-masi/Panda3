@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import BasicTable from "./BasicTable";
 import {Link} from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
-import Alert from "react-bootstrap/Alert";
 import ApiHelper from "./utils/API";
 import Container from "react-bootstrap/Container";
 import Error from "./Error";
