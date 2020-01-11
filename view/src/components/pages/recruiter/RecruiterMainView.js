@@ -20,7 +20,7 @@ import { ReactSVG } from 'react-svg'
 import Panda from '../../../resources/panda.svg';
 import AccessManager from "./AccessManager";
 import TestImporter from "./TestImporter";
-import {getLanguages, getSynonyms} from "../../utils/Yandex";
+import {getLanguages} from "../../utils/Yandex";
 import VirtualizedSelect from "react-virtualized-select";
 import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
@@ -29,12 +29,16 @@ import SynonymViewer from "./SynonymViewer";
 import {getSelectionText} from "../../utils/utils";
 import {logout} from "../../utils/Cognito";
 import Bamboo from "../../../resources/bamboo.svg";
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
 
 
 class RecruiterMainView extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            history:history,
             loading:true,
             error:null,
             languages:[],
@@ -73,13 +77,14 @@ class RecruiterMainView extends Component {
     };
 
     render() {
+        console.log(this.props);
         return (
-            <Router>
+            <Router history={history}>
                 <Container fluid={true} style={{height:"100%"}}>
                     <Row className="d-flex top-menu">
                         <Col className="d-flex align-items-center welcome" md="auto">Welcome, {this.props.user.name}</Col>
                         <Col md="auto">
-                            <Link to="/users"><Button variant="primary">Candidates</Button></Link>
+                            <Link to="/candidates"><Button variant="primary">Candidates</Button></Link>
                         </Col>
                         <Col md="auto">
                             <Link to="/view-tests"><Button>View Tests</Button></Link>
@@ -91,7 +96,7 @@ class RecruiterMainView extends Component {
                             <Link to="/import"><Button>Import tests</Button></Link>
                         </Col>
                         <Col md="auto">
-                            <Button variant="dark" onClick={logout}>Logout</Button>
+                            <Button variant="dark" onClick={()=>{this.state.history.push('/');logout()}}>Logout</Button>
                         </Col>
                         <Col className="d-flex align-items-center justify-content-end">
                             <div className="d-flex align-items-center">
@@ -110,10 +115,11 @@ class RecruiterMainView extends Component {
                         </Col>
                     </Row>
                     <Switch>
-                        <Route path="/users" component={UserManagement}/>
+                        <Route exact path="/"><RecruiterTests/></Route>
                         <Route path="/view-tests"><RecruiterTests/></Route>
+                        <Route path="/candidates" component={UserManagement}/>
                         <Route path="/test-creator" component={TestCreator}/>
-                        <Route path="/modify-test/:id" render={(history) => <TestCreator match={history.match} modify={true}/>}/>
+                        <Route path="/modify-test/:id" render={(routing) => <TestCreator match={routing.match} history={routing.history} modify={true}/>}/>
                         <Route path="/translate/:id">{withRouter(Translator)}</Route>
                         <Route path="/submissions/:id">{withRouter(PendingSubmissions)}</Route>
                         <Route path="/check-test/:testId/:userId">{withRouter(TestChecker)}</Route>

@@ -1,7 +1,4 @@
 import axios from "axios";
-import {string} from "prop-types";
-import {getSelectionText} from "./utils";
-
 const YANDEX_KEY = 'trnsl.1.1.20191226T130611Z.41e3cd5e25e1a208.9bcc0e102ab71e5444b2469fee80fef715e1da55';
 const YANDEX_DIC_KEY ='dict.1.1.20200102T115112Z.d9e8992a09a9204f.05d5a6669e9a5102c89e0121d8129a824aede575';
 const DIC_GET_LANGS ='https://dictionary.yandex.net/api/v1/dicservice.json/getLangs?key=' + YANDEX_DIC_KEY;

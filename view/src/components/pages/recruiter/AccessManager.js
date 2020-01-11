@@ -50,6 +50,7 @@ class AccessManager extends Component{
             testId:this.props.match.params.id,
             users:users
         };
+        console.log(body);
         await ApiHelper.addUsersToTest(body).then(() => this.setState({success:true})).catch(() => this.setState({success:false})).finally(() => this.setState({loading:false}))
     };
 
@@ -95,7 +96,6 @@ class AccessManager extends Component{
                         ?  <Alert variant="success">Permissions changed</Alert>
                     : this.state.success === null ? null :
                         <Alert variant="danger">Error changing permissions</Alert>
-
                 }
             </div>
         </Container>
