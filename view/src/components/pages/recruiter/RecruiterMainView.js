@@ -31,6 +31,7 @@ import {logout} from "../../utils/Cognito";
 import Bamboo from "../../../resources/bamboo.svg";
 import { createBrowserHistory } from "history";
 import AddUser from "./AddUser";
+import Handle404 from "../../404";
 
 const history = createBrowserHistory();
 
@@ -127,6 +128,7 @@ class RecruiterMainView extends Component {
                         <Route path="/manage-access/:id">{withRouter(AccessManager)}</Route>
                         <Route path="/import">{withRouter(TestImporter)}</Route>
                         <Route path="/synonyms/:lang/:text">{withRouter(SynonymViewer)}</Route>
+                        <Route path='*' exact={true} component={Handle404} />
                     </Switch>
                 </Container>
             </Router>

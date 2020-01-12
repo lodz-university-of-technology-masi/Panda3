@@ -17,6 +17,7 @@ import Panda from "../../../resources/panda.svg";
 import Bamboo from "../../../resources/bamboo.svg";
 import {logout} from "../../utils/Cognito";
 import {createBrowserHistory} from "history";
+import Handle404 from "../../404";
 
 const history = createBrowserHistory();
 
@@ -54,6 +55,7 @@ class UserMainView extends Component {
                             match={routing.match}
                             history={routing.history}
                             user={this.props.user}/>}/>
+                        <Route path='*' exact={true} component={Handle404} />
                     </Switch>
                 </Container>
             </Router>

@@ -27,6 +27,7 @@ export const ApiHelper = {
         return await API.get(API_NAME, '/tests/read', {})
     },
 
+    //Todo: deny access
     getTestById: async (id) => {
         let path = '/tests/' + id;
         return await API.get(API_NAME, path, {})
