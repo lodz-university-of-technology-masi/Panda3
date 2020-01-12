@@ -64,7 +64,7 @@ public class TestCreator {
 
     public static List<String> convertCsvAnswerToString(String answer, String number){
         List<String> answers= new ArrayList<String>();
-        String[] singleAnswers = answer.split("|", Integer.parseInt(number));
+        String[] singleAnswers = answer.split("\\|", Integer.parseInt(number));
         for(int i = 0; i<singleAnswers.length; i++)
             answers.add(singleAnswers[i]);
         return  answers;

@@ -31,10 +31,6 @@ public class BucketService {
         String answer = "";
         BufferedReader reader = new BufferedReader(new InputStreamReader(s3Object.getObjectContent()));
         CSVReader csvReader = new CSVReader(reader);
-        List<String[]> allData = csvReader.readAll();
-
-        Test test = new Test();
-        test.setTitle(allData.get(0)[0]);
         return TestCreator.createTestCsv(csvReader);
     }
 }
