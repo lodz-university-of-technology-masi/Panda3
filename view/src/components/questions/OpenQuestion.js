@@ -23,11 +23,13 @@ class OpenQuestion extends React.Component {
     render() {
         return (
             <Container>
-                <Row>{this.state.title}</Row>
+                <Row className="mb-1">{this.state.title}</Row>
+                <Row>
                     <textarea className="form-control-lg form-control"
                               value={this.state.answer}
                               readOnly={this.props.readOnly}
                               onChange={this.handleChange}/>
+                </Row>
             </Container>
         );
     }

@@ -14,22 +14,15 @@ export const ApiHelper = {
         await API.del(API_NAME, '/users/delete', {body: id}).then(r => console.log(r))
     },
 
-    getParticipant: async () => {
-        await API.get(API_NAME, '/participant/read', {}).then(r => console.log(r))
-    },
-
     getParticipants: async () => {
        return await API.get(API_NAME, '/participants/read', {})
-    },
-
-    updateParticipant: async () => {
-        await API.put(API_NAME, '/participants/update', {}).then(r => console.log(r))
     },
 
     createTest: async (test) => {
         return await API.post(API_NAME, '/tests/create', {body: test})
     },
 
+    //Todo: get by recruiter id
     getTests: async () => {
         return await API.get(API_NAME, '/tests/read', {})
     },

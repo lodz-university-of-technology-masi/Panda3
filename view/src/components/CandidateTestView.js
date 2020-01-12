@@ -54,12 +54,12 @@ class CandidateTestView extends Component{
         this.setState({
             loading:true
         });
-        //TODO: userid
         let body = {
             testId: this.props.match.params.id,
-            userId: "0775de48-324e-406d-b043-beeda717127c",
+            userId: this.props.user.sub,
             answers: this.state.answers
         };
+        console.log(body);
         ApiHelper.createSubmission(body).then(() =>
             this.props.history.push('/tests')
         ).catch(e => alert(e)).then(() =>

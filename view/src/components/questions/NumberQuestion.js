@@ -23,13 +23,16 @@ class NumberQuestion extends React.Component {
     render() {
         return (
             <Container>
-                <Row>{this.state.title}</Row>
-                <input type="number" className="form-control"
-                       readOnly={this.props.readOnly}
-                          value={this.state.answer}
-                          onChange={this.handleChange}
-                       placeholder="Enter a number"
-                />
+                <Row className="mb-1">{this.state.title}</Row>
+                <Row>
+                    <input type="number" className="form-control"
+                           readOnly={this.props.readOnly}
+                           value={this.state.answer}
+                           onChange={this.handleChange}
+                           placeholder="Enter a number"
+                           style={{width:"auto"}}
+                    />
+                </Row>
             </Container>
         );
     }

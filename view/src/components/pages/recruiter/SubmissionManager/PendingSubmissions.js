@@ -16,9 +16,6 @@ class PendingSubmissions extends Component {
             loading:true,
             submissions: [],
             columns: [{
-                Header: 'Id',
-                accessor: 'id'
-            },{
                 Header: 'Name',
                 accessor: 'name'
             },{

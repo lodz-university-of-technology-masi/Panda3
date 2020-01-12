@@ -79,10 +79,12 @@ class UserManagement extends Component {
         }
         return <Container className="grayBorder bg-items-color m1rem" style={{height:"100%", padding:"0.8rem"}}>
             <Row className="m-2"><Link to={"/candidates/add"}><Button>New Candidate</Button></Link></Row>
-                <BasicTable
-                    data={this.state.users}
-                    columns={this.state.columns}
-                />
+             <div className="d-flex" style={{height:"100%"}}>
+                 <BasicTable
+                     data={this.state.users}
+                     columns={this.state.columns}
+                 />
+             </div>
         </Container>
     }
 }

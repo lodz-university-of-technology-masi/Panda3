@@ -54,11 +54,10 @@ class TestChecker extends Component{
 
     SubmitTest = () => {
         this.setState({loading:true});
-        //TODO: result???
         let body = {
             userId: this.props.match.params.userId,
             testId: this.props.match.params.testId,
-            result: '100%'
+            results: this.state.result
         };
         let redirect = '/submissions/' + this.props.match.params.testId;
         ApiHelper.checkTest(body).then(() =>

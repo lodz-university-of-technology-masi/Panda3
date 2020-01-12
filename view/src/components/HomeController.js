@@ -18,7 +18,6 @@ class HomeController extends Component {
         await Auth.currentSession().then(
             r => {
                 const payload = r.getIdToken().decodePayload();
-                console.log(payload);
                 const groups = payload['cognito:groups'];
                 if (groups && groups.includes('Recruiters')) {
                     this.setState({isRecruiter: true})

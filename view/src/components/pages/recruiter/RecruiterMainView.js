@@ -80,7 +80,7 @@ class RecruiterMainView extends Component {
     render() {
         return (
             <Router>
-                <Container fluid={true} style={{height:"100%"}}>
+                <Container fluid={true} style={{height:"fit-content"}}>
                     <Row className="d-flex top-menu">
                         <Col className="d-flex align-items-center welcome" md="auto">Welcome, {this.props.user.name}</Col>
                         <Col md="auto">

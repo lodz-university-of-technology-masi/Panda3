@@ -22,25 +22,21 @@ class TestResults extends Component {
     }
 
     fetch = async() => {
-        //TODO:userId
-        const user = "0775de48-324e-406d-b043-beeda717127c";
-        return ApiHelper.getResults(user).then( data =>
+        return ApiHelper.getResults(this.props.user.sub).then( data =>{
+            console.log(data);
             this.setState({
                 results: data,
                 loading:false,
-            })
+            })}
         )
     };
 
     componentDidMount = async() => {
         await this.fetch().catch(e =>
-            {
-                console.log(e);
                 this.setState({
                     loading:false,
                     error:true
                 })
-            }
         )
     };
 
@@ -48,7 +44,7 @@ class TestResults extends Component {
         if(this.state.results.length ===  0)
             return <span className="noTests">No results</span>;
         return <BasicTable
-            data={this.state.tests}
+            data={this.state.results}
             columns={this.state.columns}
         />
     };

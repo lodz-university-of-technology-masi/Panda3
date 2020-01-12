@@ -6,6 +6,8 @@ import LoadingSpinner from "./LoadingSpinner";
 import ApiHelper from "./utils/API";
 import Container from "react-bootstrap/Container";
 import Error from "./Error";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 class ActiveTests extends Component {
     constructor(props) {
@@ -15,9 +17,6 @@ class ActiveTests extends Component {
             loading:true,
             tests: [],
             columns: [{
-                Header: 'Id',
-                accessor: 'id'
-            },{
                 Header: 'Title',
                 accessor: 'title'
             }, {
@@ -26,11 +25,15 @@ class ActiveTests extends Component {
                 accessor: d => d.language.label
             },{
                 id: 'action',
-                Header: 'View Test',
+                Header: 'Solve Test',
                 Cell: table => {
                     let path = '/test/' + table.row.original.id;
                     return (
-                        <Link to={path}><Button variant="primary">Solve</Button></Link>
+                        <Row className="justify-content-md-center">
+                            <Col md="auto">
+                                <Link to={path}><Button variant="primary">Solve</Button></Link>
+                            </Col>
+                        </Row>
                     )
                 }
             }]
@@ -38,7 +41,7 @@ class ActiveTests extends Component {
     }
 
     componentDidMount = async () => {
-        await ApiHelper.getUsersTests("0775de48-324e-406d-b043-beeda717127c").then( tests =>
+        await ApiHelper.getUsersTests(this.props.user.sub).then( tests =>
             this.setState({
                 tests: tests,
                 loading:false,
