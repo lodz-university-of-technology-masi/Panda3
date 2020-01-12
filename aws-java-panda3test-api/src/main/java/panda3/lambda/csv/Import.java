@@ -1,37 +1,30 @@
 package panda3.lambda.csv;
 
-//1;O;EN;List at least two corporate values at IBM;|;
 
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.serverless.ApiGatewayResponse;
+import com.amazonaws.services.lambda.runtime.events.S3Event;
+import com.amazonaws.services.s3.event.S3EventNotification;
 import panda3.mappers.TablesMapperTest;
 import panda3.model.Test;
-import panda3.responses.ApiResponseHandler;
 import panda3.service.s3.BucketService;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
-public class Import implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    private ObjectMapper mapper = new ObjectMapper();
+public class Import implements RequestHandler<S3Event, String> {
+    BucketService bucketService = new BucketService();
 
     @Override
-    public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
+    public String handleRequest(S3Event event, Context ctx) {
+        S3EventNotification.S3EventNotificationRecord record = event.getRecords().get(0);
+        Test testAnswer = null;
         try {
-            BucketService bucketService = new BucketService();
-            Test testAnswer = bucketService.uploadFile("test.csv");
-            if(testAnswer == null)
-                return ApiResponseHandler.createResponse("file not created.", 200);
-            new TablesMapperTest().saveTest(testAnswer);
-            return ApiResponseHandler.createResponse("sucess", 200);
-
+            testAnswer = bucketService.uploadFile(record.getS3().getObject().getKey());
         } catch (IOException e) {
-            return ApiResponseHandler.createResponse("cannot connect to database.", 401);
+            e.printStackTrace();
         }
+        new TablesMapperTest().saveTest(testAnswer);
+            return null;
     }
 }
