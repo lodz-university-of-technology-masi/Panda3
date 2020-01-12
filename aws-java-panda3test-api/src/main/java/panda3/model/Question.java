@@ -7,6 +7,10 @@ public class Question {
     private String type;
     private List<String> answers;
 
+    public Question(){
+
+    }
+
     public Question(String question, String type, List<String> answers) {
         this.question = question;
         this.type = type;

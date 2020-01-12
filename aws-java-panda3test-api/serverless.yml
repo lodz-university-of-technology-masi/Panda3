@@ -249,11 +249,10 @@ functions:
     events:
       - http:
           path: csv/import
-          method: post
+          method: get
           cors: true
 
   #recruiter
-
   getAllRecruiters:
     handler: panda3.lambda.recruiter.ReadRecruiterTests
     Policies: AmazonDynamoDBFullAccess
@@ -272,14 +271,6 @@ functions:
           method: get
           cors: true
 
-  modificationOnTests:
-    handler: panda3.lambda.recruiter.AddTestRecruiterTest
-    Policies: AmazonDynamoDBFullAccess
-    events:
-      - http:
-          path: recruiter/tests/add
-          method: post
-          cors: true
 
   # lambdas for testing
   test:
