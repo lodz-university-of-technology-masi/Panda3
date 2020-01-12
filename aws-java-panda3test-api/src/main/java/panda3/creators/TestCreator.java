@@ -40,8 +40,8 @@ public class TestCreator {
         ArrayList<Question> questions = new ArrayList<Question>();
         List<String[]> allData = csvReader.readAll();
         for (int i = 0; i < allData.size(); i++) {
-            questions.add(TestCreator.convertCsvStringToQuestion(allData.get(i)[0].split(";",6)));
-            test.setLanguage(TestCreator.generateLanguage(allData.get(i)[0].split(";",6)[2]));
+            questions.add(TestCreator.convertCsvStringToQuestion(allData.get(i)[0].split(";",7)));
+            test.setLanguage(TestCreator.generateLanguage(allData.get(i)[0].split(";",7)[2]));
 
         }
         test.setQuestions(questions);

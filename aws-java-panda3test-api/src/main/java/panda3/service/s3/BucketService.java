@@ -24,7 +24,7 @@ import java.util.List;
 public class BucketService {
     private AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
 
-    public BucketService(){
+    public BucketService() {}
 
     public Test uploadFile(String key) throws SdkClientException, IOException {
         S3Object s3Object = s3.getObject(new GetObjectRequest(IdentyficatorsController.BUCKET_NAME, key));

@@ -11,6 +11,7 @@ import com.serverless.ApiGatewayResponse;
 import panda3.mappers.TablesMapperTest;
 import panda3.model.Test;
 import panda3.responses.ApiResponseHandler;
+import panda3.service.s3.BucketService;
 
 import java.io.File;
 import java.io.IOException;
