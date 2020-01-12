@@ -26,13 +26,8 @@ public class CognitoService {
     }
 
     public Participant getCognitoUser(String id){
-        List<Participant> participants = getCognitoUsers();
-        Participant answer = null;
-        for(Participant participant : participants){
-            if(participant.getId().equals(id))
-                answer = participant;
-        }
-        return answer;
+        UserType user = identityProvider.listUsers(new ListUsersRequest().withUserPoolId(IdentyficatorsController.USER_POOL_ID).withFilter("sub = \"" + id + "\"")).getUsers().get(0);
+        return ParticipantCreator.CreateParticipant(user);
     }
 
     public List<Participant> getUsersInGroup(String group){

@@ -16,7 +16,7 @@ public class ReadTestToCheck  implements RequestHandler<Map<String, Object>, Api
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         Map<String,String> pathParameters =  (Map<String,String>)input.get("pathParameters");
         try {
-            List<Participant> answer = new TablesMapperAnswers().getTestUsers(pathParameters.get("testId"));
+            List<Participant> answer = new TablesMapperAnswers().getTestSubmissions(pathParameters.get("testId"));
             return ApiResponseHandler.createResponse(answer, 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);

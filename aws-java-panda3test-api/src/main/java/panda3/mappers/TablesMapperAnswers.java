@@ -10,6 +10,7 @@ import com.serverless.DynamoDBAdapter;
 import panda3.creators.TestAnswerCreator;
 import panda3.identificators.IdentyficatorsController;
 import panda3.model.Participant;
+import panda3.model.Test;
 import panda3.model.TestAnswer;
 import panda3.model.TestResult;
 import panda3.service.cognito.CognitoService;
@@ -79,6 +80,16 @@ public class TablesMapperAnswers {
                 .collect(Collectors.toList());
     }
 
+    public List<Participant> getTestSubmissions(String testId) throws IOException {
+        List<TestAnswer> answers = getObjectsWithTestId(testId);
+        List<Participant> result = new ArrayList<>();
+        for(TestAnswer an : answers){
+            if(an.getResult() == null && an.getAnswers() != null)
+                result.add(cognitoService.getCognitoUser(an.getUserId()));
+        }
+        return result;
+    }
+
 
     public List<TestResult> getResultUser(String userId) throws IOException{
         List<TestAnswer> all = this.getUserTests(userId);
@@ -102,14 +113,9 @@ public class TablesMapperAnswers {
         return this.mapper.scan(TestAnswer.class, scanRequest);
     }
 
-
-
-
     public void saveTestAnswer(TestAnswer answer) throws IOException {
         this.mapper.save(answer);
     }
-
-
 
     public void saveUsersToTest(String testId, List<String> userId) throws IOException {
         for(String uId : userId)

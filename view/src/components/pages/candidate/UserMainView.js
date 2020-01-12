@@ -10,14 +10,13 @@ import {
     Switch,
     Route,
     Link,
-    withRouter,
 } from "react-router-dom";
 import CandidateTestView from "../../CandidateTestView";
 import {ReactSVG} from "react-svg";
 import Panda from "../../../resources/panda.svg";
 import Bamboo from "../../../resources/bamboo.svg";
 import {logout} from "../../utils/Cognito";
-import { createBrowserHistory } from "history";
+import {createBrowserHistory} from "history";
 
 const history = createBrowserHistory();
 
@@ -33,8 +32,8 @@ class UserMainView extends Component {
     render() {
         return (
             <Router>
-                <Container fluid={true} style={{height:"100%"}}>
-                    <Row style={{background: "LightBlue", padding: "0.5rem"}}>
+                <Container fluid={true} style={{height:"fit-content"}}>
+                    <Row className="d-flex top-menu">
                         <Col className="d-flex align-items-center welcome" md="auto">Welcome, {this.props.user.name}</Col>
                         <Col md="auto"><Link to="/tests"><Button variant="primary">Active tests</Button></Link></Col>
                         <Col md="auto"><Link to="/results"><Button variant="primary">My results</Button></Link></Col>
@@ -47,10 +46,14 @@ class UserMainView extends Component {
                         </Col>
                     </Row>
                     <Switch>
-                        <Route exact path="/"><ActiveTests/></Route>
-                        <Route path="/tests"><ActiveTests/></Route>
-                        <Route path="/results"><TestResults/></Route>
-                        <Route path="/test/:id">{withRouter(CandidateTestView)}</Route>
+                        <Route exact path="/"><ActiveTests user={this.props.user}/></Route>
+                        <Route path="/tests"><ActiveTests user={this.props.user}/></Route>
+                        <Route path="/results"><TestResults user={this.props.user}/></Route>
+                        <Route path="/test/:id" render={(routing) =>
+                            <CandidateTestView
+                            match={routing.match}
+                            history={routing.history}
+                            user={this.props.user}/>}/>
                     </Switch>
                 </Container>
             </Router>

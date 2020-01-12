@@ -63,7 +63,6 @@ public class    TablesMapperTest {
     }
 
 
-
     public List<Test> getUserTest(String userId) throws IOException {
         List<TestAnswer> ans = new TablesMapperAnswers().getUserTests(userId);
         List<Test> answer = new ArrayList<>();
