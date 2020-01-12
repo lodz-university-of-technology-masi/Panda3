@@ -11,6 +11,9 @@ import com.opencsv.CSVReader;
 import panda3.creators.TestCreator;
 import panda3.identificators.IdentyficatorsController;
 import panda3.model.Test;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
+import panda3.config.Config;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,7 +25,6 @@ public class BucketService {
     private AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
 
     public BucketService(){
-    }
 
     public Test uploadFile(String key) throws SdkClientException, IOException {
         S3Object s3Object = s3.getObject(new GetObjectRequest(IdentyficatorsController.BUCKET_NAME, key));
@@ -34,6 +36,5 @@ public class BucketService {
         Test test = new Test();
         test.setTitle(allData.get(0)[0]);
         return TestCreator.createTestCsv(csvReader);
-
     }
 }

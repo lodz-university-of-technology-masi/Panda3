@@ -3,10 +3,10 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import QuestionController from "../../../questions/QuestionController";
+import QuestionController from "../../../fragments/questions/QuestionController";
 import update from 'immutability-helper';
 import ApiHelper from "../../../utils/API";
-import LoadingSpinner from "../../../LoadingSpinner";
+import LoadingSpinner from "../../../fragments/LoadingSpinner";
 
 class TestChecker extends Component{
     constructor(props) {
@@ -54,11 +54,10 @@ class TestChecker extends Component{
 
     SubmitTest = () => {
         this.setState({loading:true});
-        //TODO: result???
         let body = {
             userId: this.props.match.params.userId,
             testId: this.props.match.params.testId,
-            result: '100%'
+            results: this.state.result
         };
         let redirect = '/submissions/' + this.props.match.params.testId;
         ApiHelper.checkTest(body).then(() =>
@@ -69,7 +68,6 @@ class TestChecker extends Component{
 
     componentDidMount = async() => {
         await this.fetchTestData().then(() => this.setState({loading:false})).catch((e) => alert(e));
-        console.log(this.state);
         for (let i=0;i<this.state.result.length;i++){
             if(this.state.test.questions[i].type === 'W'){
                 let json = JSON.parse(this.state.answers[i]);

@@ -15,18 +15,17 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class UpdateTest implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    private ObjectMapper mapper = new ObjectMapper();
-    private TablesMapperTest tablesMapperTest;
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
-        this.tablesMapperTest = new TablesMapperTest();
-        Test test = new Test();
+        TablesMapperTest tablesMapperTest = new TablesMapperTest();
+        Test test;
         try {
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
             test = TestCreator.createUpdateTestJSON(body, mapper.convertValue(body.get("questions"), ArrayList.class));
-            this.tablesMapperTest.updateTest(test);
-            return ApiResponseHandler.createResponse("sucess.", 200);
+            tablesMapperTest.updateTest(test);
+            return ApiResponseHandler.createResponse("success.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);
         }

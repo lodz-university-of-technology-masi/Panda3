@@ -2,15 +2,13 @@ package panda3.model;
 
 public class Participant {
     private String id;
-    private String login;
     private String email;
     private String name;
     private String surname;
     private String phone;
 
-    public Participant(String id, String login, String email, String name, String surname, String phone) {
+    public Participant(String id, String email, String name, String surname, String phone) {
         this.id = id;
-        this.login = login;
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -27,14 +25,6 @@ public class Participant {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getEmail() {

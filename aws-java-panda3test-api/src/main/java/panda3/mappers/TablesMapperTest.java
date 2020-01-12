@@ -17,28 +17,24 @@ import java.util.List;
 import java.util.Map;
 
 public class    TablesMapperTest {
-    private DynamoDBAdapter db_adapter;
-    private AmazonDynamoDB client;
-    private DynamoDBMapper mapper;
+    private final DynamoDBMapper mapper;
 
 
     public TablesMapperTest(){
         DynamoDBMapperConfig mapperConfig = DynamoDBMapperConfig.builder()
                 .withTableNameOverride(new DynamoDBMapperConfig.TableNameOverride("tests_table"))
                 .build();
-        this.db_adapter = DynamoDBAdapter.getInstance();
-        this.client = this.db_adapter.getDbClient();
-        this.mapper = this.db_adapter.createDbMapper(mapperConfig);
+        DynamoDBAdapter db_adapter = DynamoDBAdapter.getInstance();
+        this.mapper = db_adapter.createDbMapper(mapperConfig);
     }
 
 
-    public List<Test> getAllTests() throws IOException {
-        List<Test> results = this.mapper.scan(Test.class, new DynamoDBScanExpression());
-        return results;
+    public List<Test> getAllTests() {
+        return this.mapper.scan(Test.class, new DynamoDBScanExpression());
     }
 
 
-    public void saveTest(Test test) throws IOException {
+    public void saveTest(Test test) {
         this.mapper.save(test);
     }
 
@@ -53,15 +49,14 @@ public class    TablesMapperTest {
         this.saveTest(test);
     }
 
-    public Test getTest(String id) throws IOException {
-        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+    public Test getTest(String id) {
+        Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":t_id", new AttributeValue().withS(id));
         DynamoDBQueryExpression<Test> query = new DynamoDBQueryExpression<Test>()
                 .withKeyConditionExpression("id = :t_id")
                 .withExpressionAttributeValues(eav);
         return this.mapper.query(Test.class, query).get(0);
     }
-
 
 
     public List<Test> getUserTest(String userId) throws IOException {

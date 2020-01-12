@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import Button from 'react-bootstrap/Button';
-import BasicTable from "../../BasicTable";
+import BasicTable from "../../fragments/BasicTable";
 import {Link} from "react-router-dom";
 import DropdownMenu from "react-bootstrap/DropdownMenu";
 import DropdownToggle from "react-bootstrap/DropdownToggle";
 import Dropdown from "react-bootstrap/Dropdown";
 import ApiHelper from "../../utils/API";
-import LoadingSpinner from "../../LoadingSpinner";
+import LoadingSpinner from "../../fragments/LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
 import Row from  "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"

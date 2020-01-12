@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {Link} from "react-router-dom";
-import BasicTable from "../../../BasicTable";
-import LoadingSpinner from "../../../LoadingSpinner";
+import BasicTable from "../../../fragments/BasicTable";
+import LoadingSpinner from "../../../fragments/LoadingSpinner";
 import ApiHelper from "../../../utils/API";
-import Error from "../../../Error";
+import Error from "../../../fragments/Error";
 import Container from "react-bootstrap/Container";
 
 class PendingSubmissions extends Component {
@@ -16,9 +16,9 @@ class PendingSubmissions extends Component {
             loading:true,
             submissions: [],
             columns: [{
-                Header: 'Id',
-                accessor: 'id'
-            },{
+                Header: 'E-Mail',
+                accessor: 'email'
+                },{
                 Header: 'Name',
                 accessor: 'name'
             },{

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import Container from "react-bootstrap/Container";
 import "@kenshooui/react-multi-select/dist/style.css"
-import LoadingSpinner from "../../LoadingSpinner";
+import LoadingSpinner from "../../fragments/LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
 import MultiSelect from "@kenshooui/react-multi-select";
 import Button from "react-bootstrap/Button";
 import ApiHelper from "../../utils/API";
-import Error from "../../Error";
+import Error from "../../fragments/Error";
 
 class AccessManager extends Component{
     constructor(props) {
@@ -22,9 +22,10 @@ class AccessManager extends Component{
         }
     }
 
-    fetchUsers = async() =>{
+    fetchUsers = async() => {
 
       let users = await ApiHelper.getParticipants().catch((e)=>alert(e));
+      console.log(users);
       let usersWithAccess = await ApiHelper.getUserWithAccess(this.props.match.params.id).catch((e)=>alert(e));
 
       let items = Object.keys(users).map((key) => ({id:key, label:users[key].name + ' ' + users[key].surname}));

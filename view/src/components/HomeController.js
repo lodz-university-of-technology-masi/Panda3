@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Auth} from 'aws-amplify';
 import UserMainView from "./pages/candidate/UserMainView";
 import RecruiterMainView from "./pages/recruiter/RecruiterMainView";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "./fragments/LoadingSpinner";
 import {ForgotPassword, SignIn, RequireNewPassword, withAuthenticator} from "aws-amplify-react";
 
 class HomeController extends Component {
@@ -18,7 +18,6 @@ class HomeController extends Component {
         await Auth.currentSession().then(
             r => {
                 const payload = r.getIdToken().decodePayload();
-                console.log(payload);
                 const groups = payload['cognito:groups'];
                 if (groups && groups.includes('Recruiters')) {
                     this.setState({isRecruiter: true})

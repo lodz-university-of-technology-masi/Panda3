@@ -5,13 +5,14 @@ html, body, #app, #app>div {
 
 }
 body{
-    background: linear-gradient(318deg, #6cc0f0, #1b89f3, #b3e2f3);
+    /*background: linear-gradient(318deg, #6cc0f0, #1b89f3, #b3e2f3);
     background-size: 600% 600%;
 
     -webkit-animation: AnimationName 51s ease infinite;
     -moz-animation: AnimationName 51s ease infinite;
-    animation: AnimationName 51s ease infinite;
-
+    animation: AnimationName 51s ease infinite;*/
+    background-image: url(D:\chmura\Panda3\view\src\resources\abstraction_geometry_shapes_colors_93400_2560x1440.jpg);
+    background-repeat: no-repeat;
     min-height: 100%;
 }
 
@@ -21,7 +22,7 @@ body > div{
 }
 
 .bg-items-color{
-    background-color: floralwhite;
+    background-color: ghostwhite;
 }
 
 .bg-table{
@@ -30,7 +31,7 @@ body > div{
 
 .top-menu{
     padding: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .panda > div > svg{
@@ -80,7 +81,6 @@ body > div{
     text-align: center;
     display: flex;
     font-size: x-large;
-    margin-top: 20%;
 }
 
 .m1rem{

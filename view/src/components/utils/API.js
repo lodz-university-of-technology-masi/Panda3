@@ -11,29 +11,23 @@ export const ApiHelper = {
     },
 
     deleteParticipant: async (id) => {
-        await API.post(API_NAME, '/participants/delete', {body: id}).then(r => console.log(r))
-    },
-
-    getParticipant: async () => {
-        await API.get(API_NAME, '/participant/read', {}).then(r => console.log(r))
+        await API.del(API_NAME, '/users/delete', {body: id}).then(r => console.log(r))
     },
 
     getParticipants: async () => {
-       return await API.get(API_NAME, '/users/all/read', {})
-    },
-
-    updateParticipant: async () => {
-        await API.put(API_NAME, '/participants/update', {}).then(r => console.log(r))
+       return await API.get(API_NAME, '/participants/read', {})
     },
 
     createTest: async (test) => {
         return await API.post(API_NAME, '/tests/create', {body: test})
     },
 
+    //Todo: get by recruiter id
     getTests: async () => {
         return await API.get(API_NAME, '/tests/read', {})
     },
 
+    //Todo: deny access
     getTestById: async (id) => {
         let path = '/tests/' + id;
         return await API.get(API_NAME, path, {})
@@ -88,6 +82,11 @@ export const ApiHelper = {
         let path = '/tests/user/' + userId;
         return await API.get(API_NAME,path,{})
     },
+
+    addUser: async (body) => {
+        let path = '/users/add';
+        return await API.post(API_NAME,path,{body:body})
+    }
 
 };
 export default ApiHelper;

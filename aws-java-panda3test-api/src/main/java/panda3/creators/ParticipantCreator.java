@@ -25,6 +25,6 @@ public class ParticipantCreator {
             }
         }
 
-        return new Participant(id, userType.getUsername(), email, name, surname, phone);
+        return new Participant(id, email, name, surname, phone);
     }
 }

@@ -61,17 +61,8 @@ package:
 functions:
   # participants lambdas
 
-  readParticipant:
-    handler: panda3.lambda.paarticipants.ReadParticipant
-    events:
-      - http:
-          path: participants/read/{id}
-          method: get
-          cors: true
-
-
   readParticipants:
-    handler: panda3.lambda.paarticipants.ReadParticipants
+    handler: panda3.lambda.participants.ReadParticipants
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
@@ -79,26 +70,31 @@ functions:
           method: get
           cors: true
 
-
   readRecruiters:
-    handler: panda3.lambda.paarticipants.ReadRecruiters
+    handler: panda3.lambda.participants.ReadRecruiters
     events:
       - http:
           path: recruiters/read
           method: get
           cors: true
 
-
-  readUsers:
-    handler: panda3.lambda.paarticipants.ReadUsers
+  addUser:
+    handler: panda3.lambda.participants.AddUser
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
-          path: users/all/read
-          method: get
+          path: users/add
+          method: post
           cors: true
 
-
+  deleteUser:
+    handler: panda3.lambda.participants.DeleteUser
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: users/delete
+          method: delete
+          cors: true
 
   # tests lambdas
   createTest:
@@ -196,7 +192,7 @@ functions:
           cors: true
 
   readUsersFromTest:
-    handler: panda3.lambda.paarticipants.ReadTestUsers
+    handler: panda3.lambda.participants.ReadTestUsers
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
@@ -211,16 +207,6 @@ functions:
     events:
       - http:
           path: answers/test/result/{userId}
-          method: get
-          cors: true
-
-
-  readAnswer:
-    handler: panda3.lambda.answers.ReadAnswer
-    Policies: AmazonDynamoDBFullAccess
-    events:
-      - http:
-          path: answers/read/single/{id}
           method: get
           cors: true
 
@@ -271,15 +257,6 @@ functions:
           method: get
           cors: true
 
-
-  # lambdas for testing
-  test:
-    handler: panda3.lambda.testingLambdas.SimpleTest
-    events:
-      - http:
-          path: participants/test
-          method: post
-          cors: true
 
 resources:
   Resources:

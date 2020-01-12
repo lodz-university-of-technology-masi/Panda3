@@ -16,21 +16,20 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class CreateAnswer implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    private ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         try {
             TablesMapperAnswers tablesMapperAnswers = new TablesMapperAnswers();
-            JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
+            JsonNode body = mapper.readTree((String) input.get("body"));
             String message = AnswerValidator.checkExistenceSingle(body);
             if(!message.equals(""))
                 return ApiResponseHandler.createResponse(message, 404);
             TestAnswer answer = tablesMapperAnswers.getUserTestAnswers(body.get("userId").asText(), body.get("testId").asText());
-            tablesMapperAnswers.updateTestAnswer(TestAnswerCreator.addUserAnswer(answer, new ObjectMapper().convertValue( body.get("answers"), ArrayList.class)));
-            return ApiResponseHandler.createResponse("sucess.", 200);
+            tablesMapperAnswers.updateTestAnswer(TestAnswerCreator.addUserAnswer(answer, mapper.convertValue( body.get("answers"), ArrayList.class)));
+            return ApiResponseHandler.createResponse("success.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);
         }
     }
-
 }

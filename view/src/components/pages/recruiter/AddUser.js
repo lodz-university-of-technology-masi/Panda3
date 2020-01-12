@@ -6,8 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
 import {ApiHelper} from "../../utils/API";
-import {Auth} from 'aws-amplify'
-import LoadingSpinner from "../../LoadingSpinner";
+import LoadingSpinner from "../../fragments/LoadingSpinner";
 
 
 class AddUser extends Component {
@@ -32,21 +31,16 @@ class AddUser extends Component {
 
     handleSubmit = async() => {
         this.setState({loading:true});
-        await Auth.signUp({
-            username: this.state.email,
-            password: 'Qw123456',
-            attributes: {
-                name: this.state.firstName,
-                family_name: this.state.lastName,
-                email: this.state.email,
-                phone_number: this.state.phone,
-            },
-        })
-            .then(data => {
-                console.log(data);
-                this.props.history.push('/candidates')
-            })
-            .catch(err => console.log(err));
+       let body = {
+           name: this.state.firstName,
+           surname: this.state.lastName,
+           email: this.state.email,
+           phone: this.state.phone,
+       };
+       await ApiHelper.addUser(body).then(data => {
+           console.log(data);
+           this.props.history.push('/candidates')
+       }).catch(err => {alert(err);this.setState({loading:false});});
     };
 
     handleFirstName(event) {

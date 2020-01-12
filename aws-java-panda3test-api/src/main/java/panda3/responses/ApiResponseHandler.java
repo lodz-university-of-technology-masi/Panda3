@@ -2,7 +2,6 @@ package panda3.responses;
 
 import com.serverless.ApiGatewayResponse;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -15,8 +15,8 @@ import VirtualizedSelect from 'react-virtualized-select';
 import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
-import TranslationSpinner from "../../../TranslationSpinner";
-import LoadingSpinner from "../../../LoadingSpinner";
+import TranslationSpinner from "../../../fragments/TranslationSpinner";
+import LoadingSpinner from "../../../fragments/LoadingSpinner";
 import ApiHelper from "../../../utils/API";
 import PropTypes from "prop-types";
 

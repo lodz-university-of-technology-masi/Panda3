@@ -30,6 +30,8 @@ import {getSelectionText} from "../../utils/utils";
 import {logout} from "../../utils/Cognito";
 import Bamboo from "../../../resources/bamboo.svg";
 import { createBrowserHistory } from "history";
+import AddUser from "./AddUser";
+import Handle404 from "../../404";
 
 const history = createBrowserHistory();
 
@@ -79,7 +81,7 @@ class RecruiterMainView extends Component {
     render() {
         return (
             <Router>
-                <Container fluid={true} style={{height:"100%"}}>
+                <Container fluid={true} style={{height:"fit-content"}}>
                     <Row className="d-flex top-menu">
                         <Col className="d-flex align-items-center welcome" md="auto">Welcome, {this.props.user.name}</Col>
                         <Col md="auto">
@@ -116,7 +118,8 @@ class RecruiterMainView extends Component {
                     <Switch>
                         <Route exact path="/"><RecruiterTests/></Route>
                         <Route path="/view-tests"><RecruiterTests/></Route>
-                        <Route path="/candidates" component={UserManagement}/>
+                        <Route exact path="/candidates" component={UserManagement}/>
+                        <Route exact path="/candidates/add" component={AddUser}/>
                         <Route path="/test-creator" component={TestCreator}/>
                         <Route path="/modify-test/:id" render={(routing) => <TestCreator match={routing.match} history={routing.history} modify={true}/>}/>
                         <Route path="/translate/:id">{withRouter(Translator)}</Route>
@@ -125,6 +128,7 @@ class RecruiterMainView extends Component {
                         <Route path="/manage-access/:id">{withRouter(AccessManager)}</Route>
                         <Route path="/import">{withRouter(TestImporter)}</Route>
                         <Route path="/synonyms/:lang/:text">{withRouter(SynonymViewer)}</Route>
+                        <Route path='*' exact={true} component={Handle404} />
                     </Switch>
                 </Container>
             </Router>
