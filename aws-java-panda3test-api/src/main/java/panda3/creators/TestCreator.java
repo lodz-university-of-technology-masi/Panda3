@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.opencsv.CSVReader;
 import panda3.model.Language;
 import panda3.model.Question;
+import panda3.model.RTest;
 import panda3.model.Test;
 
 import java.awt.*;
@@ -81,6 +82,27 @@ public class TestCreator {
             language = new Language("Diffrent", "DF");
         return language;
     }
+
+
+
+    public static RTest createRTestResponse(Test test){
+        RTest rTest = new RTest();
+        rTest.setTitle(test.getTitle());
+        rTest.setLabel(test.getLanguage().getLabel());
+        rTest.setId(test.getId());
+        return  rTest;
+    }
+
+
+
+    public static List<RTest> createRTestListResponse(List<Test> tests){
+        List<RTest> rTests = new ArrayList<RTest>();
+        for(Test test : tests)
+            rTests.add(TestCreator.createRTestResponse(test));
+        return rTests;
+    }
+
+
     //1;O;EN;List at least two corporate values at IBM;|;
     //3;O;EN;List at least two corporate values at IBM;3;[zle  srednio  dobrze];
 }
