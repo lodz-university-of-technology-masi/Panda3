@@ -20,6 +20,12 @@ Amplify.configure({
                 endpoint: API_MAIN_EP,
             },
         ]
+    },
+    Storage: {
+        AWSS3:{
+            bucket:'p3-csv',
+            region:'us-east-1'
+        }
     }
 });
 
