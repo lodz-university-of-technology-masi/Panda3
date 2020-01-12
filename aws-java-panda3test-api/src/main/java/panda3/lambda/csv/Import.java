@@ -7,9 +7,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.serverless.ApiGatewayResponse;
 import panda3.responses.ApiResponseHandler;
-import panda3.service.s3.BucketService;
 
-import java.io.File;
 import java.util.Map;
 
 public class Import implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
@@ -18,6 +16,6 @@ public class Import implements RequestHandler<Map<String, Object>, ApiGatewayRes
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
 
-            return ApiResponseHandler.createResponse("sucess", 400);
+            return ApiResponseHandler.createResponse("success", 400);
     }
 }

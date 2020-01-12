@@ -5,24 +5,24 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
-import panda3.identificators.IdentyficatorsController;
+import panda3.config.Config;
 
 import java.io.File;
 
-public class BucketService {
+class BucketService {
     private AmazonS3 s3Client;
 
     public BucketService(){
         AmazonS3 s3Client =  AmazonS3ClientBuilder
                 .standard()
-                .withRegion(IdentyficatorsController.REGION)
+                .withRegion(Config.REGION)
                 .withCredentials(new EnvironmentVariableCredentialsProvider())
                 .build();
     }
 
 
     public void uploadFile(File file){
-        PutObjectRequest putObjectRequest = new PutObjectRequest(IdentyficatorsController.BUCKET_NAME,
+        PutObjectRequest putObjectRequest = new PutObjectRequest(Config.BUCKET_NAME,
                                                                 file.getName(),
                                                                 file);
         PutObjectResult putObjectResult = s3Client.putObject(putObjectRequest);

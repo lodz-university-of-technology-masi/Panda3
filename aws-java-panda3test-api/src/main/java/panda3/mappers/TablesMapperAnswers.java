@@ -1,6 +1,5 @@
 package panda3.mappers;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
@@ -8,9 +7,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.serverless.DynamoDBAdapter;
 import panda3.creators.TestAnswerCreator;
-import panda3.identificators.IdentyficatorsController;
+import panda3.config.Config;
 import panda3.model.Participant;
-import panda3.model.Test;
 import panda3.model.TestAnswer;
 import panda3.model.TestResult;
 import panda3.service.cognito.CognitoService;
@@ -23,31 +21,27 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TablesMapperAnswers {
-    private DynamoDBAdapter db_adapter;
-    private AmazonDynamoDB client;
-    private DynamoDBMapper mapper;
-    private CognitoService cognitoService;
+    private final DynamoDBMapper mapper;
+    private final CognitoService cognitoService;
 
 
     public TablesMapperAnswers(){
         DynamoDBMapperConfig mapperConfig = DynamoDBMapperConfig.builder()
                 .withTableNameOverride(new DynamoDBMapperConfig.TableNameOverride("answer_table"))
                 .build();
-        this.db_adapter = DynamoDBAdapter.getInstance();
-        this.client = this.db_adapter.getDbClient();
-        this.mapper = this.db_adapter.createDbMapper(mapperConfig);
+        DynamoDBAdapter db_adapter = DynamoDBAdapter.getInstance();
+        this.mapper = db_adapter.createDbMapper(mapperConfig);
         this.cognitoService = new CognitoService();
     }
 
 
-    public List<TestAnswer> getAllTestAnswers() throws IOException {
-        List<TestAnswer> results = this.mapper.scan(TestAnswer.class, new DynamoDBScanExpression());
-        return results;
+    public List<TestAnswer> getAllTestAnswers() {
+        return this.mapper.scan(TestAnswer.class, new DynamoDBScanExpression());
     }
 
 
-    public TestAnswer getUserTestAnswers(String userId, String testId) throws IOException {
-        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+    public TestAnswer getUserTestAnswers(String userId, String testId) {
+        Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":v_u_id", new AttributeValue().withS(userId));
         eav.put(":v_t_id", new AttributeValue().withS(testId));
         DynamoDBQueryExpression<TestAnswer> query = new DynamoDBQueryExpression<TestAnswer>()
@@ -61,8 +55,8 @@ public class TablesMapperAnswers {
         this.mapper.delete(result);
     }
 
-    public TestAnswer getTestAnswer(String id) throws IOException {
-        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+    public TestAnswer getTestAnswer(String id) {
+        Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":v_t_id", new AttributeValue().withS(id));
         DynamoDBQueryExpression<TestAnswer> query = new DynamoDBQueryExpression<TestAnswer>()
                 .withKeyConditionExpression("testId = :v_t_id")
@@ -72,7 +66,7 @@ public class TablesMapperAnswers {
 
     public List<Participant> getTestUsers(String testId) throws IOException{
         List<TestAnswer> answers = getObjectsWithTestId(testId);
-        List<Participant> candidates = cognitoService.getUsersInGroup(IdentyficatorsController.PARTICIPANT_GROUP);
+        List<Participant> candidates = cognitoService.getUsersInGroup(Config.PARTICIPANT_GROUP);
         return candidates.stream().filter(
                 participant -> answers.stream()
                         .anyMatch(answer -> participant.getId()
@@ -93,7 +87,7 @@ public class TablesMapperAnswers {
 
     public List<TestResult> getResultUser(String userId) throws IOException{
         List<TestAnswer> all = this.getUserTests(userId);
-        List<TestResult> answer = new ArrayList<TestResult>();
+        List<TestResult> answer = new ArrayList<>();
         for(TestAnswer ans : all){
             if(ans.getResult() != null)
 
@@ -104,8 +98,8 @@ public class TablesMapperAnswers {
     }
 
 
-    public List<TestAnswer> getObjectsWithTestId(String testId) throws IOException {
-        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+    private List<TestAnswer> getObjectsWithTestId(String testId) {
+        Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":val1", new AttributeValue().withS(testId));
         DynamoDBScanExpression scanRequest = new DynamoDBScanExpression()
                 .withFilterExpression("testId = :val1")
@@ -113,23 +107,23 @@ public class TablesMapperAnswers {
         return this.mapper.scan(TestAnswer.class, scanRequest);
     }
 
-    public void saveTestAnswer(TestAnswer answer) throws IOException {
+    public void saveTestAnswer(TestAnswer answer) {
         this.mapper.save(answer);
     }
 
-    public void saveUsersToTest(String testId, List<String> userId) throws IOException {
+    public void saveUsersToTest(String testId, List<String> userId) {
         for(String uId : userId)
             this.mapper.save(TestAnswerCreator.addUserToTest(uId, testId));
     }
 
-    public void updateTestAnswer(TestAnswer answer) throws IOException {
+    public void updateTestAnswer(TestAnswer answer) {
         this.mapper.delete(answer);
         this.mapper.save(answer);
     }
 
 
-    public List<TestAnswer> getUserTests(String userId) throws IOException {
-        Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+    public List<TestAnswer> getUserTests(String userId) {
+        Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":val1", new AttributeValue().withS(userId));
         DynamoDBScanExpression scanRequest = new DynamoDBScanExpression()
                 .withFilterExpression("userId = :val1")

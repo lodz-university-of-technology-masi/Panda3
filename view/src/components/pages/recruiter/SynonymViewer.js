@@ -6,8 +6,8 @@ import {getSynonyms} from "../../utils/Yandex";
 import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
-import LoadingSpinner from "../../LoadingSpinner";
-import BasicTable from "../../BasicTable";
+import LoadingSpinner from "../../fragments/LoadingSpinner";
+import BasicTable from "../../fragments/BasicTable";
 
 class SynonymViewer extends Component {
     constructor(props) {

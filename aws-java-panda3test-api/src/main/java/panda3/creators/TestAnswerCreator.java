@@ -28,7 +28,7 @@ public class TestAnswerCreator {
     }
 
 
-    public static String calculatePercent(List<Boolean> results){
+    private static String calculatePercent(List<Boolean> results){
         float flag = 0;
         for(boolean b : results){
             if(b)

@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import QuestionController from "./questions/QuestionController";
+import QuestionController from "../../fragments/questions/QuestionController";
 import update from 'immutability-helper';
-import ApiHelper from "./utils/API";
-import LoadingSpinner from "./LoadingSpinner";
-import Error from "./Error";
+import ApiHelper from "../../utils/API";
+import LoadingSpinner from "../../fragments/LoadingSpinner";
+import Error from "../../fragments/Error";
 
 class CandidateTestView extends Component{
     constructor(props) {

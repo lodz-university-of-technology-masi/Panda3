@@ -7,7 +7,6 @@ import com.serverless.ApiGatewayResponse;
 import panda3.mappers.TablesMapperRecruiters;
 import panda3.responses.ApiResponseHandler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 

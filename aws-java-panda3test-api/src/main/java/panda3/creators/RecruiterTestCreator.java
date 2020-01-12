@@ -7,9 +7,8 @@ import panda3.model.RecruiterTests;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class RecriterTestCreator {
+public class RecruiterTestCreator {
     public static RecruiterTests createRecruiterTestJsonNode(JsonNode body){
         RecruiterTests recruiterTests = new RecruiterTests();
         recruiterTests.setUserId(body.get("userId").asText());

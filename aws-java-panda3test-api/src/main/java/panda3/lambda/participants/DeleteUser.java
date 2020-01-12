@@ -1,4 +1,4 @@
-package panda3.lambda.paarticipants;
+package panda3.lambda.participants;
 
 import com.amazonaws.services.cognitoidp.model.AdminDeleteUserResult;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class DeleteUser implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
 
-    private CognitoService cognitoService = new CognitoService();
+    private final CognitoService cognitoService = new CognitoService();
 
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {

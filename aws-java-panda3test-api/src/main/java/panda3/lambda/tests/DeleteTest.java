@@ -10,14 +10,13 @@ import java.io.IOException;
 import java.util.Map;
 
 public class DeleteTest implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    private TablesMapperTest tablesMapperTest;
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         Map<String,String> pathParameters =  (Map<String,String>)input.get("pathParameters");
-        tablesMapperTest = new TablesMapperTest();
+        TablesMapperTest tablesMapperTest = new TablesMapperTest();
         try {
             tablesMapperTest.deleteTest(pathParameters.get("id"));
-            return ApiResponseHandler.createResponse("sucess.", 200);
+            return ApiResponseHandler.createResponse("success.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database." , 401);
         }

@@ -17,6 +17,9 @@ class QuestionController extends Component {
                     readOnly={this.props.readOnly}
                 />;
             case "W":
+                if(typeof answer === 'string' || answer instanceof String){
+                    answer = JSON.parse(answer);
+                }
                 return <ClosedQuestion
                     title={this.props.param.question}
                     options={this.props.param.answers}

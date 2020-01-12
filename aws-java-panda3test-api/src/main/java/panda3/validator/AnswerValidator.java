@@ -2,7 +2,7 @@ package panda3.validator;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import panda3.identificators.IdentyficatorsController;
+import panda3.config.Config;
 import panda3.mappers.TablesMapperTest;
 import panda3.model.Participant;
 import panda3.service.cognito.CognitoService;
@@ -12,9 +12,9 @@ import java.util.List;
 
 public class AnswerValidator {
 
-    private static CognitoService cognitoService = new CognitoService(); ;
+    private static final CognitoService cognitoService = new CognitoService();
 
-    public static String checkTestId(String testId){
+    private static String checkTestId(String testId){
         try{
             if(new TablesMapperTest().getTest(testId) == null)
                 return "such test don't exists. \n";
@@ -29,7 +29,7 @@ public class AnswerValidator {
         String message = "";
         try{
             message = AnswerValidator.checkTestId(body.get("testId").asText());
-            List<Participant> candidates = cognitoService.getUsersInGroup(IdentyficatorsController.PARTICIPANT_GROUP);
+            List<Participant> candidates = cognitoService.getUsersInGroup(Config.PARTICIPANT_GROUP);
             String userId = body.get("userId").asText();
             if(checkIfNotPresent(candidates, userId)){
                 message += "such user don't exists.";
@@ -44,7 +44,7 @@ public class AnswerValidator {
         String message = "";
         try{
             message = AnswerValidator.checkTestId(body.get("testId").asText());
-            List<Participant> candidates = new CognitoService().getUsersInGroup(IdentyficatorsController.PARTICIPANT_GROUP);
+            List<Participant> candidates = new CognitoService().getUsersInGroup(Config.PARTICIPANT_GROUP);
             for(String id : (ArrayList<String>) new ObjectMapper().convertValue( body.get("users"), ArrayList.class)){
                 if(checkIfNotPresent(candidates, id))
                     return message + "such user don't exists: " + id + "\n";
@@ -57,8 +57,7 @@ public class AnswerValidator {
 
     private static boolean checkIfNotPresent(List<Participant> candidates, String id) {
         boolean b = true;
-        for (int i = 0, candidatesSize = candidates.size(); i < candidatesSize; i++) {
-            Participant candidate = candidates.get(i);
+        for (Participant candidate : candidates) {
             String participantId = candidate.getId();
             if (id.equals(participantId)) {
                 b = false;

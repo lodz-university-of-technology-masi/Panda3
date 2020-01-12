@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import BasicTable from "../../BasicTable";
+import BasicTable from "../../fragments/BasicTable";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import LoadingSpinner from "../../LoadingSpinner";
+import LoadingSpinner from "../../fragments/LoadingSpinner";
 import ApiHelper from "../../utils/API";
-import Error from "../../Error";
+import Error from "../../fragments/Error";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
 

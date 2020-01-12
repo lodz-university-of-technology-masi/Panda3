@@ -12,9 +12,9 @@ class ClosedQuestion extends React.Component {
             answers: this.props.defaultAnswer
         };
         this.handleChange = this.handleChange.bind(this);
-        if(this.state.answers.length > this.props.options.length) {
+        /*if(this.state.answers.length > this.props.options.length) {
             this.state.answers.length = this.props.options.length
-        }
+        }*/
     }
 
     handleChange(event, index) {

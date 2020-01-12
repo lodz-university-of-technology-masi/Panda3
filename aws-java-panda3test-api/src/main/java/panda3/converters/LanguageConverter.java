@@ -14,7 +14,7 @@ public class LanguageConverter implements DynamoDBTypeConverter<String, Language
 
     @Override
     public Language unconvert(String s) {
-        logger.error("UnconvertString: " + s);
+        logger.error("UnconvertedString: " + s);
         String[] r = s.split(",");
         return new Language(r[0], r[1]);
     }

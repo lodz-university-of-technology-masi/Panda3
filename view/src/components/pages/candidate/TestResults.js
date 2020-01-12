@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import BasicTable from "./BasicTable";
-import LoadingSpinner from "./LoadingSpinner";
-import ApiHelper from "./utils/API";
+import BasicTable from "../../fragments/BasicTable";
+import LoadingSpinner from "../../fragments/LoadingSpinner";
+import ApiHelper from "../../utils/API";
 import Container from "react-bootstrap/Container";
-import Error from "./Error";
+import Error from "../../fragments/Error";
 
 class TestResults extends Component {
     constructor(props) {

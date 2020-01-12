@@ -8,10 +8,10 @@ import VirtualizedSelect from 'react-virtualized-select';
 import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
 import 'react-virtualized-select/styles.css'
-import LoadingSpinner from "../../LoadingSpinner";
-import TranslationSpinner from "../../TranslationSpinner";
+import LoadingSpinner from "../../fragments/LoadingSpinner";
+import TranslationSpinner from "../../fragments/TranslationSpinner";
 import ApiHelper from "../../utils/API";
-import Error from "../../Error";
+import Error from "../../fragments/Error";
 
 class Translator extends Component {
     constructor(props) {

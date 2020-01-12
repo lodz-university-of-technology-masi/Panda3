@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
 import {ApiHelper} from "../../utils/API";
-import LoadingSpinner from "../../LoadingSpinner";
+import LoadingSpinner from "../../fragments/LoadingSpinner";
 
 
 class AddUser extends Component {

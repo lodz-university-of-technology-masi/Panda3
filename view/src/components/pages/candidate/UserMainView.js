@@ -3,15 +3,15 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import ActiveTests from "../../ActiveTests"
-import TestResults from "../../TestResults"
+import ActiveTests from "./ActiveTests"
+import TestResults from "./TestResults"
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link,
 } from "react-router-dom";
-import CandidateTestView from "../../CandidateTestView";
+import CandidateTestView from "./CandidateTestView";
 import {ReactSVG} from "react-svg";
 import Panda from "../../../resources/panda.svg";
 import Bamboo from "../../../resources/bamboo.svg";

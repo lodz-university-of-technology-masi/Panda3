@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class CreateAnswer implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    private ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         try {
@@ -27,10 +27,9 @@ public class CreateAnswer implements RequestHandler<Map<String, Object>, ApiGate
                 return ApiResponseHandler.createResponse(message, 404);
             TestAnswer answer = tablesMapperAnswers.getUserTestAnswers(body.get("userId").asText(), body.get("testId").asText());
             tablesMapperAnswers.updateTestAnswer(TestAnswerCreator.addUserAnswer(answer, mapper.convertValue( body.get("answers"), ArrayList.class)));
-            return ApiResponseHandler.createResponse("sucess.", 200);
+            return ApiResponseHandler.createResponse("success.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("cannot connect to database.", 401);
         }
     }
-
 }

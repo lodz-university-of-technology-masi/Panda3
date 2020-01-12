@@ -62,7 +62,7 @@ functions:
   # participants lambdas
 
   readParticipants:
-    handler: panda3.lambda.paarticipants.ReadParticipants
+    handler: panda3.lambda.participants.ReadParticipants
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
@@ -71,25 +71,15 @@ functions:
           cors: true
 
   readRecruiters:
-    handler: panda3.lambda.paarticipants.ReadRecruiters
+    handler: panda3.lambda.participants.ReadRecruiters
     events:
       - http:
           path: recruiters/read
           method: get
           cors: true
 
-
-  readUsers:
-    handler: panda3.lambda.paarticipants.ReadUsers
-    Policies: AmazonDynamoDBFullAccess
-    events:
-      - http:
-          path: users/all/read
-          method: get
-          cors: true
-
   addUser:
-    handler: panda3.lambda.paarticipants.AddUser
+    handler: panda3.lambda.participants.AddUser
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
@@ -98,7 +88,7 @@ functions:
           cors: true
 
   deleteUser:
-    handler: panda3.lambda.paarticipants.DeleteUser
+    handler: panda3.lambda.participants.DeleteUser
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
@@ -202,7 +192,7 @@ functions:
           cors: true
 
   readUsersFromTest:
-    handler: panda3.lambda.paarticipants.ReadTestUsers
+    handler: panda3.lambda.participants.ReadTestUsers
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
@@ -274,15 +264,6 @@ functions:
     events:
       - http:
           path: recruiter/tests/add
-          method: post
-          cors: true
-
-  # lambdas for testing
-  test:
-    handler: panda3.lambda.testingLambdas.SimpleTest
-    events:
-      - http:
-          path: participants/test
           method: post
           cors: true
 

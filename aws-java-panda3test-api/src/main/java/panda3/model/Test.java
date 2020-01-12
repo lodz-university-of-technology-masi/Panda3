@@ -1,13 +1,10 @@
 package panda3.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import panda3.converters.LanguageConverter;
 import panda3.converters.QuestionConverter;
 
 import java.util.List;
-import java.util.Map;
-import com.google.gson.Gson;
 
 @DynamoDBTable(tableName = "tests_table")
 public class Test {
