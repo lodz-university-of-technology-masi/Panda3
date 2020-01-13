@@ -7,20 +7,21 @@ import panda3.model.RecruiterTests;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecruiterTestCreator {
-    public static RecruiterTests createRecruiterTestJsonNode(JsonNode body){
+    public static RecruiterTests createRecruiterTestJsonNode(String id, List<String> testId){
         RecruiterTests recruiterTests = new RecruiterTests();
-        recruiterTests.setUserId(body.get("userId").asText());
-        recruiterTests.setTestIds(new ObjectMapper().convertValue( body.get("testIds"), ArrayList.class));
+        recruiterTests.setUserId(id);
+        recruiterTests.setTestIds(testId);
         return recruiterTests;
     }
 
 
 
-    public static RecruiterTests addRecruiterTestJsonAddTests(JsonNode body) throws IOException {
-        RecruiterTests recruiterTests = new TablesMapperRecruiters().getRecruiterTest(body.get("userId").asText());
-        recruiterTests.getTestIds().addAll(new ObjectMapper().convertValue( body.get("testIds"), ArrayList.class));
+    public static RecruiterTests addRecruiterTestJsonAddTests(String id, List<String> testId) throws IOException {
+        RecruiterTests recruiterTests = new TablesMapperRecruiters().getRecruiterTest(id);
+        recruiterTests.getTestIds().addAll(testId);
         return recruiterTests;
     }
 }

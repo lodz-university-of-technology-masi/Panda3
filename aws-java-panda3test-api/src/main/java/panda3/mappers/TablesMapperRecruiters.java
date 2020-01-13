@@ -63,7 +63,11 @@ public class TablesMapperRecruiters {
 
 
 
-    public void addRecruiterTest(RecruiterTests recruiterTests) {
+    public void addRecruiterTest(RecruiterTests recruiterTests) throws IOException {
+        RecruiterTests recruiterTests1 = this.getRecruiterTest(recruiterTests.getUserId());
+        List<String> helper = recruiterTests1.getTestIds();
+        helper.addAll(recruiterTests.getTestIds());
+        recruiterTests1.setTestIds(helper);
         this.mapper.save(recruiterTests);
     }
 

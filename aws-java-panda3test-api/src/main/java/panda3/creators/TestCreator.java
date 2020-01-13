@@ -1,7 +1,7 @@
 package panda3.creators;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import panda3.model.Language;
@@ -15,22 +15,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 public class TestCreator {
-
     private static final Logger logger = LoggerFactory.getLogger(TestCreator.class);
-
-    public static Test createTestJSON(JsonNode body, List<Question> questions){
+    public static Test createTestJSON(JsonNode body, List<Question> questions, String userId){
         Test test = new Test();
         JsonNode language = body.get("language");
         test.setTitle(body.get("title").asText());
         test.setLanguage(new Language(language.get("label").textValue(), language.get("value").textValue()));
         test.setQuestions(questions);
+        test.setRecruiterId(userId);
         return test;
     }
 
 
 
-    public static Test createUpdateTestJSON(JsonNode body, List<Question> questions){
-        Test test = TestCreator.createTestJSON(body, questions);
+    public static Test createUpdateTestJSON(JsonNode body, List<Question> questions, String userId){
+        Test test = TestCreator.createTestJSON(body, questions, userId);
         test.setId(body.get("id").asText());
         return test;
     }
@@ -42,7 +41,12 @@ public class TestCreator {
         LocalDateTime now = LocalDateTime.now();
         Test test = new Test();
         ArrayList<Question> questions = new ArrayList<Question>();
-        List<String[]> allData = csvReader.readAll();
+        List<String[]> allData = null;
+        try {
+            allData = csvReader.readAll();
+        } catch (CsvException e) {
+            logger.error(e.getMessage());
+        }
         try {
             for (int i = 0; i < allData.size(); i++) {
                 logger.debug(allData.get(i)[0]);

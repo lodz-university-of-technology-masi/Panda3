@@ -12,6 +12,7 @@ public class Test {
     private String title;
     private Language language;
     private List<Question> questions;
+    private String recruiterId;
 
     public Test(){
     }
@@ -56,4 +57,12 @@ public class Test {
         this.questions = questions;
     }
 
+    @DynamoDBAttribute(attributeName = "recruiterId")
+    public String getRecruiterId() {
+        return recruiterId;
+    }
+
+    public void setRecruiterId(String recruiterId) {
+        this.recruiterId = recruiterId;
+    }
 }

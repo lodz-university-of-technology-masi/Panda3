@@ -19,11 +19,12 @@ public class UpdateTest implements RequestHandler<Map<String, Object>, ApiGatewa
 
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
+        Map<String,String> pathParameters =  (Map<String,String>)input.get("pathParameters");
         TablesMapperTest tablesMapperTest = new TablesMapperTest();
         Test test;
         try {
             JsonNode body = new ObjectMapper().readTree((String) input.get("body"));
-            test = TestCreator.createUpdateTestJSON(body, mapper.convertValue(body.get("questions"), ArrayList.class));
+            test = TestCreator.createUpdateTestJSON(body, mapper.convertValue(body.get("questions"), ArrayList.class), pathParameters.get("id"));
             tablesMapperTest.updateTest(test);
             return ApiResponseHandler.createResponse("success.", 200);
         } catch (IOException e) {
