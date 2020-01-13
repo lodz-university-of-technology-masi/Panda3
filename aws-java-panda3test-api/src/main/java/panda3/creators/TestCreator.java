@@ -2,6 +2,7 @@ package panda3.creators;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import panda3.model.Language;
@@ -34,7 +35,7 @@ public class TestCreator {
     }
 
 
-    public static Test createTestCsv(CSVReader csvReader) throws IOException {
+    public static Test createTestCsv(CSVReader csvReader) throws IOException, CsvException {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -43,12 +44,10 @@ public class TestCreator {
         List<String[]> allData = csvReader.readAll();
         try {
             for (int i = 0; i < allData.size(); i++) {
-                logger.debug(allData.get(i)[0]);
                 questions.add(TestCreator.convertCsvStringToQuestion(allData.get(i)[0].split(";",7)));
                 test.setLanguage(TestCreator.generateLanguage(allData.get(i)[0].split(";",7)[2]));
             }
         } catch (Exception e){
-            logger.error(e.getMessage());
         }
 
         test.setQuestions(questions);
