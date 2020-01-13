@@ -6,8 +6,10 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.serverless.DynamoDBAdapter;
 import panda3.model.RecruiterTests;
+import panda3.model.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TablesMapperRecruiters {
@@ -38,6 +40,18 @@ public class TablesMapperRecruiters {
                 return recruiterTests;
         }
         return null;
+    }
+
+
+
+    public List<Test> getRecuiterTestObjectLists(String userId) throws IOException{
+        TablesMapperTest tablesMapperTest = new TablesMapperTest();
+        List<String> testId = this.getRecruiterTest(userId).getTestIds();
+        List<Test> tests = new ArrayList<Test>();
+        for (String id : testId){
+            tests.add(tablesMapperTest.getTest(id));
+        }
+        return tests;
     }
 
 

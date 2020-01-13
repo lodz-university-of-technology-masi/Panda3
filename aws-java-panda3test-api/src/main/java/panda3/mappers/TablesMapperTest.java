@@ -68,4 +68,9 @@ public class    TablesMapperTest {
         }
         return answer;
     }
+
+
+    public Test getLastTest() throws IOException{
+
+    }
 }
