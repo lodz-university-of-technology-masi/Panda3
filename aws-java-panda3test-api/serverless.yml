@@ -103,7 +103,7 @@ functions:
     events:
       - http:
           method: post
-          path: tests/create
+          path: tests/create/{id}
           cors: true
 
   readTests:
@@ -238,6 +238,15 @@ functions:
           method: get
           cors: true
 
+  exportCsv:
+    handler: panda3.lambda.csv.Export
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: csv/export
+          method: get
+          cors: true
+
   #recruiter
   getAllRecruiters:
     handler: panda3.lambda.recruiter.ReadRecruiterTests
@@ -254,6 +263,15 @@ functions:
     events:
       - http:
           path: recruiter/read/{userId}
+          method: get
+          cors: true
+
+  saveRecruiterTest:
+    handler: panda3.lambda.recruiter.SaveRecruiterTest
+    Policies: AmazonDynamoDBFullAccess
+    events:
+      - http:
+          path: recruiter/save/{userId}
           method: get
           cors: true
 
@@ -303,13 +321,9 @@ resources:
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
-          - AttributeName: title
-            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-          - AttributeName: userId
-            KeyType: RANGE
         ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1

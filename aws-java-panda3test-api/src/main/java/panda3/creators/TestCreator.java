@@ -15,19 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestCreator {
-    public static Test createTestJSON(JsonNode body, List<Question> questions){
+    public static Test createTestJSON(JsonNode body, List<Question> questions, String userId){
         Test test = new Test();
         JsonNode language = body.get("language");
         test.setTitle(body.get("title").asText());
         test.setLanguage(new Language(language.get("label").textValue(), language.get("value").textValue()));
         test.setQuestions(questions);
+        test.setRecruiterId(userId);
         return test;
     }
 
 
 
-    public static Test createUpdateTestJSON(JsonNode body, List<Question> questions){
-        Test test = TestCreator.createTestJSON(body, questions);
+    public static Test createUpdateTestJSON(JsonNode body, List<Question> questions, String userId){
+        Test test = TestCreator.createTestJSON(body, questions, userId);
         test.setId(body.get("id").asText());
         return test;
     }

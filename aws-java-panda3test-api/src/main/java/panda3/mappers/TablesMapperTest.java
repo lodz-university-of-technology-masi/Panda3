@@ -70,7 +70,13 @@ public class    TablesMapperTest {
     }
 
 
-    public Test getLastTest() throws IOException{
-
+    public Test getAddedTest(String recruiterId) {
+        List<Test> tests = this.getAllTests();
+        for(Test test : tests){
+            if(test.getRecruiterId()!=null)
+                if(test.getRecruiterId().equals(recruiterId))
+                    return test;
+        }
+        return null;
     }
 }
