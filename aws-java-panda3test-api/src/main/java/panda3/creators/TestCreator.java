@@ -2,18 +2,18 @@ package panda3.creators;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.opencsv.CSVReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import panda3.model.Language;
 import panda3.model.Question;
 import panda3.model.RTest;
 import panda3.model.Test;
 
-import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
 public class TestCreator {
     public static Test createTestJSON(JsonNode body, List<Question> questions, String userId){
         Test test = new Test();
@@ -41,14 +41,18 @@ public class TestCreator {
         Test test = new Test();
         ArrayList<Question> questions = new ArrayList<Question>();
         List<String[]> allData = csvReader.readAll();
-        for (int i = 0; i < allData.size(); i++) {
-            questions.add(TestCreator.convertCsvStringToQuestion(allData.get(i)[0].split(";",7)));
-            test.setLanguage(TestCreator.generateLanguage(allData.get(i)[0].split(";",7)[2]));
-
+        try {
+            for (int i = 0; i < allData.size(); i++) {
+                logger.debug(allData.get(i)[0]);
+                questions.add(TestCreator.convertCsvStringToQuestion(allData.get(i)[0].split(";",7)));
+                test.setLanguage(TestCreator.generateLanguage(allData.get(i)[0].split(";",7)[2]));
+            }
+        } catch (Exception e){
+            logger.error(e.getMessage());
         }
+
         test.setQuestions(questions);
         test.setTitle("Imported Test at " +  dtf.format(now));
-        csvReader.close();
         return test;
     }
 
@@ -56,10 +60,12 @@ public class TestCreator {
         Question question = new Question();
         question.setType(csvLine[1]);
         question.setQuestion(csvLine[3]);
-        if(csvLine[4].equals("|"))
+        if(csvLine[4].equals("|")){
             question.setAnswers(null);
-        else
+        }
+        else{
             question.setAnswers(TestCreator.convertCsvAnswerToString(csvLine[5], csvLine[4]));
+        }
         return question;
     }
 
@@ -76,9 +82,9 @@ public class TestCreator {
     public static Language generateLanguage(String lang){
         Language language = null;
         if(lang.equals("EN"))
-            language = new Language("English", "EN");
+            language = new Language("English", "en");
         else if(lang.equals("PL"))
-            language = new Language("Polish", "PL");
+            language = new Language("Polish", "pl");
         else
             language = new Language("Diffrent", "DF");
         return language;

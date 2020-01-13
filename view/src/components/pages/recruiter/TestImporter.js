@@ -18,6 +18,7 @@ class TestImporter extends Component {
     }
 
     handleSubmit = async(event) => {
+        console.log(event);
         event.preventDefault();
         console.log(this.state.file);
         this.setState({loading:true});
@@ -39,7 +40,8 @@ class TestImporter extends Component {
     };
 
     readFile = (e) => {
-        this.setState({file:e.target.value})
+        console.log(e);
+        this.setState({file:e.target.files[0]})
     };
 
     getFeedbackComponent = () => {
