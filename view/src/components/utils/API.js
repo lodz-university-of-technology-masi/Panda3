@@ -18,12 +18,14 @@ export const ApiHelper = {
        return await API.get(API_NAME, '/participants/read', {})
     },
 
-    createTest: async (test) => {
-        return await API.post(API_NAME, '/tests/create', {body: test})
+    createTest: async (test, userId) => {
+        let path = '/tests/create/' + userId;
+        return await API.post(API_NAME, path , {body: test})
     },
 
     //Todo: get by recruiter id
     getTests: async () => {
+        //let path = '/tests/create/' + userId;
         return await API.get(API_NAME, '/tests/read', {})
     },
 
@@ -86,6 +88,11 @@ export const ApiHelper = {
     addUser: async (body) => {
         let path = '/users/add';
         return await API.post(API_NAME,path,{body:body})
+    },
+
+    addTestToRecruiter: async (userId) => {
+        let path = '/recruiter/save/' + userId;
+        return await API.get(API_NAME,path,{})
     }
 
 };
