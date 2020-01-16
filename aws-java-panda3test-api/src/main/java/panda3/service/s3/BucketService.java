@@ -1,22 +1,26 @@
 package panda3.service.s3;
 
 import com.amazonaws.SdkClientException;
+import com.amazonaws.services.dynamodbv2.model.QueryRequest;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import com.csvreader.CsvWriter;
 import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import panda3.config.Config;
+import panda3.creators.CsvCreator;
 import panda3.creators.TestCreator;
+import panda3.model.Question;
 import panda3.model.Test;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.util.List;
 
 public class BucketService {
     private AmazonS3 s3 = AmazonS3ClientBuilder.defaultClient();
@@ -33,13 +37,29 @@ public class BucketService {
     }
 
 
-    public void downloadFile(String key){
-        File file = new File("test.csv");
-        PutObjectRequest request = new PutObjectRequest(Config.BUCKET_NAME, key, new File("test.csv"));
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType("plaint/text");
-        metadata.addUserMetadata("x-amz-meta-title", "someTitle");
-        request.setMetadata(metadata);
+    public void downloadFile(String key, Test test) throws IOException {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        CsvWriter writer = new CsvWriter(stream, ',', Charset
+                .forName("ISO-8859-1"));
+
+        List<Question> questions = test.getQuestions();
+
+        String line;
+        int i = 1;
+        for(Question question : questions){
+            line = "";
+            line = CsvCreator.ConvertQuestionToCsV(question, i, test.getLanguage().getValue());
+            writer.write(line);
+            writer.endRecord();
+        }
+
+
+
+        writer.close();
+
+        stream.close();
+        InputStream inputStream = new ByteArrayInputStream(stream.toByteArray());
+        PutObjectRequest request = new PutObjectRequest(Config.BUCKET_NAME, key, inputStream, null);
         s3.putObject(request);
     }
 }
