@@ -1,5 +1,4 @@
 package panda3.creators;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
@@ -16,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 public class TestCreator {
+    private static final Logger logger = LoggerFactory.getLogger(TestCreator.class);
     public static Test createTestJSON(JsonNode body, List<Question> questions, String userId){
         Test test = new Test();
         JsonNode language = body.get("language");
@@ -35,19 +35,26 @@ public class TestCreator {
     }
 
 
-    public static Test createTestCsv(CSVReader csvReader) throws IOException, CsvException {
+    public static Test createTestCsv(CSVReader csvReader) throws IOException {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         Test test = new Test();
         ArrayList<Question> questions = new ArrayList<Question>();
-        List<String[]> allData = csvReader.readAll();
+        List<String[]> allData = null;
+        try {
+            allData = csvReader.readAll();
+        } catch (CsvException e) {
+            logger.error(e.getMessage());
+        }
         try {
             for (int i = 0; i < allData.size(); i++) {
+                logger.debug(allData.get(i)[0]);
                 questions.add(TestCreator.convertCsvStringToQuestion(allData.get(i)[0].split(";",7)));
                 test.setLanguage(TestCreator.generateLanguage(allData.get(i)[0].split(";",7)[2]));
             }
         } catch (Exception e){
+            logger.error(e.getMessage());
         }
 
         test.setQuestions(questions);

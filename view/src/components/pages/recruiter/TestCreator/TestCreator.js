@@ -108,10 +108,12 @@ class TestCreator extends Component{
                 canSubmit:true,
                 loading:true
             });
-            let request;
-            if(this.props.modify) request = ApiHelper.updateTest(test);
-                else request =  ApiHelper.createTest(test);
-            request.then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
+            if(this.props.modify) ApiHelper.updateTest(test).then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
+                else {
+                    ApiHelper.createTest(test, this.props.userId).then(()=>{
+                        ApiHelper.addTestToRecruiter(this.props.userId).then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
+                    }).catch((e)=>alert(e));
+            }
         } else{
             this.setState({
                 canSubmit:false,
