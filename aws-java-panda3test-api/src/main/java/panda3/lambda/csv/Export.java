@@ -13,11 +13,7 @@ public class Export implements RequestHandler<Map<String, Object>, ApiGatewayRes
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
         BucketService bucketService = new BucketService();
-        try {
-            bucketService.downloadFile("test.csv");
-            return ApiResponseHandler.createResponse("sucess.", 200);
-        } catch (IOException e) {
-            return ApiResponseHandler.createResponse("failed.", 400);
-        }
+        bucketService.downloadFile("test.csv");
+        return ApiResponseHandler.createResponse("sucess.", 200);
     }
 }

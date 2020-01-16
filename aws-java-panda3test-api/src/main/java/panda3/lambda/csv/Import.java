@@ -21,7 +21,7 @@ public class Import implements RequestHandler<S3Event, String> {
         Test testAnswer = null;
         try {
             testAnswer = bucketService.uploadFile(record.getS3().getObject().getKey());
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         new TablesMapperTest().saveTest(testAnswer);

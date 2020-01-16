@@ -46,10 +46,14 @@ public class TablesMapperRecruiters {
 
     public List<Test> getRecuiterTestObjectLists(String userId) throws IOException{
         TablesMapperTest tablesMapperTest = new TablesMapperTest();
-        List<String> testId = this.getRecruiterTest(userId).getTestIds();
+        RecruiterTests recruiterTests = this.getRecruiterTest(userId);
         List<Test> tests = new ArrayList<Test>();
-        for (String id : testId){
-            tests.add(tablesMapperTest.getTest(id));
+
+        if(recruiterTests != null){
+            List<String> testId = this.getRecruiterTest(userId).getTestIds();
+            for (String id : testId){
+                tests.add(tablesMapperTest.getTest(id));
+            }
         }
         return tests;
     }
@@ -64,10 +68,6 @@ public class TablesMapperRecruiters {
 
 
     public void addRecruiterTest(RecruiterTests recruiterTests) throws IOException {
-        RecruiterTests recruiterTests1 = this.getRecruiterTest(recruiterTests.getUserId());
-        List<String> helper = recruiterTests1.getTestIds();
-        helper.addAll(recruiterTests.getTestIds());
-        recruiterTests1.setTestIds(helper);
         this.mapper.save(recruiterTests);
     }
 

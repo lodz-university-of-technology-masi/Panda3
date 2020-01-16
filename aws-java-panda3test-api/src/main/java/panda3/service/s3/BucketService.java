@@ -9,6 +9,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import panda3.config.Config;
@@ -22,7 +23,7 @@ public class BucketService {
     private static final Logger logger = LoggerFactory.getLogger(BucketService.class);
     public BucketService() {}
 
-    public Test uploadFile(String key) throws SdkClientException, IOException {
+    public Test uploadFile(String key) throws SdkClientException, IOException, CsvException {
         logger.error(key);
         S3Object s3Object = s3.getObject(new GetObjectRequest(Config.BUCKET_NAME, key));
         logger.error(s3Object.getKey());
@@ -32,7 +33,8 @@ public class BucketService {
     }
 
 
-    public void downloadFile(String key) throws SdkClientException, IOException{
+    public void downloadFile(String key){
+        File file = new File("test.csv");
         PutObjectRequest request = new PutObjectRequest(Config.BUCKET_NAME, key, new File("test.csv"));
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType("plaint/text");
