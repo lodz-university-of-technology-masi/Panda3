@@ -21,6 +21,7 @@ public class RecruiterTestCreator {
 
     public static RecruiterTests addRecruiterTestJsonAddTests(String id, List<String> testId) throws IOException {
         RecruiterTests recruiterTests = new TablesMapperRecruiters().getRecruiterTest(id);
+        recruiterTests.setUserId(id);
         recruiterTests.getTestIds().addAll(testId);
         return recruiterTests;
     }

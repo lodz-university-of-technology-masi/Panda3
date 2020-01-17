@@ -50,6 +50,39 @@ public class CognitoService {
         return false;
     }
 
+    public boolean userscript(){
+        //kwk, god, pan, scs, kec, paj, trb, wyl, kas, ext, cld, tea, sas, sam, dpd, scy, crx, bsm
+        String[] teams = {"kwk", "god", "pan", "scs", "kec", "paj", "trb", "wyl","kas", "ext", "cld", "tea", "sas", "sam", "dpd", "scy", "crx", "bsm"};
+        for (String team: teams
+             ) {
+            int i = 5;
+                String email = team +'0' + i +"@cc.pl";
+               try {
+                   AdminCreateUserResult result = identityProvider.adminCreateUser(new AdminCreateUserRequest().withUserPoolId(Config.USER_POOL_ID)
+                           .withUsername(email).withTemporaryPassword("password1")
+                           .withUserAttributes(
+                                   new AttributeType().withName("name").withValue(team + i),
+                                   new AttributeType().withName("family_name").withValue(team + i),
+                                   new AttributeType().withName("email").withValue(email)
+                           ).withDesiredDeliveryMediums(DeliveryMediumType.EMAIL));
+
+                   AdminSetUserPasswordRequest passwordRequest = new AdminSetUserPasswordRequest().withUserPoolId(Config.USER_POOL_ID).withUsername(result.getUser().getUsername()).withPermanent(true)
+                           .withPassword("pswd0" + i);
+                   AdminAddUserToGroupRequest adminAddUserToGroupRequest = new AdminAddUserToGroupRequest()
+                           .withUserPoolId(Config.USER_POOL_ID)
+                           .withGroupName(Config.RECRUITERS_GROUP)
+                           .withUsername(result.getUser().getUsername());
+                   identityProvider.adminSetUserPassword(passwordRequest);
+                   identityProvider.adminAddUserToGroup(adminAddUserToGroupRequest);
+               } catch (UsernameExistsException e) {
+               }
+
+
+
+        }
+        return true;
+    }
+
     public AdminDeleteUserResult deleteUser(String username){
         return identityProvider.adminDeleteUser(new AdminDeleteUserRequest().withUserPoolId(Config.USER_POOL_ID).withUsername(username));
     }

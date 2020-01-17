@@ -11,6 +11,8 @@ import Alert from "react-bootstrap/Alert";
 import Row from  "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Container from "react-bootstrap/Container";
+import { ReactSVG } from 'react-svg'
+import DownloadIcon from "../../../resources/download-button-svgrepo-com.svg";
 
 class RecruiterTests extends Component {
     constructor(props) {
@@ -24,17 +26,18 @@ class RecruiterTests extends Component {
                 Header: 'Title',
                 accessor: 'title'
             }, {
-                id: 'language',
                 Header: 'Language',
-                accessor: d => d.language.label
+                accessor: 'label'
             },{
                 id: 'action',
                 Header: 'Action',
                 Cell: table => {
+                    console.log(table.row.original);
                     let modifyPath = '/modify-test/' + table.row.original.id;
                     let translatePath = '/translate/' + table.row.original.id;
                     let submissionsPath = '/submissions/' + table.row.original.id;
                     let managePath = '/manage-access/' + table.row.original.id;
+                    const id = table.row.original.id;
                     return (
                         <Row className="justify-content-center">
                             <Col md={"auto"}>
@@ -60,6 +63,14 @@ class RecruiterTests extends Component {
                                     </DropdownMenu>
                                 </Dropdown>
                             </Col>
+                            <Col>
+                                <Button variant="outline-primary" onClick={(event, id) => this.downloadTest(event, id)}>
+                                    <ReactSVG className="icon" src={DownloadIcon}/>
+                                </Button>
+                                <Button variant="outline-primary" data-id={table.row.original.id} onClick={this.downloadTest}>
+                                    Download
+                                </Button>
+                            </Col>
                         </Row>
 
                     )
@@ -67,6 +78,22 @@ class RecruiterTests extends Component {
             }]
         }
     }
+
+    getTestComponent = () => {
+        if(this.state.tests.length ===  0)
+            return <span className="noTests">No tests</span>;
+        return <BasicTable
+            data={this.state.tests}
+            columns={this.state.columns}
+        />
+    };
+
+    downloadTest = (event) => {
+        event.preventDefault();
+        console.log(event);
+        let testId = event.target.attributes['data-id'].value;
+        ApiHelper.downloadCsv(testId).catch(e => alert(e));
+    };
 
     deleteTest = async (event) => {
         let idToDel = event.target.attributes['data-id'].value;
@@ -76,7 +103,7 @@ class RecruiterTests extends Component {
     };
 
     fetch = async() => {
-        return ApiHelper.getTests().then( tests =>{
+        return ApiHelper.getRecruiterTests(this.props.userId).then( tests =>{
             this.setState({
                 tests: tests,
                 loading:false,
@@ -111,10 +138,7 @@ class RecruiterTests extends Component {
             return <Alert variant="danger">Fetch error</Alert>;
         }
         return <Container className="grayBorder bg-items-color m1rem" style={{height:"100%", padding:"0.8rem"}}>
-            <BasicTable
-                data={this.state.tests}
-                columns={this.state.columns}
-            />
+            {this.getTestComponent()}
         </Container>
     }
 }

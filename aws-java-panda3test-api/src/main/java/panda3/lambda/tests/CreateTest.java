@@ -11,7 +11,6 @@ import panda3.mappers.TablesMapperTest;
 import panda3.model.RecruiterTests;
 import panda3.model.Test;
 import panda3.responses.ApiResponseHandler;
-import sun.security.x509.AttributeNameEnumeration;
 
 import java.io.IOException;
 import java.util.ArrayList;
