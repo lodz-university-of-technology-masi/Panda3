@@ -18,7 +18,7 @@ public class Export implements RequestHandler<Map<String, Object>, ApiGatewayRes
         BucketService bucketService = new BucketService();
         try {
             Test test = new TablesMapperTest().getTest(pathParameters.get("id"));
-            bucketService.downloadFile("public/" + pathParameters.get("id") + ".csv", test);
+            bucketService.downloadFile("test.csv", test);
             return ApiResponseHandler.createResponse("oksy.", 200);
         } catch (IOException e) {
             return ApiResponseHandler.createResponse("xd.", 200);

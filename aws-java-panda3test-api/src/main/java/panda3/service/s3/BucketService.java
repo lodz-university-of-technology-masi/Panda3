@@ -7,7 +7,6 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.SetObjectAclRequest;
 import com.csvreader.CsvWriter;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
@@ -62,7 +61,5 @@ public class BucketService {
         InputStream inputStream = new ByteArrayInputStream(stream.toByteArray());
         PutObjectRequest request = new PutObjectRequest(Config.BUCKET_NAME, key, inputStream, null);
         s3.putObject(request);
-        //TODO: grant public access
-        //s3.setObjectAcl(new SetObjectAclRequest());
     }
 }
