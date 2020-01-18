@@ -23,22 +23,18 @@ class TestImporter extends Component {
         event.preventDefault();
         console.log(this.state.file);
         this.setState({loading:true});
-        let key = 'import/' + Date.now() + '.csv';
+        let key = 'import/'+ this.props.userId + "_" + Date.now() + '.csv';
         await Storage.put(key, this.state.file, {}).then (result =>
         {
             console.log(result);
             this.setState({
                 loading: false,
                 error:false
-            })//TODO:saverecruiter to test
-        }).then(() => {ApiHelper.addTestToRecruiter(this.props.userId)}).catch(err => {
-                alert(err);
-                this.setState({
-                    loading: false,
-                    error:true
-                })
             });
-    };
+            ApiHelper.addTestToRecruiter(this.props.userId);
+        }).catch(e => alert(e));
+        };
+
 
     readFile = (e) => {
         console.log(e);

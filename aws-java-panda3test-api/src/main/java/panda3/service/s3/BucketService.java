@@ -26,12 +26,14 @@ public class BucketService {
     private static final Logger logger = LoggerFactory.getLogger(BucketService.class);
     public BucketService() {}
 
-    public Test uploadFile(String key) throws SdkClientException, IOException, CsvException {
+    public Test uploadFile(String key, String recruiterId) throws SdkClientException, IOException, CsvException {
         logger.error(key);
         S3Object s3Object = s3.getObject(new GetObjectRequest(Config.BUCKET_NAME, key));
         logger.error(s3Object.getKey());
         try(CSVReader csvReader = new CSVReader(new BufferedReader(new InputStreamReader(s3Object.getObjectContent())))) {
-            return TestCreator.createTestCsv(csvReader);
+           Test test = TestCreator.createTestCsv(csvReader);
+           test.setRecruiterId(recruiterId);
+           return test;
         }
     }
 
