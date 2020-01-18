@@ -40,12 +40,14 @@ class Translator extends Component {
         }
     };
 
-    translate = async (event) => {
+    translate = async(event) => {
         event.preventDefault();
         this.setState({translating:true});
-        await ApiHelper.getTestById(this.props.match.params.id).then(test => translateTest(test,this.state.language).then(test => ApiHelper.createTest(test).then(() =>
-            this.props.history.push('/view-tests')
-        ))).catch(() => this.setState({translating:false}))
+        //todo: chaining
+
+       let test = await ApiHelper.getTestById(this.props.match.params.id);
+       let translatedTest = await translateTest(test, this.state.language);
+       await ApiHelper.createTest(translatedTest, this.props.userId).then(() => ApiHelper.addTestToRecruiter(this.props.userId)).then(() => this.setState({translating:false}));
     };
 
     render() {

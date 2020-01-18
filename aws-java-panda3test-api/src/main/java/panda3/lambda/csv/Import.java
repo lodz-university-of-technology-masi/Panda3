@@ -1,7 +1,5 @@
 package panda3.lambda.csv;
 
-
-
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
@@ -19,7 +17,8 @@ public class Import implements RequestHandler<S3Event, String> {
         S3EventNotification.S3EventNotificationRecord record = event.getRecords().get(0);
         Test testAnswer = null;
         try {
-            testAnswer = bucketService.uploadFile(record.getS3().getObject().getKey());
+            String recruiterId = record.getS3().getObject().getKey().split("_")[0].split("/")[2];
+            testAnswer = bucketService.uploadFile(record.getS3().getObject().getKey(), recruiterId);
         } catch (Exception e) {
             e.printStackTrace();
         }

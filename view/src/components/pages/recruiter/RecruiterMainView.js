@@ -123,7 +123,7 @@ class RecruiterMainView extends Component {
                         <Route exact path="/candidates/add" component={AddUser}/>
                         <Route path="/test-creator" render={(routing) => <TestCreator match={routing.match} history={routing.history} userId={this.props.user.sub}/>}/>
                         <Route path="/modify-test/:id" render={(routing) => <TestCreator match={routing.match} history={routing.history} modify={true}/>}/>
-                        <Route path="/translate/:id">{withRouter(Translator)}</Route>
+                        <Route path="/translate/:id" render={(routing) => <Translator match={routing.match} history={routing.history} userId={this.props.user.sub}/>}/>
                         <Route path="/submissions/:id">{withRouter(PendingSubmissions)}</Route>
                         <Route path="/check-test/:testId/:userId">{withRouter(TestChecker)}</Route>
                         <Route path="/manage-access/:id">{withRouter(AccessManager)}</Route>

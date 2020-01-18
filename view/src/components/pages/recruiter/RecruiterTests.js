@@ -30,7 +30,6 @@ class RecruiterTests extends Component {
                 id: 'action',
                 Header: 'Action',
                 Cell: table => {
-                    console.log(table.row.original);
                     let modifyPath = '/modify-test/' + table.row.original.id;
                     let translatePath = '/translate/' + table.row.original.id;
                     let submissionsPath = '/submissions/' + table.row.original.id;
@@ -84,7 +83,6 @@ class RecruiterTests extends Component {
 
     downloadTest = (event) => {
         event.preventDefault();
-        console.log(event);
         let testId = event.target.attributes['data-id'].value;
         ApiHelper.downloadCsv(testId).catch(e => alert(e));
     };

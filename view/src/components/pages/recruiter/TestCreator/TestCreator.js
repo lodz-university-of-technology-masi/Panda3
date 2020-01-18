@@ -96,7 +96,7 @@ class TestCreator extends Component{
         }));
     };
 
-    SubmitTest = () => {
+    SubmitTest = async() => {
         let test = this.state.test;
         for(let i=0; i< test.questions.length;i++){
             if(test.questions[i].type !== 'W' &&'answers' in test.questions[i]){
@@ -108,11 +108,10 @@ class TestCreator extends Component{
                 canSubmit:true,
                 loading:true
             });
-            if(this.props.modify) ApiHelper.updateTest(test).then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
+            if(this.props.modify) await ApiHelper.updateTest(test).then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
                 else {
-                    ApiHelper.createTest(test, this.props.userId).then(()=>{
-                        ApiHelper.addTestToRecruiter(this.props.userId).then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
-                    }).catch((e)=>alert(e));
+                    await ApiHelper.createTest(test, this.props.userId).catch((e)=>alert(e));
+                    await ApiHelper.addTestToRecruiter(this.props.userId).then(() => this.props.history.push('/view-tests')).catch((e)=>alert(e));
             }
         } else{
             this.setState({

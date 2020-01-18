@@ -6,7 +6,6 @@ export const REGION = 'us-east-1';
 export const ApiHelper = {
 
     createParticipant: async (participant) => {
-        console.log(participant);
        return await API.post(API_NAME, '/participants/create', {body: participant})
     },
 
@@ -102,7 +101,6 @@ export const ApiHelper = {
         let path = '/csv/export/' + testId;
         API.get(API_NAME, path, {}).then(()=>{
             Storage.get(testId + '.csv').then(r => {
-                console.log(r);
                 window.open(r.toString(),"_blank")
 
             })
