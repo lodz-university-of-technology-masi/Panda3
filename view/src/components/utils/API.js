@@ -101,7 +101,11 @@ export const ApiHelper = {
     downloadCsv: async (testId) => {
         let path = '/csv/export/' + testId;
         API.get(API_NAME, path, {}).then(()=>{
-            Storage.get(testId + '.csv').then(r => {console.log(r)})
+            Storage.get(testId + '.csv').then(r => {
+                console.log(r);
+                window.open(r.toString(),"_blank")
+
+            })
         }).catch(e => alert(e))
 }
 
