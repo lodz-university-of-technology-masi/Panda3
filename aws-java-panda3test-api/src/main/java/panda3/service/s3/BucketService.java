@@ -18,6 +18,7 @@ import panda3.model.Test;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class BucketService {
@@ -37,8 +38,7 @@ public class BucketService {
 
     public void downloadFile(String key, Test test) throws IOException {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        CsvWriter writer = new CsvWriter(stream, ',', Charset
-                .forName("ISO-8859-1"));
+        CsvWriter writer = new CsvWriter(stream, ',', StandardCharsets.ISO_8859_1);
 
         List<Question> questions = test.getQuestions();
 
@@ -57,11 +57,9 @@ public class BucketService {
         stream.close();
 
         AccessControlList acl = new AccessControlList();
-        acl.grantPermission(GroupGrantee.AllUsers, Permission.Read); //all users or authenticated
-
+        acl.grantPermission(GroupGrantee.AllUsers, Permission.FullControl); //all users or authenticated
         InputStream inputStream = new ByteArrayInputStream(stream.toByteArray());
-        PutObjectRequest request = new PutObjectRequest(Config.BUCKET_NAME, key, inputStream, null);
-        request.setAccessControlList(acl);
+        PutObjectRequest request = new PutObjectRequest(Config.BUCKET_NAME, key, inputStream, null).withAccessControlList(acl);
         s3.putObject(request);
     }
 
