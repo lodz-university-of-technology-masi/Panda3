@@ -32,6 +32,7 @@ import Bamboo from "../../../resources/bamboo.svg";
 import { createBrowserHistory } from "history";
 import AddUser from "./AddUser";
 import Handle404 from "../../404";
+import HomeController from "../../HomeController";
 
 const history = createBrowserHistory();
 
@@ -97,7 +98,7 @@ class RecruiterMainView extends Component {
                             <Link to="/import"><Button>Import tests</Button></Link>
                         </Col>
                         <Col md="auto">
-                            <Button variant="dark" onClick={()=>{this.state.history.push('/');logout()}}>Logout</Button>
+                            <Button variant="dark" onClick={logout}>Logout</Button>
                         </Col>
                         <Col className="d-flex align-items-center justify-content-end">
                             <div className="d-flex align-items-center">
@@ -116,8 +117,8 @@ class RecruiterMainView extends Component {
                         </Col>
                     </Row>
                     <Switch>
-                        <Route exact path="/"><RecruiterTests/></Route>
-                        <Route path="/view-tests"><RecruiterTests/></Route>
+                        <Route exact path="/" render={() => <RecruiterTests userId={this.props.user.sub}/>}/>
+                        <Route path="/view-tests" render={() => <RecruiterTests userId={this.props.user.sub}/>}/>
                         <Route exact path="/candidates" component={UserManagement}/>
                         <Route exact path="/candidates/add" component={AddUser}/>
                         <Route path="/test-creator" render={(routing) => <TestCreator match={routing.match} history={routing.history} userId={this.props.user.sub}/>}/>
@@ -126,7 +127,7 @@ class RecruiterMainView extends Component {
                         <Route path="/submissions/:id">{withRouter(PendingSubmissions)}</Route>
                         <Route path="/check-test/:testId/:userId">{withRouter(TestChecker)}</Route>
                         <Route path="/manage-access/:id">{withRouter(AccessManager)}</Route>
-                        <Route path="/import">{withRouter(TestImporter)}</Route>
+                        <Route path="/import" render={() => <TestImporter userId={this.props.user.sub}/>}/>
                         <Route path="/synonyms/:lang/:text">{withRouter(SynonymViewer)}</Route>
                         <Route path='*' exact={true} component={Handle404} />
                     </Switch>
