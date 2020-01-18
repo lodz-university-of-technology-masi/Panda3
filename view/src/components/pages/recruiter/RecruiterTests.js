@@ -13,6 +13,7 @@ import Col from "react-bootstrap/Col"
 import Container from "react-bootstrap/Container";
 import { ReactSVG } from 'react-svg'
 import DownloadIcon from "../../../resources/download-button-svgrepo-com.svg";
+import Image from "react-bootstrap/Image";
 
 class RecruiterTests extends Component {
     constructor(props) {
@@ -37,7 +38,6 @@ class RecruiterTests extends Component {
                     let translatePath = '/translate/' + table.row.original.id;
                     let submissionsPath = '/submissions/' + table.row.original.id;
                     let managePath = '/manage-access/' + table.row.original.id;
-                    const id = table.row.original.id;
                     return (
                         <Row className="justify-content-center">
                             <Col md={"auto"}>
@@ -64,11 +64,8 @@ class RecruiterTests extends Component {
                                 </Dropdown>
                             </Col>
                             <Col>
-                                <Button variant="outline-primary" onClick={(event, id) => this.downloadTest(event, id)}>
-                                    <ReactSVG className="icon" src={DownloadIcon}/>
-                                </Button>
                                 <Button variant="outline-primary" data-id={table.row.original.id} onClick={this.downloadTest}>
-                                    Download
+                                    &#8659;
                                 </Button>
                             </Col>
                         </Row>

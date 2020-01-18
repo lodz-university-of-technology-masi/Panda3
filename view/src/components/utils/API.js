@@ -1,6 +1,6 @@
-import {API} from "aws-amplify";
+import {API, Storage} from "aws-amplify";
 export const API_NAME = "Panda3API";
-export const API_MAIN_EP = "https://y6p1h6b8sh.execute-api.us-east-1.amazonaws.com/dev";
+export const API_MAIN_EP = "https://ir8a6jsjkl.execute-api.us-east-1.amazonaws.com/dev";
 export const REGION = 'us-east-1';
 
 export const ApiHelper = {
@@ -23,9 +23,7 @@ export const ApiHelper = {
         return await API.post(API_NAME, path , {body: test})
     },
 
-    //Todo: get by recruiter id
     getTests: async () => {
-        //let path = '/tests/create/' + userId;
         return await API.get(API_NAME, '/tests/read', {})
     },
 
@@ -93,7 +91,19 @@ export const ApiHelper = {
     addTestToRecruiter: async (userId) => {
         let path = '/recruiter/save/' + userId;
         return await API.get(API_NAME,path,{})
-    }
+    },
+
+    getRecruiterTests: async (recruiterId) => {
+        let path = '/recruiter/read/' + recruiterId;
+        return await API.get(API_NAME,path,{})
+    },
+
+    downloadCsv: async (testId) => {
+        let path = '/csv/export/' + testId;
+        API.get(API_NAME, path, {}).then(()=>{
+            Storage.get(testId + '.csv').then(r => {console.log(r)})
+        }).catch(e => alert(e))
+}
 
 };
 export default ApiHelper;
