@@ -41,10 +41,11 @@ public class    TablesMapperTest {
     public void deleteTest(String id) throws IOException {
         Test result = this.getTest(id);
         new TablesMapperAnswers().deleteAllTestsOnList(id);
+        new TablesMapperRecruiters().removeTestIdFromRecruiterList(id);
         this.mapper.delete(result);
     }
 
-    public void updateTest(Test test) throws IOException    {
+    public void updateTest(Test test) throws IOException {
         this.mapper.delete(test);
         this.saveTest(test);
     }

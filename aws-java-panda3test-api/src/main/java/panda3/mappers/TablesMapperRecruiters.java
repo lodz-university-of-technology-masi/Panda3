@@ -78,4 +78,12 @@ public class TablesMapperRecruiters {
         this.deleteRecruiterTest(recruiterTests.getUserId());
         this.addRecruiterTest(recruiterTests);
     }
+
+
+    public void removeTestIdFromRecruiterList(String testId){
+        List<RecruiterTests> recruiterTests = this.getRecruiterTests();
+        for(RecruiterTests recruiter : recruiterTests){
+            recruiter.getTestIds().remove(testId);
+        }
+    }
 }
