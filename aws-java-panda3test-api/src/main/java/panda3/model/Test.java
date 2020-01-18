@@ -27,6 +27,7 @@ public class Test {
         this.id = id;
     }
 
+    @DynamoDBAttribute(attributeName = "title")
     public String getTitle() {
         return title;
     }
