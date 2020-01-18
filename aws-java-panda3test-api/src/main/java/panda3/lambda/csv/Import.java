@@ -10,7 +10,6 @@ import panda3.mappers.TablesMapperTest;
 import panda3.model.Test;
 import panda3.service.s3.BucketService;
 
-import java.io.IOException;
 
 public class Import implements RequestHandler<S3Event, String> {
     BucketService bucketService = new BucketService();

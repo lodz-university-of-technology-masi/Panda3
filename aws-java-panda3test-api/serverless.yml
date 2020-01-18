@@ -247,6 +247,7 @@ functions:
           method: get
           cors: true
 
+
   #recruiter
   getAllRecruiters:
     handler: panda3.lambda.recruiter.ReadRecruiterTests

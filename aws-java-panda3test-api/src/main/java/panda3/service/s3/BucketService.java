@@ -4,9 +4,7 @@ import com.amazonaws.SdkClientException;
 import com.amazonaws.services.dynamodbv2.model.QueryRequest;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.*;
 import com.csvreader.CsvWriter;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
@@ -56,10 +54,15 @@ public class BucketService {
 
 
         writer.close();
-
         stream.close();
+
+        AccessControlList acl = new AccessControlList();
+        acl.grantPermission(GroupGrantee.AllUsers, Permission.Read); //all users or authenticated
+
         InputStream inputStream = new ByteArrayInputStream(stream.toByteArray());
         PutObjectRequest request = new PutObjectRequest(Config.BUCKET_NAME, key, inputStream, null);
+        request.setAccessControlList(acl);
         s3.putObject(request);
     }
+
 }

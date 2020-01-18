@@ -133,8 +133,10 @@ public class TablesMapperAnswers {
 
     public void deleteAllTestsOnList(String testId) throws IOException{
         List<TestAnswer> tests =  this.getObjectsWithTestId(testId);
-        for(TestAnswer answer : tests){
-            this.mapper.delete(answer);
+        if(tests != null){
+            for(TestAnswer answer : tests){
+                this.mapper.delete(answer);
+            }
         }
     }
 }

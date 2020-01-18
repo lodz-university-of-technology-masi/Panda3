@@ -27,7 +27,6 @@ public class Test {
         this.id = id;
     }
 
-    @DynamoDBRangeKey(attributeName = "title")
     public String getTitle() {
         return title;
     }
