@@ -11,9 +11,6 @@ import Alert from "react-bootstrap/Alert";
 import Row from  "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Container from "react-bootstrap/Container";
-import { ReactSVG } from 'react-svg'
-import DownloadIcon from "../../../resources/download-button-svgrepo-com.svg";
-import Image from "react-bootstrap/Image";
 
 class RecruiterTests extends Component {
     constructor(props) {
