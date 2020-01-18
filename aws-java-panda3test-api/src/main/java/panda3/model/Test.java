@@ -57,7 +57,7 @@ public class Test {
         this.questions = questions;
     }
 
-    @DynamoDBAttribute(attributeName = "recruiterId")
+    @DynamoDBRangeKey(attributeName = "recruiterId")
     public String getRecruiterId() {
         return recruiterId;
     }

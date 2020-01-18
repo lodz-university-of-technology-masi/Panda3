@@ -41,7 +41,6 @@ public class    TablesMapperTest {
     public void deleteTest(String id) throws IOException {
         Test result = this.getTest(id);
         new TablesMapperAnswers().deleteAllTestsOnList(id);
-        new TablesMapperRecruiters().removeTestIdFromRecruiterList(id);
         this.mapper.delete(result);
     }
 
@@ -73,11 +72,21 @@ public class    TablesMapperTest {
 
     public Test getAddedTest(String recruiterId) {
         List<Test> tests = this.getAllTests();
-        for(Test test : tests){
-            if(test.getRecruiterId()!=null)
-                if(test.getRecruiterId().equals(recruiterId))
+        for (Test test : tests) {
+            if (test.getRecruiterId() != null)
+                if (test.getRecruiterId().equals(recruiterId))
                     return test;
         }
         return null;
+    }
+
+
+    public List<Test> getRecruiterTests(String userId){
+        Map<String, AttributeValue> eav = new HashMap<>();
+        eav.put(":val1", new AttributeValue().withS(userId));
+        DynamoDBScanExpression scanRequest = new DynamoDBScanExpression()
+                .withFilterExpression("recruiterId = :val1")
+                .withExpressionAttributeValues(eav);
+        return this.mapper.scan(Test.class, scanRequest);
     }
 }

@@ -212,15 +212,6 @@ functions:
 
 
   #recruiter
-  getAllRecruiters:
-    handler: panda3.lambda.recruiter.ReadRecruiterTests
-    Policies: AmazonDynamoDBFullAccess
-    events:
-      - http:
-          path: recruiter/read/all
-          method: get
-          cors: true
-
   getRecruiterTests:
     handler: panda3.lambda.recruiter.ReadRecruiterTest
     Policies: AmazonDynamoDBFullAccess
@@ -230,14 +221,6 @@ functions:
           method: get
           cors: true
 
-  saveRecruiterTest:
-    handler: panda3.lambda.recruiter.SaveRecruiterTest
-    Policies: AmazonDynamoDBFullAccess
-    events:
-      - http:
-          path: recruiter/save/{userId}
-          method: get
-          cors: true
 
 
 resources:
@@ -285,9 +268,13 @@ resources:
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
+          - AttributeName: recruiterId
+            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+          - AttributeName: recruiterId
+            KeyType: RANGE
         ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1

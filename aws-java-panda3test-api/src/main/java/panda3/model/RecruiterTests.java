@@ -9,7 +9,7 @@ import java.util.List;
 @DynamoDBTable(tableName = "recruiters_table")
 public class RecruiterTests {
     private String userId;
-    private List<String> testIds;
+    private List<String> testsNames;
 
     public RecruiterTests(){
     }
@@ -23,12 +23,12 @@ public class RecruiterTests {
         this.userId = userId;
     }
 
-    @DynamoDBAttribute(attributeName = "testIds")
-    public List<String> getTestIds() {
-        return testIds;
+    @DynamoDBAttribute(attributeName = "testsNames")
+    public List<String> getTestsNames() {
+        return testsNames;
     }
 
-    public void setTestIds(List<String> testIds) {
-        this.testIds = testIds;
+    public void setTestsNames(List<String> testsNames) {
+        this.testsNames = testsNames;
     }
 }
