@@ -47,7 +47,9 @@ class Translator extends Component {
 
        let test = await ApiHelper.getTestById(this.props.match.params.id);
        let translatedTest = await translateTest(test, this.state.language);
-       await ApiHelper.createTest(translatedTest, this.props.userId).then(() => ApiHelper.addTestToRecruiter(this.props.userId)).then(() => this.setState({translating:false}));
+       ApiHelper.createTest(translatedTest, this.props.userId)
+           .then(() => this.props.history.push('/view-tests'))
+           .catch((e)=>{alert(e);this.setState({translating:false, error:true})});
     };
 
     render() {

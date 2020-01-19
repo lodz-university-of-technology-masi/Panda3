@@ -80,7 +80,7 @@ class CandidateTestView extends Component{
             error:false,
             loading:false
         }));
-        console.log(this.state);
+        //console.log(this.state.test);
     };
 
 
@@ -91,8 +91,8 @@ class CandidateTestView extends Component{
         else if(this.state.error){
             return Error();
         }
-
         let question = this.state.test.questions[this.state.counter];
+        console.log(question);
         return <Container className="d-flex justify-content-between bg-items-color" style={{borderStyle:"solid", borderWidth:"0.3rem", borderColor:"LightGray", marginTop:"1rem", minHeight:"20rem", borderRadius:"1rem", flexDirection:"column"}}>
             <Row className="d-flex justify-content-between" style={{margin:"1rem"}}>
             <span className="d-flex">

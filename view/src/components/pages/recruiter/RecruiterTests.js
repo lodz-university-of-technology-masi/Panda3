@@ -55,7 +55,7 @@ class RecruiterTests extends Component {
                                     </DropdownToggle>
                                     <DropdownMenu>
                                         <Link to={modifyPath}><Button className="ml-1" variant="warning">Modify</Button></Link>
-                                        <Button className="ml-1" data-id={table.row.original.id} variant="danger" onClick={this.deleteTest}>Delete</Button>
+                                        <Button className="ml-1" data-id={table.row.original.id} variant="danger" onClick={this.deleteTest}>&#128465;</Button>
                                     </DropdownMenu>
                                 </Dropdown>
                             </Col>

@@ -4,6 +4,8 @@ import UserMainView from "./pages/candidate/UserMainView";
 import RecruiterMainView from "./pages/recruiter/RecruiterMainView";
 import LoadingSpinner from "./fragments/LoadingSpinner";
 import {ForgotPassword, SignIn, RequireNewPassword, withAuthenticator} from "aws-amplify-react";
+import {createBrowserHistory} from "history";
+const history = createBrowserHistory();
 
 class HomeController extends Component {
     constructor(props) {
@@ -15,6 +17,7 @@ class HomeController extends Component {
     }
 
     componentDidMount = async () => {
+        history.push('/');
         await Auth.currentSession().then(
             r => {
                 const payload = r.getIdToken().decodePayload();

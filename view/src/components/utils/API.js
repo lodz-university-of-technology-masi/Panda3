@@ -1,6 +1,6 @@
 import {API, Storage} from "aws-amplify";
 export const API_NAME = "Panda3API";
-export const API_MAIN_EP = "https://ir8a6jsjkl.execute-api.us-east-1.amazonaws.com/dev";
+export const API_MAIN_EP = "https://1ty4gjpe3c.execute-api.us-east-1.amazonaws.com/dev";
 export const REGION = 'us-east-1';
 
 export const ApiHelper = {
@@ -37,8 +37,8 @@ export const ApiHelper = {
         return await API.del(API_NAME, path, {})
     },
 
-    updateTest: async (test) => {
-        let path = '/tests/update';
+    updateTest: async (test, id) => {
+        let path = '/tests/update/' + id;
         return await API.put(API_NAME, path, {body:test})
     },
 
@@ -101,7 +101,7 @@ export const ApiHelper = {
         let path = '/csv/export/' + testId;
         API.get(API_NAME, path, {}).then(()=>{
             Storage.get(testId + '.csv').then(r => {
-                window.open(r.toString(),"_blank")
+                window.open(r.toString(),"_self")
 
             })
         }).catch(e => alert(e))

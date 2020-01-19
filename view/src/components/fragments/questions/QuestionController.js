@@ -8,6 +8,7 @@ class QuestionController extends Component {
 
     render() {
         let answer = this.props.defaultVal;
+
         switch (this.props.param.type) {
             case "O":
                 return <OpenQuestion
@@ -20,6 +21,10 @@ class QuestionController extends Component {
                 if(typeof answer === 'string' || answer instanceof String){
                     answer = JSON.parse(answer);
                 }
+                console.log("Question Conteoller");
+                //console.log(answer);
+                console.log(this.props.param);
+                if(answer === undefined) answer = Array(15).fill(false);
                 return <ClosedQuestion
                     title={this.props.param.question}
                     options={this.props.param.answers}
