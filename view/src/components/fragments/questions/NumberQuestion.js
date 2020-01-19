@@ -20,6 +20,15 @@ class NumberQuestion extends React.Component {
         );
     }
 
+    componentDidUpdate(prevProps, nextState,nextContent) {
+        if (prevProps.title !== this.props.title) {
+            this.setState({title: this.props.title})
+        }
+        if (prevProps.defaultAnswer !== this.props.defaultAnswer) {
+            this.setState({answer: this.props.defaultAnswer})
+        }
+    }
+
     render() {
         return (
             <Container>

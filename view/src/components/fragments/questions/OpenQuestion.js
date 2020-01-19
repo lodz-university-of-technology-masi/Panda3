@@ -14,6 +14,15 @@ class OpenQuestion extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentDidUpdate(prevProps, nextState,nextContent) {
+        if (prevProps.title !== this.props.title) {
+            this.setState({title: this.props.title})
+        }
+        if (prevProps.defaultAnswer !== this.props.defaultAnswer) {
+            this.setState({answer: this.props.defaultAnswer})
+        }
+    }
+
     handleChange(event) {
         this.setState({answer: event.target.value},
             () => {this.props.onAnswer(this.state.answer)}

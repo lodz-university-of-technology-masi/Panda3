@@ -108,10 +108,10 @@ class TestChecker extends Component{
             </Row>
             <Row className="justify-content-center" style={{marginLeft:"1rem", marginRight:"1rem"}}>
                 <Col md="auto">
-                    <Button onClick={() => this.CheckQuestion(false)} variant="danger" size="lg">&#10008;</Button>
+                    <Button onClick={() => this.CheckQuestion(false)} variant="danger" size="lg" style={{width:"6rem"}}>&#10008;</Button>
                 </Col>
                 <Col md="auto">
-                    <Button onClick={() => this.CheckQuestion(true)} variant="success" size="lg">&#10004;</Button>
+                    <Button onClick={() => this.CheckQuestion(true)} variant="success" size="lg" style={{width:"6rem"}}>&#10004;</Button>
                 </Col>
             </Row>
             <Row className="justify-content-between" style={{margin:"1rem"}}>
