@@ -113,7 +113,7 @@ functions:
     Policies: AmazonDynamoDBFullAccess
     events:
       - http:
-          path: tests/update
+          path: tests/update/{id}
           method: put
           cors: true
 
