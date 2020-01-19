@@ -51,6 +51,7 @@ public class BucketService {
             line = CsvCreator.ConvertQuestionToCsV(question, i, test.getLanguage().getValue());
             writer.write(line);
             writer.endRecord();
+            i++;
         }
 
 
