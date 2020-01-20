@@ -7,7 +7,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import LoadingSpinner from "../../fragments/LoadingSpinner";
 import Alert from "react-bootstrap/Alert";
-import ApiHelper from "../../utils/API";
 
 class TestImporter extends Component {
     constructor(props) {
@@ -19,20 +18,15 @@ class TestImporter extends Component {
     }
 
     handleSubmit = async(event) => {
-        console.log(event);
         event.preventDefault();
         console.log(this.state.file);
         this.setState({loading:true});
         let key = 'import/'+ this.props.userId + "_" + Date.now() + '.csv';
-        await Storage.put(key, this.state.file, {}).then (result =>
-        {
-            console.log(result);
-            this.setState({
-                loading: false,
-                error:false
-            });
-            ApiHelper.addTestToRecruiter(this.props.userId);
-        }).catch(e => alert(e));
+        await Storage.put(key, this.state.file, {}).catch(e => {alert(e);this.setState({loading: false, error:true})});
+        this.setState({
+            loading: false,
+            error:false
+        });
         };
 
 

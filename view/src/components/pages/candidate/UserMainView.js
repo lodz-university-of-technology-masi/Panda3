@@ -39,7 +39,7 @@ class UserMainView extends Component {
                         <Col md="auto"><Link to="/tests"><Button variant="primary">Active tests</Button></Link></Col>
                         <Col md="auto"><Link to="/results"><Button variant="primary">My results</Button></Link></Col>
                         <Col md="auto">
-                            <Button variant="dark" onClick={()=>{this.state.history.push('/');logout()}}>Logout</Button>
+                            <Button variant="dark" onClick={logout}>Logout</Button>
                         </Col>
                         <Col className="d-flex align-items-center justify-content-end">
                             <ReactSVG className="panda" src={Bamboo}/>

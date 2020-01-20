@@ -46,8 +46,9 @@ class SynonymViewer extends Component {
             loading: false
         })).catch(e => {
             alert(e);
-            this.props.history.push('/view-tests')
+            //this.props.history.push('/view-tests')
         });
+        console.log(this.state);
     };
 
     render() {
